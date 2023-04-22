@@ -8,10 +8,6 @@ class Dcsdindex extends MY_Controller
         //if ($this->flags->is_login === FALSE) {
         //    redirect(base_url('welcome'));
         //}
-        $this->load->library('smarty_acl');
-        if (!$this->smarty_acl->logged_in(FALSE)) {
-            return redirect(base_url('/Auth/login'));
-        }
 
         $this->load->model('dcsdindex_model');
         $this->load->model('create_class/course_sch_model');

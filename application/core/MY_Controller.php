@@ -18,6 +18,12 @@ class MY_Controller extends MI_Controller
     public function __construct()
     {
         parent::__construct();
+
+        $this->load->library('smarty_acl');
+        if (!$this->smarty_acl->logged_in(FALSE)) {
+            return redirect(base_url('/Auth/login'));
+        }
+
         $this->session_id = $this->session->session_id;
         $this->site = 'admin';
         $this->flags = new stdClass;
