@@ -39,7 +39,7 @@ class Auth extends MI_Controller
         $username = $password = NULL;
         if ($this->smarty_acl->logged_in(FALSE)) {
             //return redirect('/account');
-            return redirect('/dcsdindex');
+            return redirect(base_url('dcsdindex'));
         }
 
         $tmp = $this->input->cookie('username');

@@ -133,3 +133,5 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array();
+array_push($autoload['libraries'], 'pagination');
+array_push($autoload['helper'], 'form');

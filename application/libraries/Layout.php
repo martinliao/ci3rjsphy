@@ -17,26 +17,25 @@ class Layout {
 
 	public function view($view, $data = array(), $return = false)
 	{
-		//$data['site'] = $this->CI->site;
-//debugBreak();
 		$data['base_url'] = base_url('/');
-		//$data['_MENU'] = array();
-		//if (isset($this->CI->data['_MENU']))
-		//	$data['_MENU'] = $this->CI->data['_MENU'];
+		/*$data['site'] = $this->CI->site;
+		$data['_MENU'] = array();
+		if (isset($this->CI->data['_MENU']))
+			$data['_MENU'] = $this->CI->data['_MENU'];
 
-		//$data['_CONF'] = array();
-		//if (isset($this->CI->data['_SETTING']))
-		//	$data['_SETTING'] = $this->CI->data['_SETTING'];
+		$data['_CONF'] = array();
+		if (isset($this->CI->data['_SETTING']))
+			$data['_SETTING'] = $this->CI->data['_SETTING'];
 
-		//$data['_JSON'] = array();
-		//if (isset($this->CI->data['_JSON']))
-		//	$data['_JSON'] = $this->CI->data['_JSON'];
-		//unset($this->CI->data);
+		$data['_JSON'] = array();
+		if (isset($this->CI->data['_JSON']))
+			$data['_JSON'] = $this->CI->data['_JSON'];
+		unset($this->CI->data);
 
 
 		// $data['page_title'] = $data['_CONF'][$this->CI->site]['title'];
 		// $data['page_description'] = $data['_CONF'][$this->CI->site]['description'];
-		// $data['page_keywords'] = $data['_CONF'][$this->CI->site]['keywords'];
+		// $data['page_keywords'] = $data['_CONF'][$this->CI->site]['keywords'];		/**/
 		$data['__header'] = $this->CI->load->view("common/header", $data, true);
 		$data['__footer'] = $this->CI->load->view("common/footer", $data, true);
 

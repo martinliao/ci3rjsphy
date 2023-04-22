@@ -60,7 +60,6 @@ class MY_Controller extends MI_Controller
         }
 
         // 網站參數
-//debugBreak();
         $this->data['_SETTING'] = $this->initSetting();
 
         // 傳送 josn 給 JavaScrip 使用

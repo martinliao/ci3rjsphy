@@ -369,42 +369,44 @@
 </head>
 <body>
     <nav class="navbar navbar-fixed-top navbar-bootsnipp animate" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-        <div class="animbrand">
-        <!-- <a class="navbar-brand animate" href="<?=HTTP_ROOT;?>"><?=$_SETTING['web_title'];?></a> -->
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            <div class="animbrand">
+            <!-- <a class="navbar-brand animate" href="<?=HTTP_ROOT;?>"><?=$_SETTING['web_title'];?></a> -->
+            </div>
+            </div>
+            <div style="text-align:center;"><H1>臺北市政府公務人員訓練處</H1></div>
         </div>
-        </div>
-        <div style="text-align:center;"><H1>臺北市政府公務人員訓練處</H1></div>
-    </div>
     </nav>
 
     <div class="wrapper fadeInDown">
-    <div id="formContent">
-        <!-- Tabs Titles -->
-        <!-- Icon -->
-        <div class="fadeIn first">實體班期專區</div>
-        <!-- Login Form -->
-        <form method="POST" role="form" id="loginform" class="form-signin">
-        <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
-        <input type="text" id="username" class="fadeIn one" name="username" placeholder="帳號" value="<?=$username;?>"">
-        <input type="password" id="password" class="fadeIn second" name="password" placeholder="密碼">
-        <div class="g-recaptcha" data-sitekey="6LeWFsEUAAAAAPkas5uVitqs1e2yKDxivqDD8sii"></div>
-        <input type="submit" class="fadeIn fourth"  value="登錄系統"">   
-        </form>
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <!-- Icon -->
+            <div class="fadeIn first">實體班期專區</div>
+            <!-- Login Form -->
+            <form method="POST" role="form" id="loginform" class="form-signin">
+            <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
+            <input type="text" id="username" class="fadeIn one" name="username" placeholder="帳號" value="<?=$username;?>"">
+            <input type="password" id="password" class="fadeIn second" name="password" placeholder="密碼">
+            <div class="g-recaptcha" data-sitekey="6LeWFsEUAAAAAPkas5uVitqs1e2yKDxivqDD8sii"></div>
+            <?php $this->load->view('alerts'); ?>
+            <input type="submit" class="fadeIn fourth"  value="登錄系統"">
+            </form>
 
-        <!-- Remind Passowrd -->
-        <div id="formFooter" >
-        <?php if ($error) { ?>
-        <div id="alert_error" class="alert bs-callout bs-callout-danger alert-dismissible" role="alert">
-            <button class="close" aria-label="Close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">×</span>
-            </button>
-            <h5><?=$error;?></h5>
+            <!-- Remind Passowrd -->
+            <div id="formFooter" >
+                <?php if ($error) { ?>
+                <div id="alert_error" class="alert bs-callout bs-callout-danger alert-dismissible" role="alert">
+                    <button class="close" aria-label="Close" data-dismiss="alert" type="button">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h5><?=$error;?></h5>
+                </div>
+                <?php } ?>
+            </div>
         </div>
-        <?php } ?>
-    </div>
     </div>
     <script>
         $(document).ready(function(){

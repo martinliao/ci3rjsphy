@@ -5,9 +5,12 @@ class Dcsdindex extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-//debugBreak();
-        if ($this->flags->is_login === FALSE) {
-            redirect(base_url('welcome'));
+        //if ($this->flags->is_login === FALSE) {
+        //    redirect(base_url('welcome'));
+        //}
+        $this->load->library('smarty_acl');
+        if (!$this->smarty_acl->logged_in(FALSE)) {
+            return redirect(base_url('/Auth/login'));
         }
 
         $this->load->model('dcsdindex_model');
@@ -20,7 +23,6 @@ class Dcsdindex extends MY_Controller
 
         $appseqArr = $this->dcsdindex_model->checkNotSendPay();
         $username = $this->flags->user['username'];
-//debugBreak();
         $today = date("Y-m-d",strtotime("-2 day"));
         if(!empty($appseqArr)){
             for($i=0;$i<count($appseqArr);$i++){

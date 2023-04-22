@@ -39,7 +39,7 @@ class BackendController extends MI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
-debugBreak();
+//debugBreak();
         $this->logged_in();
         $this->smarty_acl->authorized();
         //Example data: 
