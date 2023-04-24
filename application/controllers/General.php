@@ -6,8 +6,16 @@
  */
 
 //class General extends MY_Controller
-class General extends FrontendController
+//class General extends FrontendController
+class General extends BackendController
 {
+	public function __construct()
+    {
+        parent::__construct();
+        /* Breadcrumbs :: Common */
+		$this->breadcrumbs->unshift(1, lang('menu_general'), 'general');
+    }
+
 	/**
 	 * Site Default Landing Page.
 	 *
@@ -30,15 +38,20 @@ class General extends FrontendController
 
 		// Do something here...
 		$foo = 'bar';
-
-		// Assign your data to an array
 		$data = array(
 			'foo' => $foo
 		);
-
-		// relative path to your views file.php eg: index.php or custom/index.php
-		// pass your data to the view
-		$this->load->view('/general/index', $data);
+		// relative path to your views file.php eg: index.php or custom/index.php pass your data to the view
+		//$this->load->view('/general/index', $data);
+//debugBreak();
+		// 試著替換成 render_page(From CI_LTE, aka ci_lte)
+		/* Title Page */
+		$this->page_title->push(lang('menu_general'));
+        $this->data['pagetitle'] = $this->page_title->show();
+		/* Breadcrumbs */
+		$this->breadcrumbs->unshift(2, lang('menu_general_testpage'), 'general'); // 測試
+		$this->data['breadcrumb'] = $this->breadcrumbs->show();
+		$this->render_page('general/index', $data);
 	}
 
 	/**

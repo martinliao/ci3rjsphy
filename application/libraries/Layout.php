@@ -2,12 +2,22 @@
 class Layout {
 
 	private $CI;
+	private $theme;
 	private $layout;
 
-	public function __construct() {
+	//public function __construct() {
+	public function __construct($_layout = 'layout2', $theme = 'common') {
 		$this->CI =& get_instance();
-
-		$this->setLayout('common/layout_main');
+		if (is_array($_layout)) {
+            $this->theme = $_layout['theme'];
+            $this->layout = $_layout['layout'];
+            # $this->theme = $this->config->item('theme');
+			$this->setLayout($_layout['theme'] . '/' . $_layout['layout']);
+        } else {
+            $this->theme = $theme;
+            //$this->layout = $_layout;
+			$this->setLayout('common/layout_main');
+        }
 	}
 
 	public function setLayout($layout) {

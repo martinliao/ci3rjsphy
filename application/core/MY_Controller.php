@@ -32,9 +32,7 @@ class MY_Controller extends MI_Controller
             'is_edap' => false
         );
 
-        $this->load->library(array(
-            'layout',
-        ));
+        $this->load->library('layout');
 
         $this->load->helper(array(
             'captcha',

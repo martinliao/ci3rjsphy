@@ -543,3 +543,43 @@ $config['proxy_ips'] = '';
 $config['modules_locations'] = array(
     APPPATH.'modules/' => '../modules/',
 );
+
+
+/*
+|--------------------------------------------------------------------------
+| Assets
+|--------------------------------------------------------------------------
+|
+*/
+$config['assets_dir']     = 'assets';
+$config['frameworks_dir'] = $config['assets_dir'] . '/frameworks';
+$config['plugins_dir']    = $config['assets_dir'] . '/plugins';
+
+/*
+|--------------------------------------------------------------------------
+| Upload
+|--------------------------------------------------------------------------
+|
+*/
+$config['upload_dir']     = 'upload';
+$config['avatar_dir']     = $config['upload_dir'] . '/avatar';
+
+
+/*
+ * **********************
+ * AdminLTE
+ * **********************
+ */
+/* Page Title */
+$config['pagetitle_open']     = '<h1 class="m-0 text-dark">';
+$config['pagetitle_close']    = '</h1>';
+$config['pagetitle_el_open']  = '<small>';
+$config['pagetitle_el_close'] = '</small>';
+
+/* Breadcrumbs */
+$config['breadcrumb_open']     = '<ol class="breadcrumb float-sm-right">';
+$config['breadcrumb_close']    = '</ol>';
+$config['breadcrumb_el_open']  = '<li class="breadcrumb-item">';
+$config['breadcrumb_el_close'] = '</li>';
+$config['breadcrumb_el_first'] = '<i class="fa fa-dashboard"></i>';
+$config['breadcrumb_el_last']  = '<li class="breadcrumb-item active">';
