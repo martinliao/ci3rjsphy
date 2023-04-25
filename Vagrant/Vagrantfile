@@ -1,0 +1,135 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+PHPVERSION = '7.3'
+httpport = 80
+PROJECTID = 'ci3Phy23F'
+DOCROOT = '/var/www/html'
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/bullseye64"
+  config.ssh.insert_key = false
+  config.vm.box_check_update = false
+  config.vm.network "forwarded_port", guest: 80, host: "#{httpport}"
+  #config.vm.network "forwarded_port", guest: 3000, host: 3000 # React
+  config.vm.synced_folder ".", "/vagrant", :owner => "vagrant", :group => "vagrant"
+  #config.vm.synced_folder "CI3-party", "/CI3", :owner => "vagrant", :group => "vagrant"
+  #config.vm.synced_folder "../ClassMgt", "/ClassMgt", :owner => "vagrant", :group => "vagrant"
+  config.vm.synced_folder "../../Phy", "/Phy", :owner => "vagrant", :group => "vagrant"
+  config.vm.synced_folder "Fet-party", "/FetOldParty", :owner => "vagrant", :group => "vagrant"
+
+  # https://serverfault.com/questions/453185/vagrant-virtualbox-dns-10-0-2-3-not-working
+  config.vm.provider "virtualbox" do |vb|
+    vb.cpus = 4
+    vb.gui = false
+    vb.memory = 8192
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    #vb.check_guest_additions = false
+    vb.customize ["modifyvm", :id, "--natnet1", "10.10.10/24"]
+  end
+  $RampUP = <<-SCRIPT
+    sudo apt-get install -y -q curl dnsutils git jq gnupg2 net-tools htop python sudo wget nfs-common unzip > /tmp/apt-out 2>&1
+SCRIPT
+  $LNMPInstall = <<-SCRIPT
+    sudo apt-get install -y apt-transport-https lsb-release ca-certificates nginx
+    sudo systemctl status nginx
+    sudo systemctl enable nginx
+    wget https://packages.sury.org/php/apt.gpg -O apt.gpg && sudo apt-key add apt.gpg
+    echo "deb https://packages.sury.org/php/ buster main" | sudo tee /etc/apt/sources.list.d/php.list
+    sudo apt-get update
+    sudo apt-get install -y php#{PHPVERSION}-fpm php#{PHPVERSION}-common php#{PHPVERSION}-cli php#{PHPVERSION}-curl php#{PHPVERSION}-gd php#{PHPVERSION}-gmp php#{PHPVERSION}-intl php#{PHPVERSION}-mbstring php#{PHPVERSION}-mysql php#{PHPVERSION}-soap php#{PHPVERSION}-xmlrpc php#{PHPVERSION}-xml php#{PHPVERSION}-zip php#{PHPVERSION}-redis php#{PHPVERSION}-ldap 
+    sudo apt-get install -y default-mysql-client
+    sudo apt-get install -y mariadb-server mariadb-client
+    sudo systemctl start mariadb.service
+    sudo systemctl enable mariadb.service
+SCRIPT
+  $nodejsInstall = <<-SCRIPT
+    sudo apt-get install -y software-properties-common
+    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    # sudo apt-get install gcc g++ make
+    curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+    echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    sudo apt-get update && sudo apt-get install yarn
+    sudo npm install -g node-gyp grunt-cli shifter
+    #sudo yarn add node-sass
+SCRIPT
+  config.vm.provision "shell", inline: <<-SHELL
+    { sudo rm /var/lib/dpkg/lock-frontend; } || { sudo rm /var/lib/dpkg/lock; } || { sudo rm /var/cache/apt/archives/lock; } || { echo "Clean lock"; }
+    sudo apt-get update
+  SHELL
+  config.vm.provision "file", source: "vagrantfiles/dbg-wizard.php", destination: "dbg-wizard.php"
+  config.vm.define "#{PROJECTID}" do|debian|
+    debian.vm.provision :shell, inline: $RampUP
+    debian.vm.provision :shell, inline: $LNMPInstall, privileged: false
+    debian.vm.provision :shell, inline:  <<-SHELL
+      curl -Ss https://getcomposer.org/installer | php
+      sudo mv composer.phar /usr/bin/composer
+      composer -V
+      sudo usermod -aG www-data vagrant
+      cd 
+      if ! grep -q "cd #{DOCROOT}" ~/.bash_profile; then
+        echo -e "cd #{DOCROOT}" | tee -a ~/.bash_profile > /dev/null 2>&1
+      fi
+      if grep -q "alias ll" ~/.bashrc; then
+        sed -i 's|[#]*alias[ ]*ll[ ]*=.*|alias ll="ls \$LS_OPTIONS -l"|' ~/.bashrc
+      else
+          echo -e "alias ll='ls \$LS_OPTIONS -l'" | tee -a ~/.bashrc > /dev/null 2>&1
+      fi
+      if ! grep -q "[ ]*set[ ]*mouse.*" ~/.vimrc; then
+          echo "set mouse-=a" >> ~/.vimrc
+      fi
+    SHELL
+    debian.vm.provision :shell, inline: $nodejsInstall
+    debian.vm.provision :shell, path: "vagrantfiles/mariadb-10.5.sh"
+    debian.vm.provision :shell, path: "vagrantfiles/fpm-dev.sh", privileged: false, env: {"DOCROOT" => "/var/www/html", "sshUsername" => "vagrant" }
+    debian.vm.provision :shell, path: "vagrantfiles/fpm-prod.sh", privileged: false, env: {"DOCROOT" => "/var/www/html", "sshUsername" => "vagrant" }
+
+    debian.vm.provision :shell, path: "vagrantfiles/gen_fpm_pool_conf.sh", privileged: false, env: {"PHPVERSION" => "#{PHPVERSION}", "FILESIZE" => '1024M'}
+
+    debian.vm.provision :shell, path: "vagrantfiles/gen_default_site_conf.sh", privileged: false, env: {"NGINXPORT" => "#{httpport}", "DOCROOT" => "/var/www/html", "SERVERNAME" => "default", "FILESIZE" => '1024M'}
+    # NGINXPORT=80 DOCROOT='/var/www/html/ci3' SERVERNAME=default FILESIZE='1024M' bash gen_default_site_conf.sh
+
+    debian.vm.provision :shell, path: "vagrantfiles/ci3-nginx.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/#{PROJECTID}", "sshUsername" => "vagrant" }
+    # DOCROOT='/var/www/html/ci3' sshUsername='vagrant' bash go.sh
+
+    # 加 ci3(virtualhost)
+    debian.vm.provision :shell, path: "vagrantfiles/gen_virtualhost.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/#{PROJECTID}", "PROJECTID" => "#{PROJECTID}" }
+    # DOCROOT='/var/www/html/ci3' PROJECTID='ci3rjsphy' bash gen_virtualhost.sh
+
+    # 重啟 Nginx
+    debian.vm.provision :shell, inline: """
+      { sudo nginx -t; } && { sudo systemctl restart nginx; sudo systemctl restart php#{PHPVERSION}-fpm; }
+    """, privileged: false
+    # { sudo nginx -t; } && { sudo systemctl restart nginx; sudo systemctl restart php7.3-fpm; }
+    
+    # 從 github 還原(ci3phy-menu23 就是目前階段的 ci3Phy23B)
+    debian.vm.provision :shell, inline: """
+        git clone https://github.com/martinliao/ci3rjsphy.git
+        cp -r ci3rjsphy/* /var/www/html/#{PROJECTID}/
+        { sudo nginx -t; } && { sudo systemctl restart nginx; sudo systemctl restart php7.3-fpm; }
+    """, privileged: false
+    
+    # PHPunit 單元測試, https://github.com/kenjis/ci-phpunit-test, https://phpunit.de/getting-started/phpunit-9.html, https://github.com/kenjis/ci-app-for-ci-phpunit-test.git
+    <<-COMMENT
+    debian.vm.provision :shell, inline: """
+        mkdir -p ~/phpunit_temp && cd ~/phpunit_temp
+        wget https://github.com/kenjis/ci-phpunit-test/archive/refs/tags/v3.0.3.tar.gz
+        tar zxf v3.0.3.tar.gz
+        sudo cp -r ci-phpunit-test-3.0.3/application/tests $DCOROOT/applications/
+        sudo chown -R vagrant: $DCOROOT/applications/tests
+        cd ${DCOROOT}/ && rm composer.lock && composer update
+        echo '*** composer require --dev phpunit/phpunit ^9 , for PHP 7.3'
+        echo '*** cd ${DCOROOT}/applications/tests && ../../vendor/bin/phpunit Welcome_test.php '
+        echo '*** cd ${DCOROOT} && vendor/bin/phpunit -c application/tests/ '
+    """, privileged: false, env: { "DOCROOT" => "/var/www/html/#{PROJECTID}" }
+    COMMENT
+    ## 用 ci-phpunit-test 指令建立 PHPunit
+    debian.vm.provision :shell, inline: """
+      cd /var/www/html/#{PROJECTID}
+      composer require kenjis/ci-phpunit-test:^3.0 --dev
+      php vendor/kenjis/ci-phpunit-test/install.php --from-composer
+      # php vendor/kenjis/ci-phpunit-test/install.php -a application -p . -t application/tests
+      vendor/bin/phpunit -c application/tests/
+    """, privileged: false, env: { "CI_ENV" => "testing" }
+  end
+end
