@@ -96,17 +96,3 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | 
 | 但是為了相容性, 所以目前還是保留, Updated, Apr2023, martin.
 */ 
-if (defined(CI_PHPUNIT_TESTPATH)) {
-$scheme = $_SERVER['REQUEST_SCHEME'] . '://';
-$dirx= explode("/", $_SERVER['PHP_SELF']);
-$httpRoot= $scheme . $_SERVER['HTTP_HOST'] . '/' . $dirx[1] . '/'; /**/
-} else {
-$httpRoot = "http://localhost/ci3Phy23C/";
-}
-defined('HTTP_ROOT')           OR define('HTTP_ROOT', $httpRoot);
-defined('HTTP_STATIC')         OR define('HTTP_STATIC', HTTP_ROOT . 'static/');
-defined('HTTP_CSS')            OR define('HTTP_CSS', HTTP_STATIC . 'css/');
-defined('HTTP_JS')             OR define('HTTP_JS', HTTP_STATIC . 'js/');
-defined('HTTP_IMG')            OR define('HTTP_IMG', HTTP_STATIC . 'img/');
-defined('HTTP_PLUGIN')         OR define('HTTP_PLUGIN', HTTP_STATIC . 'plugin/');
-defined('HTTP_MEDIA')          OR define('HTTP_MEDIA', HTTP_ROOT . "media/");

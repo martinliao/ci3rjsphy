@@ -23,15 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
-if (defined(CI_PHPUNIT_TESTPATH)) {
+/*$config['base_url'] = '';
 $httpRoot  = "http://".$_SERVER['HTTP_HOST'];
 $httpRoot .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-$httpRoot = rtrim($httpRoot, '/'); /** */
-} else {
-$httpRoot= 'http://localhost/ci3Phy23D/';
-}
-$config['base_url'] = $httpRoot;
+$httpRoot = rtrim($httpRoot, '/');
+$config['base_url'] = $httpRoot;    /** */
 
 /*
 |--------------------------------------------------------------------------
