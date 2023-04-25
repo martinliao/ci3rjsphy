@@ -145,5 +145,33 @@ SCRIPT
       # php vendor/kenjis/ci-phpunit-test/install.php -a application -p . -t application/tests
       vendor/bin/phpunit -c application/tests/
     """, privileged: false, env: { "CI_ENV" => "testing" }
+
+    # 開始架Demo站台
+    ## 架Demo: CI_LTE
+    debian.vm.provision :shell, path: "Thirdparty/CI_LTE/ci3-CI_LTE.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/ci_lte", "PROJECTID" => "ci_lte", "sshUsername" => "vagrant" }
+    debian.vm.provision :shell, path: "vagrantfiles/gen_virtualhost.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/ci_lte", "PROJECTID" => "ci_lte" }
+
+    ## 架Demo: codeignitor-requirejs-backbone
+    debian.vm.provision :shell, path: "vagrantfiles/ci3-requirejs-backbone.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/codeignitor-requirejs-backbone", "PROJECTID" => "codeignitor-requirejs-backbone", "sshUsername" => "vagrant" }
+    # 加 virtualhost
+    debian.vm.provision :shell, path: "vagrantfiles/gen_virtualhost.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/codeignitor-requirejs-backbone", "PROJECTID" => "codeignitor-requirejs-backbone" }
+    # DOCROOT='/var/www/html/codeignitor-requirejs-backbone' PROJECTID='codeignitor-requirejs-backbone' bash gen_virtualhost.sh
+
+    ## 架Demo: CRUD (https://github.com/guptarajesh/CodeIgnitor-3.2-Login-Register-Dashboard-CRUD-Operations)
+    <<-COMMENT
+    debian.vm.provision :shell, inline: """
+      git clone https://github.com/guptarajesh/CodeIgnitor-3.2-Login-Register-Dashboard-CRUD-Operations
+      mv CodeIgnitor-3.2-Login-Register-Dashboard-CRUD-Operations /var/www/html/crud
+      sudo chown -R vagrant: /var/www/html/crud
+    """, privileged: false
+    COMMENT
+    debian.vm.provision :shell, path: "Thirdparty/CRUD/ci3-CRUD.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/crud", "PROJECTID" => "crud", "sshUsername" => "vagrant" }
+    debian.vm.provision :shell, path: "vagrantfiles/gen_virtualhost.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/crud", "PROJECTID" => "crud" }
+    debian.vm.provision :shell, inline: """
+      sudo npm install -g bower
+      cd /var/www/html/crud/assets
+      bower install
+      { sudo nginx -t; } && { sudo systemctl restart nginx; sudo systemctl restart php7.3-fpm; }
+    """, privileged: false
   end
 end
