@@ -92,24 +92,38 @@ SCRIPT
     debian.vm.provision :shell, path: "vagrantfiles/ci3-nginx.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/#{PROJECTID}", "sshUsername" => "vagrant" }
     # DOCROOT='/var/www/html/ci3' sshUsername='vagrant' bash go.sh
 
-    # 加 ci3(virtualhost)
+    ## 1. 架Demo: Phy(舊版 Phy, AKA. dcsdcourse, 請確認 /Phy 存在!!)
+    debian.vm.provision :shell, inline: """mkdir -p /var/www/html/phy && cp -r /Phy/* /var/www/html/phy/ && chown -R vagrant:www-data /var/www/html/phy""", privileged: true
+    #     1-a. 加 phy/base/admin(virtualhost), dcsdcourse.taipei.gov.tw 有自己的路徑...
+    debian.vm.provision :shell, path: "Fet-party/gen_phy_virtualhost.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/phy/base/admin", "ALIAS" => "phy/base/admin", "PROJECTID" => "phy" }
+    # DOCROOT='/var/www/html/phy/base/admin' ALIAS='phy/base/admin' PROJECTID='phy' bash ~/gen_phy_virtualhost.sh
+    ##    1-b. 修 phy/base/admin 問題...
+    debian.vm.provision :shell, inline: """chmod g+w /var/www/html/phy/base/admin/application/cache""", privileged: true
+    ##    1-c. Fix 舊版 bug(bf2022)
+    debian.vm.provision :shell, path: "Fet-party/Phy-Fix/fix_csrf.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/phy/base/admin" }
+    ##    1-d. DCSD-index
+    #debian.vm.provision :shell, inline: """cp -r /Phy ~/FetDcsdPhy""", privileged: false
+    debian.vm.provision :shell, path: "Fet-party/DcsdIndex/DcsdIndex.sh", privileged: false, env: {"FetDcsdPhy" => "/var/www/html/phy/base/admin", "DOCROOT" => "/var/www/html/#{PROJECTID}", "sshUsername" => "vagrant" }
+    # FetDcsdPhy='/var/www/html/phy/base/admin/' DOCROOT='/var/www/html/ci3rjsphy' sshUsername='vagrant' bash DcsdIndex.sh
+
+    #  2. 開始新版-實體班期(virtualhost)
     debian.vm.provision :shell, path: "vagrantfiles/gen_virtualhost.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/#{PROJECTID}", "PROJECTID" => "#{PROJECTID}" }
     # DOCROOT='/var/www/html/ci3' PROJECTID='ci3rjsphy' bash gen_virtualhost.sh
+
+    #     2-a. 從 github 還原(ci3phy-menu23 就是目前階段的 ci3Phy23B)
+    debian.vm.provision :shell, inline: """
+        git clone https://github.com/martinliao/ci3rjsphy.git
+        cp -r ci3rjsphy/* /var/www/html/#{PROJECTID}/
+        { sudo nginx -t; } && { sudo systemctl restart nginx; sudo systemctl restart php7.3-fpm; }
+    """, privileged: false
 
     # 重啟 Nginx
     debian.vm.provision :shell, inline: """
       { sudo nginx -t; } && { sudo systemctl restart nginx; sudo systemctl restart php#{PHPVERSION}-fpm; }
     """, privileged: false
     # { sudo nginx -t; } && { sudo systemctl restart nginx; sudo systemctl restart php7.3-fpm; }
-    
-    # 從 github 還原(ci3phy-menu23 就是目前階段的 ci3Phy23B)
-    debian.vm.provision :shell, inline: """
-        git clone https://github.com/martinliao/ci3rjsphy.git
-        cp -r ci3rjsphy/* /var/www/html/#{PROJECTID}/
-        { sudo nginx -t; } && { sudo systemctl restart nginx; sudo systemctl restart php7.3-fpm; }
-    """, privileged: false
-    
-    # PHPunit 單元測試, https://github.com/kenjis/ci-phpunit-test, https://phpunit.de/getting-started/phpunit-9.html, https://github.com/kenjis/ci-app-for-ci-phpunit-test.git
+
+    #     2-b. PHPunit 單元測試, https://github.com/kenjis/ci-phpunit-test, https://phpunit.de/getting-started/phpunit-9.html, https://github.com/kenjis/ci-app-for-ci-phpunit-test.git
     <<-COMMENT
     debian.vm.provision :shell, inline: """
         mkdir -p ~/phpunit_temp && cd ~/phpunit_temp
