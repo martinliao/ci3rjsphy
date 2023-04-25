@@ -11,7 +11,6 @@ class Breadcrumbs {
     public function __construct()
     {	
 		$this->CI =& get_instance();
-debugBreak();
         $this->breadcrumb_open         = $this->CI->config->item('breadcrumb_open');
 		$this->breadcrumb_close        = $this->CI->config->item('breadcrumb_close');
 		$this->breadcrumb_el_open      = $this->CI->config->item('breadcrumb_el_open');
