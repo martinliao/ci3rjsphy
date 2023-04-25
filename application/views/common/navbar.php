@@ -17,7 +17,7 @@
                 </a>
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <span class="hidden-xs" style="color:#F6F6F6;" >目前登入的使用者：<?=!empty($this->flags->user['co_usrnick'])?$this->flags->user['co_usrnick']:$this->flags->user['name'];?></span>
+            <span class="hidden-xs" style="color:#F6F6F6;" >目前登入的使用者：<?=!empty($flags['user']['co_usrnick'])?$flags['user']['co_usrnick']:$flags['user']['name'];?></span>
         </a>
         <ul class="dropdown-menu">
             <li class="user-footer">
@@ -26,7 +26,7 @@
                     Logout
                 </a>
             </li>
-            <?php if ($this->flags->user['switch'] === TRUE) { ?>
+            <?php if ($flags['user']['switch'] === TRUE) { ?>
             <li class="user-footer">
                 <a class="btn btn-default btn-flat" href="<?=base_url('switch_back');?>">
                     <i class="fa fa-sign-out"></i>
