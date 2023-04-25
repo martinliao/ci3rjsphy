@@ -24,10 +24,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = '';
-/*$httpRoot  = "http://".$_SERVER['HTTP_HOST'];
-$httpRoot .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);/**/
-//$httpRoot = rtrim($httpRoot, '/');
-$httpRoot= 'http://localhost/ci3Phy23C/';
+if (defined(CI_PHPUNIT_TESTPATH)) {
+$httpRoot  = "http://".$_SERVER['HTTP_HOST'];
+$httpRoot .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+$httpRoot = rtrim($httpRoot, '/'); /** */
+} else {
+$httpRoot= 'http://localhost/ci3Phy23D/';
+}
 $config['base_url'] = $httpRoot;
 
 /*
