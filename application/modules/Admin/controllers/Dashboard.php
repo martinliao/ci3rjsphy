@@ -31,8 +31,8 @@ class Dashboard extends BackendController //Admin_Controller
         /* Data */
         $this->data['userid']            = $this->session->userdata["user_id"];
 
-        $this->data['count_bsuser']       = $this->dashboard_model->get_count_record('BS_user');
-        $this->data['count_bsgroup']      = $this->dashboard_model->get_count_record('BS_user_group');
+        $this->data['count_bsuser']      = $this->dashboard_model->get_count_record('BS_user');
+        $this->data['count_bsgroup']     = $this->dashboard_model->get_count_record('BS_user_group');
 
         $this->data['count_users']       = $this->dashboard_model->get_count_record('users');   // BS_user
         $this->data['count_groups']      = $this->dashboard_model->get_count_record('acl_roles');  // BS_user_group
