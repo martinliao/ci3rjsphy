@@ -391,20 +391,12 @@
             <input type="text" id="username" class="fadeIn one" name="username" placeholder="帳號" value="<?=$username;?>"">
             <input type="password" id="password" class="fadeIn second" name="password" placeholder="密碼">
             <div class="g-recaptcha" data-sitekey="6LeWFsEUAAAAAPkas5uVitqs1e2yKDxivqDD8sii"></div>
-            <?php $this->load->view('alerts'); ?>
             <input type="submit" class="fadeIn fourth"  value="登錄系統"">
             </form>
 
             <!-- Remind Passowrd -->
             <div id="formFooter" >
-                <?php if ($error) { ?>
-                <div id="alert_error" class="alert bs-callout bs-callout-danger alert-dismissible" role="alert">
-                    <button class="close" aria-label="Close" data-dismiss="alert" type="button">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <h5><?=$error;?></h5>
-                </div>
-                <?php } ?>
+                <?php $this->load->view('alerts'); ?>
             </div>
         </div>
     </div>

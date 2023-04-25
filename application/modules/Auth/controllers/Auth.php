@@ -54,7 +54,6 @@ class Auth extends MI_Controller
             $post = $this->input->post();
             if((strcmp(ENVIRONMENT, 'production') == 0) && empty($post['g-recaptcha-response'])){
                 $error = '請勾選我不是機器人';
-                
             }else{
                 //$username = str_replace(array("\r", "\n", "\r\n", "\n\r" , "%0a", "%0d"), "", $post['username']);
                 $username = $this->input->post('username', true);
@@ -77,16 +76,13 @@ class Auth extends MI_Controller
                     $this->user_blacklist_model->cancelIP($ip);
                     $this->setOldFlags($user);
                     return redirect(base_url('dcsdindex'));
-                } else {
-                    $error = $this->smarty_acl->errors();
                 }
                 $this->session->set_flashdata('error_msg', $this->smarty_acl->errors());
                 return redirect(current_url());
             }
+            $this->session->set_flashdata('error_msg', $error);
         }
         //Load view
-        $this->data['error'] = $error;
-
         $this->data['grecaptcha_sitekey'] = '6LeWFsEUAAAAAPkas5uVitqs1e2yKDxivqDD8sii';
         // 舊版 DCSD-Phy: common/layout_base + login
         //$this->load->view('login');
