@@ -28,7 +28,7 @@ class MY_Controller extends MI_Controller
         $this->site = 'admin';
         $this->flags = new stdClass;
         $this->data = array(
-            'isMobile' => $this->isMobile(),
+            //'isMobile' => $this->isMobile(), // 因為 RWD, 不需要, 且 phpunit test 不能測, 24Apr2023
             'is_edap' => false
         );
 
@@ -461,6 +461,7 @@ class MY_Controller extends MI_Controller
     /********************************
      * Check Mobile functions.
      ********************************/
+    /* // 因為 RWD, 不需要, 且 phpunit test 不能測, 24Apr2023
     public function isMobile()
     {
         $regex_match="/(nokia|iphone|android|motorola|^mot\-|softbank|foma|docomo|kddi|up\.browser|up\.link|";
@@ -471,6 +472,7 @@ class MY_Controller extends MI_Controller
         $regex_match.=")/i";
         return preg_match($regex_match, strtolower($_SERVER['HTTP_USER_AGENT']));
     }
+    /**/
 
     /********************************
      * Change Query String params

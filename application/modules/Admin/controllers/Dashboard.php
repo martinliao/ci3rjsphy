@@ -30,8 +30,12 @@ class Dashboard extends BackendController //Admin_Controller
 
         /* Data */
         $this->data['userid']            = $this->session->userdata["user_id"];
-        $this->data['count_users']       = $this->dashboard_model->get_count_record('BS_user'); //users');
-        $this->data['count_groups']      = $this->dashboard_model->get_count_record('BS_user_group'); //groups');
+
+        $this->data['count_bsuser']       = $this->dashboard_model->get_count_record('BS_user');
+        $this->data['count_bsgroup']      = $this->dashboard_model->get_count_record('BS_user_group');
+
+        $this->data['count_users']       = $this->dashboard_model->get_count_record('users');   // BS_user
+        $this->data['count_groups']      = $this->dashboard_model->get_count_record('acl_roles');  // BS_user_group
         $this->data['disk_totalspace']   = $this->dashboard_model->disk_totalspace(DIRECTORY_SEPARATOR);
         $this->data['disk_freespace']    = $this->dashboard_model->disk_freespace(DIRECTORY_SEPARATOR);
         $this->data['disk_usespace']     = $this->data['disk_totalspace'] - $this->data['disk_freespace'];
@@ -46,7 +50,8 @@ class Dashboard extends BackendController //Admin_Controller
 //debugBreak();
         /* Load Template */
         //$this->template->admin_render('admin/dashboard/index', $this->data);
-        $this->render_page('dashboard/index', $this->data);
+        //$this->render_page('dashboard/index', $this->data);
+        $this->render_page('dashboard', $this->data);
         //$this->render_page2('dashboard/index', $this->data);
     }
 }

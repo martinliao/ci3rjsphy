@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class AuthAdmin extends MY_Controller
+class AuthAdmin extends MI_Controller
 {
 
     public function __construct()

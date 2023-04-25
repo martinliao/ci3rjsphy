@@ -71,7 +71,7 @@ class BackendController extends MI_Controller
 
     protected function logged_in()
     {
-        if (!$this->smarty_acl->logged_in(False)) {
+        if (!$this->smarty_acl->logged_in(TRUE)) {
             return redirect('admin/login');
         }
     }

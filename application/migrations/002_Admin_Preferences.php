@@ -18,14 +18,12 @@ class Migration_Admin_Preferences extends CI_Migration
         //Tables prefix
         //$this->settings['prefix'] = $tables['prefix'] ? $tables['prefix'].'_' : '';
         // Table names
-debugBreak();
         $this->settings['admin_preferences'] = 'admin_preferences';
     }
 
     public function up()
     {
         $this->get_settings();
-debugBreak();
         /**************** Start Create Tables ****************/
         $this->dbforge->add_field(array(
             'id' => array(

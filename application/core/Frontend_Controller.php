@@ -39,8 +39,7 @@ class FrontendController extends MI_Controller
         // Normally, to call any of the available CodeIgniter object or pre defined library classes then you need to declare.
         $CI =& get_instance();
 
-//debugBreak();
-        $this->load->library('theme');
+        //$this->load->library('theme');
 
         // Example data
         // Site name

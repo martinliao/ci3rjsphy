@@ -6,7 +6,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * Site:    https://smartyscripts.com
  *
  * Requirements: PHP7 or above
- */
+**/
+
+/*
+| -------------------------------------------------------------------------
+| Old Database
+| -------------------------------------------------------------------------
+*/
+$config['olddb']['database'] = 'dcsdphy';
+$config['olddb']['users'] = 'BS_User';
 
 /*
 | -------------------------------------------------------------------------

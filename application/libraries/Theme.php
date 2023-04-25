@@ -8,7 +8,6 @@ class Theme
 
     function __construct($layout = 'highlight', $theme = 'AdminLTE')
     {
-debugBreak();
         if (is_array($layout)) {
             $this->layout = $layout['layout'];
             $this->theme = $layout['theme'];

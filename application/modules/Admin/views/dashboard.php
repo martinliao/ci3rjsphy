@@ -24,10 +24,8 @@
             <div class="info-box">
               <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">License</span>
-                <span class="info-box-number">
-                  Free
-                </span>
+                <span class="info-box-text">BS_User</span>
+                <span class="info-box-number"><?php echo $count_bsuser; ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -38,8 +36,8 @@
             <div class="info-box mb-3">
               <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">AdminLTE version</span>
-                <span class="info-box-number">3.0.0-beta.2</span>
+                <span class="info-box-text">BS_Group</span>
+                <span class="info-box-number"><?php echo $count_bsgroup; ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
