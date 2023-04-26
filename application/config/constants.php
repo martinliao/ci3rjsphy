@@ -96,3 +96,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | 
 | 但是為了相容性, 所以目前還是保留, Updated, Apr2023, martin.
 */ 
+
+//9B 課程講座時間建檔
+if (!defined('DIR_ROOT')) define('DIR_ROOT', dirname(dirname(__FILE__)) . '/');
+if (!defined('DIR_UPLOAD_COURSE_SCHEDULE')) define('DIR_UPLOAD_COURSE_SCHEDULE', DIR_ROOT . 'admin/files/upload_course_schedule/');
