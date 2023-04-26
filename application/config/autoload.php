@@ -134,4 +134,5 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array();
 array_push($autoload['libraries'], 'pagination');
+array_push($autoload['libraries'], 'form_validation');
 array_push($autoload['helper'], 'form');
