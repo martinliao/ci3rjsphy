@@ -51,7 +51,7 @@ class Mail_log_model extends MY_Model
         }
         $this->db->stop_cache();
         
-        if ($paginate) $this->paginate();
+        //if ($paginate) $this->paginate();
         $query = $this->db->get();
         $this->db->flush_cache(); 
         return $query->result();

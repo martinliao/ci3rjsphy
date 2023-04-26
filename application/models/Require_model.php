@@ -59,7 +59,7 @@ class Require_model extends MY_Model
 
         $this->db->stop_cache();
 
-        if ($paginate) $this->paginate();
+        //if ($paginate) $this->paginate();
         $this->db->order_by('r.year, r.class_no, r.term');
         $query = $this->db->get();
         // dd($this->db->last_query());
