@@ -86,7 +86,12 @@ class Auth extends MI_Controller
         $this->data['grecaptcha_sitekey'] = '6LeWFsEUAAAAAPkas5uVitqs1e2yKDxivqDD8sii';
         // 舊版 DCSD-Phy: common/layout_base + login
         //$this->load->view('login');
-        $this->load->view('old-login');
+        // CSRF Token
+        $this->data['csrf'] = array(
+            'name' => $this->security->get_csrf_token_name(),
+            'hash' => $this->security->get_csrf_hash()
+        );
+        $this->load->view('old-login', $this->data);
     }
 
     /**
