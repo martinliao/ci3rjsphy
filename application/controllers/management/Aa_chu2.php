@@ -27,9 +27,6 @@ class Aa_chu2 extends MY_Controller
             'B' => '發展系列',
         );
 
-        $this->load->library('pdf/PDF_Chinesess');
-        $this->load->library('pdf/font/makefont/Makefont123');
-
         $date_now = new DateTime('now');
         $year_now = $date_now->format('Y');
         $this_yesr = $year_now - 1911;
@@ -60,6 +57,9 @@ class Aa_chu2 extends MY_Controller
 
     public function print_pdf()
     {
+        $this->load->library('pdf/PDF_Chinesess');
+        $this->load->library('pdf/font/makefont/Makefont123');
+
         $query_condition = '';
         $query_condition .= " a.year = ".$this->db->escape(addslashes($this->data['filter']['year']))."  ";
         $query_condition .= "and a.reason = ".$this->db->escape(addslashes($this->data['filter']['season']))."  ";
