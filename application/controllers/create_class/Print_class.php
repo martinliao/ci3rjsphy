@@ -9,9 +9,7 @@ class Print_class extends MY_Controller
 			redirect(base_url('welcome'));
         }
         $this->load->model('create_class/print_class_model');
-        $this->load->library('pdf/PDF_Chinesess');
-        $this->load->library('pdf/font/makefont/Makefont123');
-
+        
         if (!isset($this->data['filter']['page'])) {
             $this->data['filter']['page'] = '1';
         }
@@ -88,6 +86,8 @@ class Print_class extends MY_Controller
     }
     public function export($seq_no=null)
     {
+        $this->load->library('pdf/PDF_Chinesess');
+        $this->load->library('pdf/font/makefont/Makefont123');
         if($seq_no !=null){
             $this->db->select('year,class_no,term,sc.name as bureau_name,class_name');
             $this->db->join('sub_category as sc','sc.type=require.type and sc.cate_id=require.beaurau_id','left');

@@ -16,9 +16,6 @@ class Student_search extends MY_Controller
         $this->load->model('customer_service/online_app_model');
         $this->load->model('customer_service/BS_user_model');  
         $this->load->model('management/code_table_model');   
-
-        $this->load->library('pdf/PDF_Chinesess');
-
         $this->data['choices']['year'] = $this->_get_year_list();
 
         if (!isset($this->data['filter']['page'])) {
@@ -297,6 +294,8 @@ class Student_search extends MY_Controller
     
     }
     public function show($seq_no=NULL){
+        $this->load->library('pdf/PDF_Chinesess');
+
         if($_GET['csv'] == 1) $this->__result('3', '操作錯誤');
         
         $ShowTel = $this->data['filter']['ShowTelChecked'] = $_GET['ShowTel'];

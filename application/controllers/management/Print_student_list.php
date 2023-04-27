@@ -16,9 +16,6 @@ class Print_student_list extends MY_Controller
         $this->load->model('management/online_app_model');
         $this->load->model('customer_service/BS_user_model');
 
-        $this->load->library('pdf/PDF_Chinesess');
-        $this->load->library('pdf/font/makefont/Makefont123');
-
         $this->data['choices']['year'] = $this->_get_year_list();
 
         if (!isset($this->data['filter']['page'])) {
@@ -152,7 +149,10 @@ class Print_student_list extends MY_Controller
     }
     public function show($seq_no=NULL)
     {   
-       $ShowTel = $this->data['filter']['ShowTelChecked'] = $_GET['ShowTel'];
+        $this->load->library('pdf/PDF_Chinesess');
+        $this->load->library('pdf/font/makefont/Makefont123');
+        
+        $ShowTel = $this->data['filter']['ShowTelChecked'] = $_GET['ShowTel'];
     	if($_GET['csv'] == 1) $this->setAlert(3, '操作錯誤');
 
     	$class = $this->data['class'] = $this->regist_contractors_model->get($seq_no);

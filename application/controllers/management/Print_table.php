@@ -16,9 +16,6 @@ class Print_table extends MY_Controller
         $this->load->model('management/online_app_model');
         $this->load->model('management/classroom_model');
         $this->load->model('customer_service/BS_user_model');
-
-        $this->load->library('pdf/PDF_Chinesess');
-
         $this->data['choices']['year'] = $this->_get_year_list();
 
         if (!isset($this->data['filter']['page'])) {
@@ -127,7 +124,10 @@ class Print_table extends MY_Controller
         $this->data['link_refresh'] = base_url("management/Print_table/");
         $this->layout->view('management/print_table/list',$this->data);
     }
+
     public function checkinFrom($seq_no=NULL){
+        $this->load->library('pdf/PDF_Chinesess');
+
         $class = $this->regist_contractors_model->get($seq_no);
         $type =  $_GET['type'];
         if(!isset($class) || !isset($type) ){
@@ -523,6 +523,7 @@ class Print_table extends MY_Controller
         $pdf->Output();
         ob_end_flush();
     }
+
     public function rating(){
         $seq_no = $_GET['seq_no'];
         $class = $this->regist_contractors_model->get($seq_no);  //選定的class
