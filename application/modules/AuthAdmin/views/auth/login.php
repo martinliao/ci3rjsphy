@@ -9,6 +9,7 @@
                     </div>
                     <div class="card-body">
                         <form action="<?php echo base_url('admin/login');?>" method="post">
+                            <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
                             <div class="form-group">
                                 <label>Username</label>
                                 <input type="text" name="username" placeholder="Username" class="form-control" value="<?php echo set_value('username'); ?>"/>

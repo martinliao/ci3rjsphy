@@ -211,6 +211,11 @@ class AuthAdmin extends MI_Controller
      */
     protected function admin_views($view, $data = null)
     {
+        // CSRF Token
+        $data['csrf'] = array(
+            'name' => $this->security->get_csrf_token_name(),
+            'hash' => $this->security->get_csrf_hash()
+        );
         $this->load->view('' . $view, $data);
     }
 }
