@@ -167,21 +167,21 @@
         <?=form_error('ecpa_class_id'); ?>
     </div>
 
-    <?php if($user_bureau != '379680000A' && ($page_name == 'edit' || isset($transfer))){ ?>
-    <div class="form-group col-xs-6 required <?=form_error('class_name')?'has-error':'';?>">
+    <?php //if($user_bureau != '379680000A' && ($page_name == 'edit' || isset($transfer))){ ?>
+    <!--div class="form-group col-xs-6 required <?=form_error('class_name')?'has-error':'';?>">
         <label class="control-label">班期名稱</label>
         <input type="button" class="btn btn-xs btn-primary" onclick="query_classname('<?=$page_name?>')" value="查詢已建立班期名稱">
         <input class="form-control" id="class_name" name="class_name" placeholder="" value="<?=set_value('class_name', $form['class_name']); ?>" readonly>
         <?=form_error('class_name'); ?>
-    </div>
-    <?php } else { ?>
+    </div -->
+    <?php //} else { ?>
     <div class="form-group col-xs-6 required <?=form_error('class_name')?'has-error':'';?>">
         <label class="control-label">班期名稱</label>
         <input type="button" class="btn btn-xs btn-primary" onclick="query_classname('<?=$page_name?>')" value="查詢已建立班期名稱">
         <input class="form-control" id="class_name" name="class_name" placeholder="" onblur="getClassNO()" value="<?=set_value('class_name', $form['class_name']); ?>">
         <?=form_error('class_name'); ?>
     </div>
-    <?php } ?>
+    <?php //} ?>
 
     <div class="form-group col-xs-6">
         <label class="control-label">課程類別名稱</label>
