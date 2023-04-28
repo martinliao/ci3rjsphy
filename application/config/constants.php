@@ -110,7 +110,7 @@ define('ROLE_EMPLOYEE',                         '3');
 if (!defined('DIR_ROOT')) define('DIR_ROOT', dirname(dirname(__FILE__)) . '/');
 if (!defined('DIR_UPLOAD_COURSE_SCHEDULE')) define('DIR_UPLOAD_COURSE_SCHEDULE', DIR_ROOT . 'files/upload_course_schedule/');
 //13A 講義上傳
-if (!defined('DIR_MEDIA')) define('DIR_MEDIA', DIR_ROOT . 'media/');
+if (!defined('DIR_MEDIA')) define('DIR_MEDIA', FCPATH . 'files/media/');
 //16A 每日刷卡記錄-匯入範本檔
 if (!defined('HTTP_EXAMPLE_FILE')) define('HTTP_EXAMPLE_FILE', HTTP_ROOT . 'files/example_files/');
 //16A 每日刷卡記錄-匯入

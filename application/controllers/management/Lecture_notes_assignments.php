@@ -594,7 +594,7 @@ class Lecture_notes_assignments extends MY_Controller
             } else {
                 //$path = HTTP_MEDIA.$download_data['file_path'] ;
                 //$path = '/var/www/resource/'.$download_data['file_path']; 
-                $path = DIR_ROOT.'/media/'.$download_data['file_path'] ;
+                $path = DIR_MEDIA.$download_data['file_path'] ;
                 
 			    if(!is_file($path)||!is_readable($path)){
 			        die("檔案無法讀取");
