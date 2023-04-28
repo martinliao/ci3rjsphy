@@ -753,4 +753,21 @@ class Createclass_model extends MY_Model
         return $result;
     }
 
+    public function getBookingRooms($year, $class_no, $term){
+        $where = sprintf(" b.year = %s", $this->db->escape(addslashes($year)));
+        $where .= sprintf(" AND b.term = %s", $this->db->escape(addslashes($term)));
+        $where .= sprintf(" AND b.class_no = %s", $this->db->escape(addslashes($class_no)));
+
+        $sql = sprintf("SELECT b.*, r.room_name, t.name FROM `booking_place` b
+                        LEFT JOIN `venue_information` r ON b.room_id = r.room_id
+                        LEFT JOIN `reservation_time` t ON b.booking_period = t.item_id
+                        WHERE %s
+                        ORDER BY b.booking_date", $where);
+
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+
+        return $result;
+    }
+
 }

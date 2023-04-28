@@ -151,11 +151,11 @@ class MY_Controller extends MI_Controller
         );
 
          // 年度查詢
-        $current_year = date('Y')-1909;
+        $current_year = date('Y') - 1909;
         for($i=$current_year;$i>=90;$i--){
              $this->data['choices']['query_year'][$i] = $i;
         }
-        
+
         if (empty($this->data['filter']['rows'])) {
             $this->data['filter']['rows'] = 10;
             if ($this->input->cookie('rows')) {
@@ -181,8 +181,7 @@ class MY_Controller extends MI_Controller
         }
 
         $this->data['history_back'] = (empty($this->input->post('history_back'))) ? (int)$this->getFilterData('history_back', -1) : $this->input->post('history_back');
-
-        $this->data['is_edap'] = false;
+        //$this->data['is_edap'] = false;
     }
 
 

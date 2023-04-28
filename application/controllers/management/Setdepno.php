@@ -14,8 +14,6 @@ class Setdepno extends MY_Controller
         $this->load->model('management/bureau_model');
         $this->load->model('management/beaurau_persons_model');
 
-        $this->data['choices']['year'] = $this->_get_year_list();
-
         if (!isset($this->data['filter']['page'])) {
             $this->data['filter']['page'] = '1';
         }
@@ -148,21 +146,6 @@ class Setdepno extends MY_Controller
         $this->data['setdepno'] = 'Y';
         $this->data['link_cancel'] = base_url("management/setdepno/?{$_SERVER['QUERY_STRING']}");
         $this->layout->view('management/setdepno/detail',$this->data);
-    }
-
-    public function _get_year_list()
-    {
-        $year_list = array();
-
-        $date_now = new DateTime('now');
-        $year_now = $date_now->format('Y');
-        $this_yesr = $year_now - 1910;
-
-        for($i=$this_yesr; $i>=90; $i--){
-            $year_list[$i] = $i;
-        }
-        // jd($year_list,1);
-        return $year_list;
     }
 
 }

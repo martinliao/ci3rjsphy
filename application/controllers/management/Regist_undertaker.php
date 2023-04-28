@@ -18,8 +18,6 @@ class Regist_undertaker extends MY_Controller
         $this->load->model('management/stud_modifylog_model');
         $this->load->model('planning/createclass_model');
 
-        $this->data['choices']['year'] = $this->_get_year_list();
-
         if (!isset($this->data['filter']['page'])) {
             $this->data['filter']['page'] = '1';
         }
@@ -535,21 +533,6 @@ class Regist_undertaker extends MY_Controller
         }
         $this->data['link_save_phydisabled'] = base_url("management/regist_undertaker/phydisabled/{$id}");
         $this->load->view('management/regist_undertaker/phydisabledchg', $this->data);
-    }
-
-    public function _get_year_list()
-    {
-        $year_list = array();
-
-        $date_now = new DateTime('now');
-        $year_now = $date_now->format('Y');
-        $this_yesr = $year_now - 1911;
-
-        for($i=$this_yesr+1; $i>=90; $i--){
-            $year_list[$i] = $i;
-        }
-        // jd($year_list,1);
-        return $year_list;
     }
 
     public function _check_person($conditions=array())

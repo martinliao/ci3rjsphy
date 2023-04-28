@@ -132,57 +132,51 @@ class Class_undertake_setting extends MY_Controller
                     // unset($post['ext_e_date']);
                 }
 
-                if( (!empty($post['ref_s_date'])) && (!empty($post['ref_e_date'])) )
-                {
-                    if ((date('Y-m-d',strtotime($post['ref_s_date'])) > date('Y-m-d',strtotime($post['ref_e_date'])))){
-                         die('退費開始日期不可大於退費結束日期，請回上一頁');
-                    }      
-                   
-                }
-                
-                if( (!empty($post['ext_s_date'])) && (!empty($post['ext_e_date'])) )
-                {
-                    if ((date('Y-m-d',strtotime($post['ext_s_date'])) > date('Y-m-d',strtotime($post['ext_e_date'])))){
-                         die('延期開始日期不可大於延期結束日期，請回上一頁');
-                    }      
-                   
-                }
+                if((empty($post['apply_s_date']) || empty($post['apply_e_date']))
+                    && (!empty($post['apply_s_date2']) || !empty($post['apply_e_date2']))) {
+                    echo "<script>alert('若「報名起日(西元)」尚未設定，則不可設定「報名起日2(西元)」')</script>";
+                }else {
 
-               
-                $rs3 = $this->class_undertake_setting_model->getselect2($post);
-               
-
-
-                if ($rs3) {
-                    $this->setAlert(2, 'moodle資料編輯成功');
-
-                    $rs2 = $this->class_undertake_setting_model->update_phy_require($post);
-                    if ($rs2) {
-                        $this->setAlert(2, 'moodle資料編輯成功');
+                    if( (!empty($post['ref_s_date'])) && (!empty($post['ref_e_date'])) )
+                    {
+                        if ((date('Y-m-d',strtotime($post['ref_s_date'])) > date('Y-m-d',strtotime($post['ref_e_date'])))){
+                            die('退費開始日期不可大於退費結束日期，請回上一頁');
+                        }      
+                    
                     }
-                }else{    $this->setAlert(2, '沒有moodle資料');
+                    
+                    if( (!empty($post['ext_s_date'])) && (!empty($post['ext_e_date'])) )
+                    {
+                        if ((date('Y-m-d',strtotime($post['ext_s_date'])) > date('Y-m-d',strtotime($post['ext_e_date'])))){
+                            die('延期開始日期不可大於延期結束日期，請回上一頁');
+                        }      
+                    
+                    }
+
+                    $rs3 = $this->class_undertake_setting_model->getselect2($post);
+                    if ($rs3) {
+                        $this->setAlert(2, 'moodle資料編輯成功');
+
+                        $rs2 = $this->class_undertake_setting_model->update_phy_require($post);
+                        if ($rs2) {
+                            $this->setAlert(2, 'moodle資料編輯成功');
+                        }
+                    }else{
+                        $this->setAlert(2, '沒有moodle資料');
+                    }
+
+                    unset($post['phy_year']);
+                    unset($post['phy_class_no']);
+                    unset($post['phy_term']);
+                    
+                    //20210708加入自費語言end
+                    $rs = $this->class_undertake_setting_model->update($id, $post);
+                    if ($rs) {
+                        $this->setAlert(2, '資料編輯成功');
+                    }
+                    redirect(base_url("create_class/class_undertake_setting/?{$_SERVER['QUERY_STRING']}"));
                 }
-
-
-                
-
-                unset($post['phy_year']);
-                unset($post['phy_class_no']);
-                unset($post['phy_term']);
-                
-
-
-
-
-
-
-                //20210708加入自費語言end
-                $rs = $this->class_undertake_setting_model->update($id, $post);
-                if ($rs) {
-                    $this->setAlert(2, '資料編輯成功');
-                }
-                redirect(base_url("create_class/class_undertake_setting/?{$_SERVER['QUERY_STRING']}"));
-            // }            
+            //}
         }
         $this->data["link_save"] = "test";
         $this->data["page_name"] = "";

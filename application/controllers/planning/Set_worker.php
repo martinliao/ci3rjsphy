@@ -52,7 +52,7 @@ class Set_worker extends MY_Controller
 	public function index()
 	{
 		if ($post = $this->input->post()) {
-			$message = '';
+			$message = $message2 = '';
 			for($i=0;$i<count($post['rowid']);$i++){
                 $class_info = $this->set_worker_model->getClassInfo($post['rowid'][$i]);
 				if(!empty($post['batch_worker_idno'])){
@@ -123,7 +123,14 @@ class Set_worker extends MY_Controller
                 }
 
                 if(!empty($post['batch_apply_s_date2'])){
-                    $this->set_worker_model->updateApplyStartDate2($post['rowid'][$i],$post['batch_apply_s_date2']);
+                    $tmp_start_key = 'apply_s_date_'.$post['rowid'][$i];
+                    if(empty($post[$tmp_end_key])){
+                        $message2 .= $post['rowid'][$i].":「首次報名起日」尚未設定，因此本次資料將帶入「首次報名起日」<br>";
+                        $this->set_worker_model->updateApplyStartDate($post['rowid'][$i],$post['batch_apply_s_date2']);
+                    }
+                    else{
+                        $this->set_worker_model->updateApplyStartDate2($post['rowid'][$i],$post['batch_apply_s_date2']);
+                    }
                 } else {
                     $tmp_start_key = 'apply_s_date2_'.$post['rowid'][$i];
                     if(!empty($post[$tmp_start_key])){
@@ -132,7 +139,14 @@ class Set_worker extends MY_Controller
                 }
 
                 if(!empty($post['batch_apply_e_date2'])){
-                    $this->set_worker_model->updateApplyEndDate2($post['rowid'][$i],$post['batch_apply_e_date2']);
+                    $tmp_end_key = 'apply_e_date_'.$post['rowid'][$i];
+                    if(empty($post[$tmp_end_key])){
+                        $message2 .= $post['rowid'][$i].":「首次報名迄日」尚未設定，因此本次資料將帶入「首次報名迄日」<br>";
+                        $this->set_worker_model->updateApplyEndDate($post['rowid'][$i],$post['batch_apply_e_date2']);
+                    }
+                    else{
+                        $this->set_worker_model->updateApplyEndDate2($post['rowid'][$i],$post['batch_apply_e_date2']);
+                    }
                 } else {
                     $tmp_end_key = 'apply_e_date2_'.$post['rowid'][$i];
                     if(!empty($post[$tmp_end_key])){
@@ -148,7 +162,7 @@ class Set_worker extends MY_Controller
                 $this->setAlert(2, $message);
 
             } else {
-                $this->setAlert(2, '資料修改成功');
+                $this->setAlert(2, '資料修改成功<br>'.$message2);
             }
 		
 			redirect(base_url("planning/set_worker?{$_SERVER['QUERY_STRING']}"));
