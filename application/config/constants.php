@@ -108,6 +108,10 @@ define('ROLE_EMPLOYEE',                         '3');
 
 //9B 課程講座時間建檔
 if (!defined('DIR_ROOT')) define('DIR_ROOT', dirname(dirname(__FILE__)) . '/');
-if (!defined('DIR_UPLOAD_COURSE_SCHEDULE')) define('DIR_UPLOAD_COURSE_SCHEDULE', DIR_ROOT . 'admin/files/upload_course_schedule/');
+if (!defined('DIR_UPLOAD_COURSE_SCHEDULE')) define('DIR_UPLOAD_COURSE_SCHEDULE', DIR_ROOT . 'files/upload_course_schedule/');
 //13A 講義上傳
 if (!defined('DIR_MEDIA')) define('DIR_MEDIA', DIR_ROOT . 'media/');
+//16A 每日刷卡記錄-匯入範本檔
+if (!defined('HTTP_EXAMPLE_FILE')) define('HTTP_EXAMPLE_FILE', HTTP_ROOT . 'files/example_files/');
+//16A 每日刷卡記錄-匯入
+if (!defined('DIR_UPLOAD_FILES')) define('DIR_UPLOAD_FILES', FCPATH . 'files/upload_files/');
