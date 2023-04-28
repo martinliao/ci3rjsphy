@@ -51,9 +51,11 @@
                             <td>
                             <?php if($log->yn_sel == '6' && !empty($log->select_stno)){ ?>
                                 原:<?=$log->select_stno?>
-                            <?php }else{?>
+                            <?php }else if($log->st_no == 999) {
+                                echo "";
+                            }else{?>
                                 <?=$log->st_no?>
-                            <?php } ?>                      
+                            <?php } ?>
                             </td>
                             <td><?=$log->name?></td>
                             <td><?=$log->student_beaurau_name?></td>

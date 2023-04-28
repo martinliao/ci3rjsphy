@@ -67,7 +67,7 @@ class stud_modifylog_model extends MY_Model
         $sql = "SELECT * FROM ( SELECT a.*, @rownum := @rownum + 1 AS num FROM
         (SELECT 
             modifylog_ids.id,
-            online_app.st_no,
+            IF (online_app.st_no IS NULL, 999, online_app.st_no) as st_no,
             online_app.yn_sel,
             IFNULL(BS_user.name, modifylog_ids.id) as name,
             STUDENT_bureau_code. NAME AS student_beaurau_name,
@@ -138,8 +138,8 @@ class stud_modifylog_model extends MY_Model
         order by st_no,id
 
         ) b
-        
-    ";
+        ORDER by st_no";
+
     $query = $this->db->query($sql);
     return $query->result();
     }
