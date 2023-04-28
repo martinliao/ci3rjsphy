@@ -202,8 +202,9 @@ class Createclass extends MY_Controller
         
         $current_year = date('Y')-1911;
         $next_year = $current_year+1;
+        $next_year2 = $current_year+2;
         
-        $this->data['choices']['year'] = array($current_year => $current_year,$next_year => $next_year);
+        $this->data['choices']['year'] = array($current_year => $current_year,$next_year => $next_year,$next_year2 => $next_year2);
         if($this->data['is_edat']){
             $this->data['choices']['year'] = array($next_year => $next_year);
         }
