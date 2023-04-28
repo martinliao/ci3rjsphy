@@ -65,12 +65,20 @@ class Auth extends MI_Controller
                     $lock_time = date('Y-m-d H:i:s', strtotime($lock_time));
                     $error = "該IP已遭鎖定！<br>於「{$lock_time}」解鎖";
                 }/** */
+                $user = null;
                 $login = $this->smarty_acl->login($username, $password, $this->input->post('remember', true), FALSE);
                 if ($login) {
-                    $this->session->set_flashdata('success_msg', 'User logged in successfully!');
-                    // 以下是 Welcome作的
-                    //$user = $this->user_model->getuserByAccount($username);
                     $user = $this->user_model->getuserByAccount('admin'); // ToDo: 暫時用 admin 的帳號. 22Apr2023
+                } else {
+                    // 以下是 Welcome作的
+                    $user = $this->user_model->getuserByAccount($username);
+                    $rs = $this->user_model->login($username, $password);
+                    if ($rs['status']) {
+                        $login = $this->smarty_acl->login('martin', 'jack5899', false, FALSE);
+                    }
+                }
+                if ($login) {
+                    $this->session->set_flashdata('success_msg', 'User logged in successfully!');
                     // cancel logs for login error
                     $this->user_blacklist_model->cancelAccount($username);
                     $this->user_blacklist_model->cancelIP($ip);
