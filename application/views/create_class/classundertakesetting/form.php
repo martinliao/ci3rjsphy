@@ -90,25 +90,13 @@ if ($rs4) {
               $_checked["repeat_sign"][1] = ($edit_data->repeat_sign == "N") ? 'checked' : '';
             ?>
 
-            <div class="col-xs-6" >
-              <div class="form-group">
-                <label class="control-label">報名方式 1：</label>
-                <input type="radio" name="app_type" value="0" <?=$_checked["apply_type"][0];?> >開放各單位人事報名
-              </div>
-            </div> 
+            <input type="hidden" name="app_type" value="0">
 
-            <div class="col-xs-6" >
+            <div class="col-xs-12" >
               <div class="form-group">
                 <label class="control-label">同一班期是否可重複報名：</label>
                 <input type="radio" name="repeat_sign" value="Y" <?=$_checked["repeat_sign"][0]?> >Yes
                 <input type="radio" name="repeat_sign" value="N" <?=$_checked["repeat_sign"][1]?> >No
-              </div>
-            </div> 
-
-            <div class="col-xs-6" >
-              <div class="form-group">
-                <label class="control-label">報名方式 2：</label>
-                <input type="radio" name="app_type" value="2" <?=$_checked["apply_type"][2];?> >限定某單位人事報名(<span style="color:red">請選擇右邊單位人事</span>)
               </div>
             </div> 
 
@@ -120,14 +108,8 @@ if ($rs4) {
                 <a onclick="personnelQuery(1)" class="btn btn-success">查詢</a>
                 <a onclick="clearBeaurau('limit_beaurau_id', 'limit_beaurau_name')" class="btn btn-primary">清空</a>
               </div>
-            </div>       
+            </div>
 
-            <div class="col-xs-6" >
-              <div class="form-group">    
-                <label class="control-label">報名方式 3：</label>
-                <input type="radio" name="app_type" value="1" <?=$_checked["apply_type"][1];?>>承辦單位統一報名(<span style="color:red">此功能暫停使用</span>)
-              </div>
-            </div>   
             <div class="col-xs-6" >
               <div class="form-group">
                 <label class="control-label">承辦單位：</label>
@@ -136,7 +118,7 @@ if ($rs4) {
                 <a onclick="personnelQuery(2)" class="btn btn-success">查詢</a>
                 <a onclick="clearBeaurau('req_beaurau_id', 'req_beaurau_name')" class="btn btn-primary">清空</a>
               </div>
-            </div> 
+            </div>
 
             <div class="col-xs-6" >
               <div class="form-group">
@@ -184,25 +166,17 @@ if ($rs4) {
                                         class="fa fa-calendar"></i></span>
               </div>
             </div> 
-            <div class="col-xs-6" >
-              <label class="control-label">選員起日(西元)：</label>
-              <div class="input-group">
-                <input type="text" name="sel_s_date" id="datepicker7" class="form-control form-control datepicker" value="<?=!empty($edit_data->sel_s_date)?date('Y-m-d',strtotime($edit_data->sel_s_date)):''?>">
-                <span class="input-group-addon" style="cursor: pointer;" id="datepicker8"><i
-                                        class="fa fa-calendar"></i></span>
-              </div>
-            </div> 
-            <div class="col-xs-6" >
-              <label class="control-label" >選員迄日(西元)：</label>
-              <div class="input-group">
-                <input type="text" id="datepicker9" name="sel_e_date" class="form-control form-control datepicker" value="<?=!empty($edit_data->sel_e_date)?date('Y-m-d',strtotime($edit_data->sel_e_date)):''?>">
-                <span class="input-group-addon" style="cursor: pointer;" id="datepicker10"><i
-                                        class="fa fa-calendar"></i></span>
-              </div>
-            </div> 
+            
+            <input type="hidden" name="sel_s_date" id="datepicker7" value="">
+            <input type="hidden" name="sel_e_date" id="datepicker9" value="">
+
+            <div class="col-xs-12">
+                <label class="control-label">備註：</label>
+                <br>
+                <textarea class="form-control" name="undertake_remark" id="undertake_remark" cols="100" rows="3"><?=!empty($edit_data->undertake_remark)?($edit_data->undertake_remark):''?></textarea>
+            </div>
 
             <div class="col-xs-12 center" style="background-color:#bdff87; text-align:center;padding:5px 0px;margin:30px 0px 20px 0px">自費語言班期專用</div>
-            
 
             <div class="col-xs-6" >
               <label class="control-label">退費起日(西元)：</label>

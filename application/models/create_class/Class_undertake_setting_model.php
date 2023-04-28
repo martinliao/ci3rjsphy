@@ -158,6 +158,7 @@ class Class_undertake_setting_model extends MY_Model
 		$this->tdb2->set('ext_s_date',$post['ext_s_date']);
 		$this->tdb2->set('ext_e_date',$post['ext_e_date']);
 
+		$this->tdb2->set('undertake_remark',$post['undertake_remark']);
     
     	$this->tdb2->where('year',$post['phy_year']);
 		$this->tdb2->where('class_no',$post['phy_class_no']);

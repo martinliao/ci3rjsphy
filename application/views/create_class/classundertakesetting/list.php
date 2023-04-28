@@ -77,21 +77,18 @@
                                <th>系列</th>
                       <?php 
                       $fields = [
-                          "year" => "年度", 
-                          "class_no" => "班期代碼", 
-                          "class_name" => "班期名稱", 
-                          "term" => "期別", 
-                          "app_type_text" => "報名方式", 
-                          "apply_s_date" => "報名起日", 
+                          "year" => "年度",
+                          "class_no" => "班期代碼",
+                          "class_name" => "班期名稱",
+                          "term" => "期別",
+                          "apply_s_date" => "報名起日",
                           "apply_e_date" => "報名迄日",
-                          "apply_s_date2" => "二次報名起日", 
-                          "apply_e_date2" => "二次報名迄日", 
-                          "contactor" => "承辦聯絡人", 
-                          "description" => "承辦單位", 
-                          "tel" => "承辦電話",                         
-                          "sel_s_date_format" => "選員起日", 
-                          "sel_e_date_format" => "選員迄日" 
-                                                   
+                          "apply_s_date2" => "二次報名起日",
+                          "apply_e_date2" => "二次報名迄日",
+                          "contactor" => "承辦聯絡人",
+                          "description" => "承辦單位",
+                          "tel" => "承辦電話",
+                          "undertake_remark" => "備註"                                                   
                       ];
                      ?>
                   <?php foreach($fields as $key => $value) :?>
@@ -107,32 +104,30 @@
               <?php foreach ($list["data"] as $row) : ?>
                 <tr>
                   <!-- <td class="text-center"><input type="checkbox" name="rowid[]"  value="<?=$row->id;?>"></td> -->
-                  <td> <?=++$count;?> </td>
-                  <td> <?=$row->style;?> </td>                  
-                  <td> <?=$row->year;?> </td>
-                  <td> <?=$row->class_no;?> </td>
-                  <td> <?=$row->class_name;?> </td>
-                  <td> <?=$row->term;?> </td>
-                  <td> <?=$row->app_type_text;?> </td>
-                  <td> <?=$row->apply_s_date_format;?> </td>
-                  <td> <?=$row->apply_e_date_format;?> </td>
-                  <td> <?=$row->apply_s_date2_format;?> </td>
-                  <td> <?=$row->apply_e_date2_format;?> </td>
-                  <td> <?=$row->contactor;?> </td>
-                  <td> <?=$row->description;?> </td>
-                  <td> <?=$row->tel;?> </td>
-                  <td> <?=$row->sel_s_date_format;?> </td>
-                  <td> <?=$row->sel_e_date_format;?> </td> 
-                  <td align="center" valign="center"> 
+                  <td width="2%"> <?=++$count;?> </td>
+                  <td width="2%"> <?=$row->style;?> </td>                  
+                  <td width="2%"> <?=$row->year;?> </td>
+                  <td width="5%"> <?=$row->class_no;?> </td>
+                  <td width="15%"> <?=$row->class_name;?> </td>
+                  <td width="2%"> <?=$row->term;?> </td>
+                  <td width="5%"> <?=$row->apply_s_date_format;?> </td>
+                  <td width="5%"> <?=$row->apply_e_date_format;?> </td>
+                  <td width="5%"> <?=$row->apply_s_date2_format;?> </td>
+                  <td width="5%"> <?=$row->apply_e_date2_format;?> </td>
+                  <td width="5%"> <?=$row->contactor;?> </td>
+                  <td width="10%"> <?=$row->description;?> </td>
+                  <td width="10%"> <?=$row->tel;?> </td>
+                  <td width="10%"> <?=$row->undertake_remark;?> </td>
+                  <td width="5%" align="center" valign="center"> 
                     <?php 
                   if($row->ref_s_date_format != ""){
                     echo $row->ref_s_date_format."<br>至<br>".$row->ref_e_date_format;
                   } ?> </td>
-                  <td align="center" valign="center"> <?php 
+                  <td width="5%" align="center" valign="center"> <?php 
                   if($row->ext_s_date_format != ""){
                     echo $row->ext_s_date_format."<br>至<br>".$row->ext_e_date_format;
                   } ?> </td>
-                  <td> 
+                  <td width="2%"> 
                     <a href="<?=base_url()."/create_class/class_undertake_setting/edit/".htmlspecialchars($row->seq_no, ENT_HTML5|ENT_QUOTES)."?".htmlspecialchars($_SERVER['QUERY_STRING'], ENT_HTML5|ENT_QUOTES).""; ?>" class="btn btn-outline btn-warning btn-xs btn-toggle <?=htmlspecialchars($row->edit_disable, ENT_HTML5|ENT_QUOTES)?>"><i class="fa fa-pencil fa-lg"></i></a>
                   </td>
                 </tr>
