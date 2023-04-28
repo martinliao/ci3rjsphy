@@ -118,3 +118,5 @@ if (!defined('DIR_UPLOAD_FILES')) define('DIR_UPLOAD_FILES', FCPATH . 'files/upl
 //17G 結業書證管理
 if (!defined('HTTP_FIX_FILE')) define('HTTP_FIX_FILE', HTTP_ROOT . 'files/fix_str/');
 if (!defined('DIR_UPLOAD_CERTS')) define('DIR_UPLOAD_CERTS', FCPATH . 'files/certificate/');
+//18A 匯出終身學習時數檔
+if (!defined('HTTP_MEDIA')) define('HTTP_MEDIA', HTTP_ROOT . 'files/media/');
