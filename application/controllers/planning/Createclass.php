@@ -585,10 +585,13 @@ class Createclass extends MY_Controller
             $this->data['form']['ecpa_class_name'] = $this->createclass_model->getEcpaClassName($this->data['form']['ecpa_class_id']);
         }
 
+        /*
         if(isset($this->data['form']['room_code']) && !empty($this->data['form']['room_code'])){
             $this->data['form']['room_name'] = $this->createclass_model->getRoomName($this->data['form']['room_code']);
             //var_dump($this->data['form']['room_name']);
         }
+        */
+        $this->data['form']['bookingRooms'] = $this->createclass_model->getBookingRooms($this->data['form']['year'], $this->data['form']['class_no'], $this->data['form']['term']);
 
         if(isset($this->data['form']['room_remark']) && !empty($this->data['form']['room_remark'])){
             $this->data['form']['room_name'] = '非公訓處上課';
