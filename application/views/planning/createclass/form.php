@@ -281,7 +281,7 @@
     </div>
 
     <?php if($is_edat) { ?>
-        <input id="weights" name="weights" type="hidden" value="<?=set_value('weights', $form['weights']); ?>">
+        <input id="weights" name="weights" type="hidden" value="<?=set_value('weights', ($form['weights']>0)?$form['weights']:'1'); ?>" <?=($user_bureau!='379680000A')?'readonly':''?>">
     <?php } else {?>
     <div class="form-group col-xs-6 required <?=form_error('weights')?'has-error':'';?>">
         <label class="control-label">權重</label>
