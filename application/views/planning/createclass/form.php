@@ -175,6 +175,7 @@
         <?=form_error('class_name'); ?>
     </div -->
     <?php //} else { ?>
+    
     <div class="form-group col-xs-6 required <?=form_error('class_name')?'has-error':'';?>">
         <label class="control-label">班期名稱</label>
         <input type="button" class="btn btn-xs btn-primary" onclick="query_classname('<?=$page_name?>')" value="查詢已建立班期名稱">
@@ -771,6 +772,9 @@
         <?=form_error('fmap'); ?>
     </div>
 
+    <div class="form-group col-xs-6">
+    </div>
+
     <div class="form-group col-xs-6 required <?=form_error('env_class')?'has-error':'';?>">
         <label class="control-label">環境教育班期</label>
         <div>
@@ -790,9 +794,6 @@
         <?=form_error('env_class'); ?>
     </div>
 
-    <div class="form-group col-xs-6">
-
-    </div>
 
     <div class="form-group col-xs-6 required">
         <label class="control-label">政策行銷班期</label>
@@ -1220,9 +1221,18 @@ function checkSave(){
     }
 
     if(document.getElementById('not_location').value == 'Y'){
-        if((document.getElementById('start_date1').value == '')
-            || (document.getElementById('end_date1').value == '')){
+        var year = document.getElementsByName('year')[0].value ;
+        year = parseInt(year)+1911;
+
+        var sd = document.getElementsByName('start_date1')[0].value;
+        var ed = document.getElementsByName('end_date1')[0].value;
+        if((sd == '') || (ed == '')){
             alert('上課地點非公訓處時，需填寫開課起迄日');
+            return false;
+        }
+
+        if((parseInt(sd) != year) || (parseInt(ed) != year)){
+            alert('預定開課起迄日年度與開班年度不符，請重新點選年度');
             return false;
         }
     }

@@ -283,12 +283,6 @@ class Createclass extends MY_Controller
                     $end=$y.'-'.$m2.'-'.$d2;
                     $post['start_date1'] = $start;
                     $post['end_date1']=$end;
-                }else {
-                    if((isset($post['start_date1']) && intval(date('Y', strtotime($post['start_date1']))) != ($post['year']+1911))
-                        || (isset($post['end_date1']) && intval(date('Y', strtotime($post['end_date1']))) != ($post['year']+1911)) ){
-                        $this->setAlert(1, '資料新增失敗:預定開課起迄日年度與開班年度不符，請重新設定年度。');
-                        redirect(base_url('planning/createclass'));
-                    }
                 }
                 
                 unset($post['room_name']);
@@ -501,12 +495,6 @@ class Createclass extends MY_Controller
                 unset($post['online_course_name']);
                 unset($post['hours']);
                 unset($post['elrid']);
-
-                if((isset($post['start_date1']) && intval(date('Y', strtotime($post['start_date1']))) != ($post['year']+1911))
-                    || (isset($post['end_date1']) && intval(date('Y', strtotime($post['end_date1']))) != ($post['year']+1911)) ){
-                    $this->setAlert(1, '資料新增失敗:預定開課起迄日年度與開班年度不符，請重新設定年度。');
-                    redirect(base_url('planning/createclass'));
-                }
                 
                 $rs = $this->createclass_model->updateRequire($id, $post);
                 if ($rs) {
