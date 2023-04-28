@@ -12,7 +12,7 @@
                             <div class="form-group">
                                 <label class="control-label">年度</label>
                                 <?php
-                                    echo form_dropdown('year', $choices['year'], $filter['year'], 'class="form-control"');
+                                    echo form_dropdown('year', $choices['query_year'], $filter['year'], 'class="form-control"');
                                 ?>
                             </div>
                             <div class="form-group">

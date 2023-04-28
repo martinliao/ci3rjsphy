@@ -188,11 +188,11 @@ class Createclass extends MY_Controller
         } else {
             $this->data['form'] = $this->createclass_model->getFormDefault();
 
-            if(preg_match("/^211.79.136.20[2,3,4,5,6]$/", $_SERVER["REMOTE_ADDR"]) || preg_match("/^163.29.35.[0-9]*[0-9]*[0-9]*$/", $_SERVER["REMOTE_ADDR"])) {
+            //if(preg_match("/^211.79.136.20[2,3,4,5,6]$/", $_SERVER["REMOTE_ADDR"]) || preg_match("/^163.29.35.[0-9]*[0-9]*[0-9]*$/", $_SERVER["REMOTE_ADDR"])) {
                 if($this->data['is_edat']){
                     $this->data['beaurau_id'] = $this->createclass_model->getSecondCategory('A');
                 }
-            }
+            //}
 
             $this->data['form']['dev_type'] = $this->flags->user['bureau_id'];
             $this->data['form']['dev_type_name'] = $this->flags->user['bureau_name'];
@@ -379,13 +379,13 @@ class Createclass extends MY_Controller
     {
         $this->data['page_name'] = 'edit';
         $this->data['user_bureau'] = $this->flags->user['bureau_id'];
-        if(preg_match("/^211.79.136.20[2,3,4,5,6]$/", $_SERVER["REMOTE_ADDR"]) || preg_match("/^163.29.35.[0-9]*[0-9]*[0-9]*$/", $_SERVER["REMOTE_ADDR"])) {
+        //if(preg_match("/^211.79.136.20[2,3,4,5,6]$/", $_SERVER["REMOTE_ADDR"]) || preg_match("/^163.29.35.[0-9]*[0-9]*[0-9]*$/", $_SERVER["REMOTE_ADDR"])) {
             if(in_array(14,$this->flags->user['group_id'])){
                 $this->data['is_edat'] = true;
             } else {
                 $this->data['is_edat'] = false;
             }
-        }
+        //}
 
         $this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
         $this->data['form']['segmemo'] = $this->createclass_model->getSegmemo($this->data['form']['year'],$this->data['form']['class_no']);
