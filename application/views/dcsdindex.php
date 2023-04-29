@@ -7,8 +7,8 @@
             <!-- /.panel-heading -->
 
             <div class="panel-body">
-                <iframe src="https://elearning.taipei/mpage/home/view_dcsdcourse_news_more" width="100%" height="2000px" frameborder="0" scrolling="no">
-                </iframe>
+                <!--iframe src="https://elearning.taipei/mpage/home/view_dcsdcourse_news_more" width="100%" height="2000px" frameborder="0" scrolling="no">
+                </iframe-->
             </div>
             <!-- /.panel-body -->
         </div>
