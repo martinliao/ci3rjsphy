@@ -42,7 +42,7 @@ $where = "between date(".$this->db->escape(addslashes($d1)).") and date(".$this-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>用餐人數統計表</title>
-  <script src="<?php echo base_url(HTTP_PLUGIN . '/jquery/jquery.min.js'); ?>"></script>
+  <script src="<?php echo base_url(HTTP_PLUGIN . 'jquery-1.12.4.min.js'); ?>"></script>
     <link rel="stylesheet" type="text/css" href="<?=base_url('static/css/master.css')?>">
 </head>
 <style type="text/css">
