@@ -22,4 +22,4 @@ defined('HTTP_CSS')            OR define('HTTP_CSS', HTTP_STATIC . 'css/');
 defined('HTTP_JS')             OR define('HTTP_JS', HTTP_STATIC . 'js/');
 defined('HTTP_IMG')            OR define('HTTP_IMG', HTTP_STATIC . 'img/');
 defined('HTTP_PLUGIN')         OR define('HTTP_PLUGIN', HTTP_STATIC . 'plugin/');
-defined('HTTP_MEDIA')          OR define('HTTP_MEDIA', HTTP_ROOT . "media/");
+//defined('HTTP_MEDIA')          OR define('HTTP_MEDIA', HTTP_ROOT . "media/");
