@@ -120,3 +120,5 @@ if (!defined('HTTP_FIX_FILE')) define('HTTP_FIX_FILE', HTTP_ROOT . 'files/fix_st
 if (!defined('DIR_UPLOAD_CERTS')) define('DIR_UPLOAD_CERTS', FCPATH . 'files/certificate/');
 //18A 匯出終身學習時數檔
 if (!defined('HTTP_MEDIA')) define('HTTP_MEDIA', HTTP_ROOT . 'files/media/');
+//29E 學員上課紀錄
+if (!defined('DIR_MODIFY')) define('DIR_MODIFY', FCPATH . 'files/upload_modify/');

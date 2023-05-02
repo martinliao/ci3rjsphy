@@ -491,7 +491,7 @@ class Online_app_model extends MY_Model
         }
         $this->db->stop_cache();
         // 單一條件區 結束
-        $this->paginate();  
+        //$this->paginate();  
         $query = $this->db->get();
 
         $this->db->flush_cache(); 
