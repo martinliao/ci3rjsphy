@@ -373,8 +373,8 @@ class Regist_personnel extends MY_Controller
             $isGroup = false;
         }
 
-        require 'fpdf_new/chinese.php';
-        $pdf = new PDF_Chinese();
+        $this->load->library('pdf/PDF_Chinesess');
+        $pdf = new PDF_Chinesess();
 
         $pdf->AddPage();
 

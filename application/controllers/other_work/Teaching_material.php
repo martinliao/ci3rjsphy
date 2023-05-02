@@ -1,7 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once(DIR_ROOT.'/libraries/pdf/PDF_Chinesess.php');
-
 class Teaching_material extends MY_Controller
 {
     public function __construct()
@@ -32,6 +30,8 @@ class Teaching_material extends MY_Controller
         $condition['start_date'] = $this->getFilterData('start_date', date("Y-m-d"));
         $condition['end_date'] = $this->getFilterData('end_date', date("Y-m-d"));
         $this->data['materials'] = $this->room_use_model->getMaterial($condition);
+
+        $this->load->library('pdf/PDF_Chinesess');
         $pdf = new PDF_Chinesess();
         $pdf->AddBig5Font('kaiu','標楷體');
         $pdf->SetFont('kaiu');
@@ -249,7 +249,8 @@ class Teaching_material extends MY_Controller
         // var_dump($teacher_info);
         // die();
         
-        $pdf = new PDF_Chinese();
+        $this->load->library('pdf/PDF_Chinesess');
+        $pdf = new PDF_Chinesess();
         $pdf->AddBig5Font('kaiu','標楷體');
         $pdf->SetFont('kaiu');
 
