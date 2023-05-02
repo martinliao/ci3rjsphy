@@ -70,3 +70,24 @@ $db['phy_require'] = array(
 	'save_queries' => TRUE
 );
 
+$db['old_oracle'] = array(
+	'dsn'	=> '',
+	'hostname' => '172.25.154.96',
+	'username' => 'root',
+	'password' => 'kiM83jiu23@',
+	'database' => 'OLD_ORACLE',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => FALSE,
+	'cache_on' => TRUE,
+	'cachedir' => '/tmp/db_cache',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
