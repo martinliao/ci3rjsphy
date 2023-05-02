@@ -707,7 +707,7 @@ class Require_model extends MY_Model
         }  
 
         $this->db->stop_cache();
-        $this->paginate();
+        //$this->paginate();
         $query = $this->db->get();
 
         $this->db->flush_cache(); 
