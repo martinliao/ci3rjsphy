@@ -109,16 +109,22 @@ define('ROLE_EMPLOYEE',                         '3');
 //9B 課程講座時間建檔
 if (!defined('DIR_ROOT')) define('DIR_ROOT', dirname(dirname(__FILE__)) . '/');
 if (!defined('DIR_UPLOAD_COURSE_SCHEDULE')) define('DIR_UPLOAD_COURSE_SCHEDULE', DIR_ROOT . 'files/upload_course_schedule/');
-//13A 講義上傳
+//13A 講義上傳 files/media/upload
 if (!defined('DIR_MEDIA')) define('DIR_MEDIA', FCPATH . 'files/media/');
 //16A 每日刷卡記錄-匯入範本檔
 if (!defined('HTTP_EXAMPLE_FILE')) define('HTTP_EXAMPLE_FILE', HTTP_ROOT . 'files/example_files/');
 //16A 每日刷卡記錄-匯入
 if (!defined('DIR_UPLOAD_FILES')) define('DIR_UPLOAD_FILES', FCPATH . 'files/upload_files/');
 //17G 結業書證管理
-if (!defined('HTTP_FIX_FILE')) define('HTTP_FIX_FILE', HTTP_ROOT . 'files/fix_str/');
-if (!defined('DIR_UPLOAD_CERTS')) define('DIR_UPLOAD_CERTS', FCPATH . 'files/certificate/');
-//18A 匯出終身學習時數檔
+if (!defined('HTTP_FIX_FILE')) define('HTTP_FIX_FILE', HTTP_ROOT . 'files/fix_str/'); //造字
+if (!defined('DIR_UPLOAD_CERTS')) define('DIR_UPLOAD_CERTS', FCPATH . 'files/certificate/'); //證書底圖
+//18A 匯出終身學習時數檔 - 環教時數檔 files/meida/upload_score, 下載整批檔案 files/meida/upload_score_all, 全國教師下載整批檔案 files/meida/extTemp
 if (!defined('HTTP_MEDIA')) define('HTTP_MEDIA', HTTP_ROOT . 'files/media/');
-//29E 學員上課紀錄
+//29E 學員上課紀錄-異動表上傳
 if (!defined('DIR_MODIFY')) define('DIR_MODIFY', FCPATH . 'files/upload_modify/');
+//31A 電視牆設定 files/upload_tv_wall
+//9G 班期資訊 files/upload_files/class_info
+//31B 卡機輪播設定 files/upload_card_rotation
+if (!defined('DIR_UPLOAD_CARD_ROTATION')) define('DIR_UPLOAD_CARD_ROTATION', FCPATH . 'files/upload_card_rotation/');
+
+//教師圖像 files/media/data/teacher/thumb/
