@@ -214,6 +214,7 @@ class Teacher_manger extends MY_Controller
 
     public function edit($id=NULL)
     {
+        $this->load->helper("html");
         $this->data['page_name'] = 'edit';
         $this->data['u_id'] = $this->flags->user['id'];
         $this->data['form'] = $this->teacher_model->getFormDefault($this->teacher_model->_get($id));

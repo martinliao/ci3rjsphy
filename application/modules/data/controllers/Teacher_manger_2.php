@@ -259,6 +259,7 @@ class Teacher_manger_2 extends MY_Controller
 
     public function edit($id=NULL, $idno=NULL, $old_idno=NULL)
     {
+        $this->load->helper("html");
         $id = $_GET["id"];
         $idno = $_GET["idno"];
         $old_idno = $_GET["old_idno"];
