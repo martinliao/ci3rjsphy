@@ -128,3 +128,5 @@ if (!defined('DIR_MODIFY')) define('DIR_MODIFY', FCPATH . 'files/upload_modify/'
 if (!defined('DIR_UPLOAD_CARD_ROTATION')) define('DIR_UPLOAD_CARD_ROTATION', FCPATH . 'files/upload_card_rotation/');
 
 //教師圖像 files/media/data/teacher/thumb/
+
+//33 操作文件 \files\txt
