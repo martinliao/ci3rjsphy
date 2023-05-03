@@ -87,13 +87,14 @@
                           "apply_e_date2" => "二次報名迄日",
                           "contactor" => "承辦聯絡人",
                           "description" => "承辦單位",
-                          "tel" => "承辦電話",
-                          "undertake_remark" => "備註"                                                   
+                          "tel" => "承辦電話"
+                          //"undertake_remark" => "備註"                                                   
                       ];
                      ?>
                   <?php foreach($fields as $key => $value) :?>
                     <th class="sorting<?=($filter['sort']==$key.' asc')?'_asc':'';?><?=($filter['sort']==$key.' desc')?'_desc':'';?>" data-field="<?=$key?>"><?=$value?></th>
                   <?php endforeach ?>
+                  <th>備註<input type="button" class="btn btn-info" id="all-fun" type="button" onclick="allFun(this)" value="展開"></th>
                   <th>退費日期起訖日</th>
                   <th>延期轉班起訖日</th>
                   <th>修改</th>
@@ -117,7 +118,7 @@
                   <td width="5%"> <?=$row->contactor;?> </td>
                   <td width="10%"> <?=$row->description;?> </td>
                   <td width="10%"> <?=$row->tel;?> </td>
-                  <td width="10%"> <?=$row->undertake_remark;?> </td>
+                  <td width="10%"><button class="btn btn-info" type="button" onclick="showFun('<?=htmlspecialchars($row->id,ENT_HTML5|ENT_QUOTES);?>')">詳細內容</button><br><div class="push-content" style="display: none;" id="detail_<?=htmlspecialchars($row->id,ENT_HTML5|ENT_QUOTES);?>"><?=htmlspecialchars_decode($row->undertake_remark);?></div></td>
                   <td width="5%" align="center" valign="center"> 
                     <?php 
                   if($row->ref_s_date_format != ""){
@@ -226,4 +227,34 @@ function changeCurrentWeek(d)
   document.getElementById('test1').value=y+'-'+sDate ;
   document.getElementById('datepicker1').value=y+'-'+eDate ;
 }
+</script>
+
+<script src="<?=HTTP_PLUGIN;?>jquery.highlight-3.js"></script>
+<script>
+$(document).ready(function() {
+$('#filter-form select').change(function(){
+    $('#filter-form').submit();
+});
+});
+
+function allFun(obj)
+{
+    if(obj.value == '展開'){
+        $(".push-content").show();
+        obj.value = '收合';
+    } else if(obj.value == '收合'){
+        $(".push-content").hide();
+        obj.value = '展開';
+    }
+}
+
+function showFun(id)
+{
+    if($("#detail_"+id).is(':hidden')){
+        // $("#content").show();
+        $("#detail_"+id).show();
+    } else {
+        $("#detail_"+id).hide();
+    }
+} 
 </script>

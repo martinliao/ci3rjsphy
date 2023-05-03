@@ -180,7 +180,7 @@ class Class_undertake_setting extends MY_Controller
         }
         $this->data["link_save"] = "test";
         $this->data["page_name"] = "";
-        $this->data["link_cancel"] = "/base/admin/create_class/class_undertake_setting/?{$_SERVER['QUERY_STRING']}";
+        $this->data["link_cancel"] = base_url("create_class/class_undertake_setting/?{$_SERVER['QUERY_STRING']}");
 
         $params = [
             "select" => "r.*, b_limit.name as limit_name, b_req.name as req_name",

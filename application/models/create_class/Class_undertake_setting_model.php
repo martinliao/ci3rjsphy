@@ -39,6 +39,7 @@ class Class_undertake_setting_model extends MY_Model
 
 			//20210602 加入四個欄位，也在資料庫裡新增四個欄位
 			$select = "
+			CONCAT(r.year,'-',r.class_no,'-',r.term) AS id,
 			CASE r.type
 				WHEN 'A' THEN '行政'
 				WHEN 'B' THEN '發展'

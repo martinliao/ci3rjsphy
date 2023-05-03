@@ -213,6 +213,25 @@ if ($rs4) {
 
           </div>
         </form>
+<script src="<?=HTTP_PLUGIN;?>ckeditor_4.14.0_full/ckeditor/ckeditor.js"></script>
+<script>
+    var undertake_remark = <?php echo json_encode(htmlspecialchars_decode($edit_data->undertake_remark));?>;
+    
+    $(function() {
+        CKEDITOR.config.extraPlugins += (CKEDITOR.config.extraPlugins ? ',lineheight' : 'lineheight');
+        CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+        CKEDITOR.config.shiftEnterMode = CKEDITOR.ENTER_P;
+        CKEDITOR.replace('undertake_remark', {
+            language: 'zh',
+            uiColor: '#AADBCB',
+            height: '100px',
+        });
+
+        CKEDITOR.config.toolbar = [['Source','Bold','Underline','Strike'],['Link','Unlink'],['Image','SpecialChar','Maximize'],['TextColor','BGColor','RemoveFormat','FontSize']]
+
+        CKEDITOR.instances.undertake_remark.setData(undertake_remark);
+    });
+</script>
 
 <script type="text/javascript">
   function personnelQuery(type){
@@ -279,4 +298,4 @@ $(document).ready(function() {
     $("#datepicker17").focus();
   });
 });
-</script>        
+</script>
