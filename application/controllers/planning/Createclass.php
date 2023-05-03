@@ -199,6 +199,10 @@ class Createclass extends MY_Controller
             $this->data['form']['beaurau_id']  = $this->flags->user['bureau_id'];
             $this->data['link_cancel'] = base_url("planning/createclass/?{$_SERVER['QUERY_STRING']}");
         }
+        //3A import to 3B
+        if(isset($get['id']) && !empty($get['id'])){
+            $this->data['form']['way1'] = 'Y';
+        }
         
         $current_year = date('Y')-1911;
         $next_year = $current_year+1;
