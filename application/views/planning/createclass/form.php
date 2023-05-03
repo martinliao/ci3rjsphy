@@ -38,7 +38,7 @@
     <div class="form-group col-xs-6">
         <label class="control-label">年度</label>
         <?php
-            echo form_dropdown('year', $choices['year'], set_value('year', $form['year']), 'class="form-control"');
+            echo form_dropdown('year', $choices['year'], set_value('year', $form['year']), 'class="form-control" id="year" onchange="getDefaultYear()"');
         ?>
         <?=form_error('year'); ?>
     </div>
@@ -354,7 +354,7 @@
         <label class="control-label">開課起日</label>
         <div class="input-group" id="start_date1">
             <input type="text" class="form-control <?=form_error('start_date1')?'has-error':'';?> datepicker" id="set_start_date1" name="start_date1" value="<?=set_value('start_date1', !empty($form['start_date1'])?date('Y-m-d',strtotime($form['start_date1'])):''); ?>" <?=($unlock_start_date1=='true')?'':'disabled'?> />
-            <span class="input-group-addon" style="cursor: pointer;" ><i class="fa fa-calendar"></i></span>
+            <span class="input-group-addon" style="cursor: pointer;"><i class="fa fa-calendar"></i></span>
         </div>
     </div>
 
@@ -1038,6 +1038,12 @@ function notAtLocalFun(type){
         jQuery("#set_end_date1").prop( "disabled", false);
         alert('選非公訓處上課者，請接續點選預定開課起訖日，處外場地須自行洽外機關預約');
         $("input#set_start_date1").trigger("focus");
+
+        var today = new Date();
+        var selectYear = parseInt(document.getElementsByName('year')[0].value) + 1911;
+        today.setFullYear(selectYear);
+        $('#set_start_date1').datepicker("setDate", today);
+        $('#set_end_date1').datepicker("setDate", today);
     } else if(type == '本處上課'){
         document.getElementById('room_name').value = '';
         document.getElementById('enableRoom').value = '非公訓處上課';
@@ -1248,6 +1254,14 @@ function checkSave(){
 
     var obj = document.getElementById('data-form');
     obj.submit();
+}
+
+function getDefaultYear(){
+    var today = new Date();
+    var selectYear = parseInt(document.getElementsByName('year')[0].value) + 1911;
+    today.setFullYear(selectYear);
+    $('#set_start_date1').datepicker("setDate", today);
+    $('#set_end_date1').datepicker("setDate", today);
 }
 
 $(document).ready(function() {
