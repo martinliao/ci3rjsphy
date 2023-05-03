@@ -402,13 +402,18 @@
         <?=form_error('class_status'); ?>
     </div>
 
-    <div class="form-group col-xs-6">
+    <?php if($user_bureau == '379680000A'){?>
+        <div class="form-group col-xs-6">
         <label class="control-label">季別</label>
         <?php
             echo form_dropdown('reason', $choices['reason'], set_value('reason', $form['reason']), "class='form-control' disabled");
         ?>
         <?=form_error('reason'); ?>
     </div>
+    <?php } 
+    else { ?>
+        <input id="reason" type="hidden" name="reason" value="<?=set_value('reason', $form['reason']); ?>">
+    <?php } ?>
 
     <?php if($user_bureau == '379680000A'){ 
             if($is_edat) { ?>
@@ -552,12 +557,16 @@
             </div>
         </div>
     </div>
-
-    <div class="form-group col-xs-6">
-        <label class="control-label">課程內容(舊資料)(僅供參考)</label>
-        <textarea class="form-control" id="content" name="content" maxlength='400' cols='100' rows='4' disabled><?=set_value('content', $form['content']); ?></textarea>
-        <?=form_error('content'); ?>
-    </div>
+    <?php if($user_bureau == '379680000A'){?>
+        <div class="form-group col-xs-6">
+            <label class="control-label">課程內容(舊資料)(僅供參考)</label>
+            <textarea class="form-control" id="content" name="content" maxlength='400' cols='100' rows='4' disabled><?=set_value('content', $form['content']); ?></textarea>
+            <?=form_error('content'); ?>
+        </div>
+    <?php } 
+    else { ?>
+        <input id="content" type="hidden" name="content" value="<?=set_value('content', $form['content']); ?>">
+    <?php } ?>
 
     <div class="tab-pane col-xs-12" id="course_content">
         <label class="control-label">課程內容(非必填)<button type="button" class="btn btn-success btn-sm" onclick="addCourse()">新增課程</button></label>
