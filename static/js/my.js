@@ -71,7 +71,7 @@ $(document).ready(function() {
     }
     jQuery.browser = browser;
 
-    $(".datepicker").datepicker({yearRange:"-100:+1"});
+    $(".datepicker").datepicker({yearRange:"-100:+2"});
     // $('.datepicker, .input-group.date, .input-daterange').datepicker({
     //     autoclose: true,
     //     todayBtn: true,
