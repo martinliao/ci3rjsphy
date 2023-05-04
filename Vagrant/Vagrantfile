@@ -2,20 +2,21 @@
 # vi: set ft=ruby :
 PHPVERSION = '7.3'
 httpport = 80
-PROJECTID = 'ci3Phy23F'
+PROJECTID = 'ci3Phy3A'
 DOCROOT = '/var/www/html'
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "debian/bullseye64"
+  #config.vm.box = "debian/bullseye64"
+  config.vm.box = "bullseye_vb6142"
   config.ssh.insert_key = false
   config.vm.box_check_update = false
   config.vm.network "forwarded_port", guest: 80, host: "#{httpport}"
-  #config.vm.network "forwarded_port", guest: 3000, host: 3000 # React
   config.vm.synced_folder ".", "/vagrant", :owner => "vagrant", :group => "vagrant"
   #config.vm.synced_folder "CI3-party", "/CI3", :owner => "vagrant", :group => "vagrant"
   #config.vm.synced_folder "../ClassMgt", "/ClassMgt", :owner => "vagrant", :group => "vagrant"
   config.vm.synced_folder "../../Phy", "/Phy", :owner => "vagrant", :group => "vagrant"
   config.vm.synced_folder "Fet-party", "/FetOldParty", :owner => "vagrant", :group => "vagrant"
+  config.vm.synced_folder "../../ci3Phy23B", "/ci3Phy23B", :owner => "vagrant", :group => "vagrant"
 
   # https://serverfault.com/questions/453185/vagrant-virtualbox-dns-10-0-2-3-not-working
   config.vm.provider "virtualbox" do |vb|
@@ -105,6 +106,7 @@ SCRIPT
     #debian.vm.provision :shell, inline: """cp -r /Phy ~/FetDcsdPhy""", privileged: false
     debian.vm.provision :shell, path: "Fet-party/DcsdIndex/DcsdIndex.sh", privileged: false, env: {"FetDcsdPhy" => "/var/www/html/phy/base/admin", "DOCROOT" => "/var/www/html/#{PROJECTID}", "sshUsername" => "vagrant" }
     # FetDcsdPhy='/var/www/html/phy/base/admin/' DOCROOT='/var/www/html/ci3rjsphy' sshUsername='vagrant' bash DcsdIndex.sh
+    ## end of 1.
 
     #  2. 開始新版-實體班期(virtualhost)
     debian.vm.provision :shell, path: "vagrantfiles/gen_virtualhost.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/#{PROJECTID}", "PROJECTID" => "#{PROJECTID}" }
@@ -124,26 +126,13 @@ SCRIPT
     # { sudo nginx -t; } && { sudo systemctl restart nginx; sudo systemctl restart php7.3-fpm; }
 
     #     2-b. PHPunit 單元測試, https://github.com/kenjis/ci-phpunit-test, https://phpunit.de/getting-started/phpunit-9.html, https://github.com/kenjis/ci-app-for-ci-phpunit-test.git
-    <<-COMMENT
-    debian.vm.provision :shell, inline: """
-        mkdir -p ~/phpunit_temp && cd ~/phpunit_temp
-        wget https://github.com/kenjis/ci-phpunit-test/archive/refs/tags/v3.0.3.tar.gz
-        tar zxf v3.0.3.tar.gz
-        sudo cp -r ci-phpunit-test-3.0.3/application/tests $DCOROOT/applications/
-        sudo chown -R vagrant: $DCOROOT/applications/tests
-        cd ${DCOROOT}/ && rm composer.lock && composer update
-        echo '*** composer require --dev phpunit/phpunit ^9 , for PHP 7.3'
-        echo '*** cd ${DCOROOT}/applications/tests && ../../vendor/bin/phpunit Welcome_test.php '
-        echo '*** cd ${DCOROOT} && vendor/bin/phpunit -c application/tests/ '
-    """, privileged: false, env: { "DOCROOT" => "/var/www/html/#{PROJECTID}" }
-    COMMENT
     ## 用 ci-phpunit-test 指令建立 PHPunit
     debian.vm.provision :shell, inline: """
       cd /var/www/html/#{PROJECTID}
       composer require kenjis/ci-phpunit-test:^3.0 --dev
       php vendor/kenjis/ci-phpunit-test/install.php --from-composer
-      # php vendor/kenjis/ci-phpunit-test/install.php -a application -p . -t application/tests
-      vendor/bin/phpunit -c application/tests/
+      ## php vendor/kenjis/ci-phpunit-test/install.php -a application -p . -t application/tests
+      # vendor/bin/phpunit -c application/tests/ # 在 ci3Phy3A 先不測試.
     """, privileged: false, env: { "CI_ENV" => "testing" }
 
     # 開始架Demo站台
@@ -158,13 +147,6 @@ SCRIPT
     # DOCROOT='/var/www/html/codeignitor-requirejs-backbone' PROJECTID='codeignitor-requirejs-backbone' bash gen_virtualhost.sh
 
     ## 架Demo: CRUD (https://github.com/guptarajesh/CodeIgnitor-3.2-Login-Register-Dashboard-CRUD-Operations)
-    <<-COMMENT
-    debian.vm.provision :shell, inline: """
-      git clone https://github.com/guptarajesh/CodeIgnitor-3.2-Login-Register-Dashboard-CRUD-Operations
-      mv CodeIgnitor-3.2-Login-Register-Dashboard-CRUD-Operations /var/www/html/crud
-      sudo chown -R vagrant: /var/www/html/crud
-    """, privileged: false
-    COMMENT
     debian.vm.provision :shell, path: "Thirdparty/CRUD/ci3-CRUD.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/crud", "PROJECTID" => "crud", "sshUsername" => "vagrant" }
     debian.vm.provision :shell, path: "vagrantfiles/gen_virtualhost.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/crud", "PROJECTID" => "crud" }
     debian.vm.provision :shell, inline: """
@@ -173,5 +155,21 @@ SCRIPT
       bower install
       { sudo nginx -t; } && { sudo systemctl restart nginx; sudo systemctl restart php7.3-fpm; }
     """, privileged: false
+
+    # Test ci3Phy23B(F)
+    debian.vm.provision :shell, inline: """cp -r /ci3Phy23B /var/www/html/ci3Phy23F""", privileged: false
+    debian.vm.provision :shell, path: "vagrantfiles/gen_virtualhost.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/ci3Phy23F", "PROJECTID" => "ci3Phy23F" }
+
+    <<-COMMENT
+    debian.vm.provision :shell, inline: """
+        git clone https://github.com/oxygenfox/reactadmin.git
+        cp -r reactadmin /var/www/html/
+        sudo chown -R vagrant: /var/www/html/reactadmin
+    """, privileged: false
+    COMMENT
+    debian.vm.provision :shell, path: "Thirdparty/reactadmin/ci3-reactadmin.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/reactadmin", "PROJECTID" => "reactadmin", "sshUsername" => "vagrant" }
+    debian.vm.provision :shell, path: "vagrantfiles/gen_virtualhost.sh", privileged: false, env: {"DOCROOT" => "/var/www/html/reactadmin", "PROJECTID" => "reactadmin" }
+    # DOCROOT=/var/www/html/reactadmin PROJECTID=reactadmin bash /vagrant/vagrantfiles/gen_virtualhost.sh
+
   end
 end

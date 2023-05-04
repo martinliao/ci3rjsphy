@@ -15,7 +15,8 @@ echo "FILESIZE=${FILESIZE}"
 export PHPVERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;")
 
 if [ -f "'/etc/nginx/sites-available/${SERVERNAME}'" ]; then
-    cp /etc/nginx/sites-available/${SERVERNAME} ~/${SERVERNAME}.conf
+    confdate=$(date -r /etc/nginx/sites-available/${SERVERNAME} "+%Y%m%d")
+    cp /etc/nginx/sites-available/${SERVERNAME} ~/${SERVERNAME}-${confdate}.conf
 fi
 if [ ! -d '/etc/nginx/virtualhost.d' ]; then
     sudo mkdir -p /etc/nginx/virtualhost.d/

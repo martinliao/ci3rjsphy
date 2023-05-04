@@ -6,7 +6,11 @@ CodeIgnitor 3.2 based CRUD application, used to role based User Login, Registrat
 
 github: https://github.com/guptarajesh/CodeIgnitor-3.2-Login-Register-Dashboard-CRUD-Operations
 
+用它的 UI, Dashboard: http://localhost/crud/dashboard 很有水準.
+
 ### Feature特徵
+
+* 就是 CRUD 的參考, UI 很好.(表頭有 show-entries, search過濾 ), layout 也不錯.
 
 * isLoggedIn 是用單純的 session 檢查.
 * 用 ROLE_ADMIN/ROLE_MANAGER/ROLE_EMPLOYEE (constants) 判斷user角色
@@ -14,8 +18,6 @@ github: https://github.com/guptarajesh/CodeIgnitor-3.2-Login-Register-Dashboard-
 * isAdmin() 應該是 isAccess? 是判斷有無權限?
 * 同上, loadThis() 作用是 Access Denied, 也應該是 loadDenied.
 * loadViews 類似 template/layout 的功能, 不同於內建的 load->view() 
-* 其它就是 CRUD 的參考, UI 很好.(表頭有 show-entries, search過濾 ), layout 也不錯.
-
 
 ##  CodeIgnitor
 
