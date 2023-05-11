@@ -29,6 +29,7 @@ $httpRoot .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_N
 $httpRoot = rtrim($httpRoot, '/'); /** */
 $config['base_url'] = $httpRoot;
 
+
 /*
 |--------------------------------------------------------------------------
 | Page Title
@@ -37,3 +38,23 @@ $config['base_url'] = $httpRoot;
 $config['title']      = '維聖班務系統';
 $config['title_mini'] = '聖';
 $config['title_lg']   = '維聖';
+
+/*
+|--------------------------------------------------------------------------
+| Fake session config
+|--------------------------------------------------------------------------
+| The fake is temp for 2023 program. Try to format on $this->flags.
+| The flags is MY_Controller protected array, It's for Old(Fet) controllers authority.
+| Updated May2023.
+**/
+$config['flag_name'] = 'flags';
+$config['flag_site'] = 'admin';
+// | Session Admin Fields
+$config['flag_session_userdata_fields'] = [
+    'id' => 'flag_site+core_session_id',
+    'user' => 'user',
+    'login_check' => 'is_login',
+    'permission' => 'permission'
+];
+
+$config['set_flag_wrapper'] = 'Auth/setOldFlags';

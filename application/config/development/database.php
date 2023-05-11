@@ -6,11 +6,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	//'hostname' => '192.168.50.104',
-	'hostname' => '192.168.50.23',
+	'hostname' => '192.168.50.104',
 	'username' => 'root',
 	'password' => 'jack5899',
-	//'database' => 'dcsdphy104',
 	'database' => 'course',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
@@ -30,11 +28,9 @@ $db['default'] = array(
 
 $db['dcsdphy'] = array(
 	'dsn'	=> '',
-	//'hostname' => '192.168.50.104',
-	'hostname' => '192.168.50.23',
+	'hostname' => '192.168.50.103',
 	'username' => 'root',
 	'password' => 'jack5899',
-	//'database' => 'dcsdphy104',
 	'database' => 'course',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

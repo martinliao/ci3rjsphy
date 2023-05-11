@@ -53,8 +53,8 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['importdatabase'] = 'Admin/importdatabase';
 // SmartyaACL route
-$route['importdatabase'] = 'welcome/importdatabase';
 $route['admin'] = 'Admin/index';
 $route['admin/login'] = 'AuthAdmin/index';
 $route['admin/logout'] = 'AuthAdmin/logout';

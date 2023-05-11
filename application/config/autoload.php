@@ -58,7 +58,7 @@ $autoload['packages'] = array(APPPATH.'third_party/DevelBar',APPPATH.'third_part
 |
 |	$autoload['libraries'] = array('database','session');
 */
-$autoload['libraries'] = array('database','session');
+$autoload['libraries'] = array('session', 'database');
 
 /*
 | -------------------------------------------------------------------

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $autoload['packages'] = array(APPPATH.'third_party/SmartyAcl');
 
-$autoload['libraries'] = array('database', 'form', 'pagination', 'session');
+$autoload['libraries'] = array('database', 'form_validation', 'pagination', 'session');
 
 $autoload['drivers'] = array();
 
