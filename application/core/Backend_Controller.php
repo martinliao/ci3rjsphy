@@ -32,7 +32,7 @@ class BackendController extends MI_Controller
     public function __construct()
     {
         parent::__construct();
-        //$this->output->enable_profiler(true);
+        $this->output->enable_profiler(false);
         $CI =& get_instance();
         $this->load->library('smarty_acl');
         //$this->load->helper('url');

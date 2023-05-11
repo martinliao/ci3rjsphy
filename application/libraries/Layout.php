@@ -2,6 +2,7 @@
 class Layout {
 
 	private $CI;
+	private $oldStyleLayout = 'common/layout_main';
 	private $theme;
 	private $layout;
 
@@ -16,7 +17,7 @@ class Layout {
         } else {
             $this->theme = $theme;
             //$this->layout = $_layout;
-			$this->setLayout('common/layout_main');
+			$this->setLayout($this->oldStyleLayout);
         }
 	}
 
@@ -45,9 +46,11 @@ class Layout {
 
 		// $data['page_title'] = $data['_CONF'][$this->CI->site]['title'];
 		// $data['page_description'] = $data['_CONF'][$this->CI->site]['description'];
-		// $data['page_keywords'] = $data['_CONF'][$this->CI->site]['keywords'];		/**/
-		$data['__header'] = $this->CI->load->view("common/header", $data, true);
-		$data['__footer'] = $this->CI->load->view("common/footer", $data, true);
+		// $data['page_keywords'] = $data['_CONF'][$this->CI->site]['keywords'];/** */
+		if ( $this->layout == $this->oldStyleLayout ) {
+			$data['__header'] = $this->CI->load->view("common/header", $data, true);
+			$data['__footer'] = $this->CI->load->view("common/footer", $data, true);
+		}
 
 		if (is_array($view)) {
 			$data['__content'] = '';
@@ -55,7 +58,6 @@ class Layout {
 				$data['__content'] .= $this->CI->load->view($v, $data, true);
 			}
 		} elseif(!empty($view)) {
-			// $data['__content'] = $this->CI->load->view($view, $data, true);
 			$data['__content'] = $this->CI->load->view($view, $data, true);
 		} else{
 			$data['__content'] = '';

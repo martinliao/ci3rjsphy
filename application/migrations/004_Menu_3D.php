@@ -32,7 +32,7 @@ class Migration_Menu_3D extends CI_Migration
         /**************** Start Set Foreign Keys ****************/
         /**************** End Set Foreign Keys ****************/
         /**************** Start Insert Data ****************/
-        $new_link = 'planning/defaultclass';
+        $new_link = 'Defaultclass';
         $this->db->insert($this->settings['menu'],[
              'parent_id' => 586,
              'action_id' => 0,

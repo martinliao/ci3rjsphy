@@ -48,6 +48,7 @@ class MI_Controller extends MX_Controller
         $CI =& get_instance();
 
         // Load global css here.
+
 		$this->load_css(array(
 			'css/normalize.css',
 			'css/global.css'
@@ -152,6 +153,9 @@ require_once(APPPATH.'core/Backend_Controller.php');
 
 // Frontend controller
 require_once(APPPATH.'core/Frontend_Controller.php');
+
+// Admin controller
+require_once(APPPATH.'core/Admin_Controller.php');
 
 // Javascript controller
 require_once(APPPATH.'core/Javascript_Controller.php');

@@ -10,6 +10,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class Auth extends MI_Controller
 {
+    protected $flag_site = 'admin';
 
     public function __construct()
     {
@@ -264,13 +265,15 @@ class Auth extends MI_Controller
         $this->load->view('passwords/reset', ['code' => $code]);
     }
 
-    public function setOldFlags($user)
+    /** Copy from (Fet)MY_Controller */
+    private function setOldFlags($user)
     {
         $data = array(
             'member_userid' => $user['id'],
         );
-        $this->session->set_userdata('session_id', $this->session->session_id);
+        $_sessId = $this->session->session_id;
+        $this->session->set_userdata('session_id', $_sessId);
         // $this->site = 'admin'
-        $this->session->set_userdata('admin'.$this->session->session_id, $data);
+        $this->session->set_userdata($this->flag_site.$_sessId, $data);
     }
 }

@@ -40,7 +40,7 @@ class JavascriptController extends MI_Controller
 
 
         // CI profiler
-        $this->output->enable_profiler(true);
+        $this->output->enable_profiler(false);
 
         // This function returns the main CodeIgniter object.
         // Normally, to call any of the available CodeIgniter object or pre defined library classes then you need to declare.
