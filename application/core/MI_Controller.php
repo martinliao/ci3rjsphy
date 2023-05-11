@@ -42,6 +42,7 @@ class MI_Controller extends MX_Controller
     {
         // To inherit directly the attributes of the parent class.
         parent::__construct();
+		$this->_hmvc_fixes();
 
         // This function returns the main CodeIgniter object.
         // Normally, to call any of the available CodeIgniter object or pre defined library classes then you need to declare.
@@ -67,6 +68,14 @@ class MI_Controller extends MX_Controller
         // Copyright
         $this->data['copyright'] = $date;
     }
+
+	function _hmvc_fixes()
+	{
+		//fix callback form_validation
+		//https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc
+		$this->load->library('form_validation');
+		$this->form_validation->CI =& $this;
+	}
 
     /**
 	 * Set page title.

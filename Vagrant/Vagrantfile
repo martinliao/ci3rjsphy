@@ -113,10 +113,7 @@ SCRIPT
     # DOCROOT='/var/www/html/ci3' PROJECTID='ci3rjsphy' bash gen_virtualhost.sh
 
     #     2-a. 從 github 還原(ci3phy-menu23 就是目前階段的 ci3Phy23B)
-    debian.vm.provision :shell, inline: """
-        cd /var/www/html && git clone https://github.com/martinliao/ci3rjsphy.git && mv ci3rjsphy /var/www/html/ && mv /var/www/html/ci3rjsphy /var/www/html/#{PROJECTID}
-    """, privileged: false
-
+    debian.vm.provision :shell, inline: "git clone https://github.com/martinliao/ci3rjsphy.git && cp -r ci3rjsphy/* /var/www/html/#{PROJECTID}/ ", privileged: false
     # 重啟 Nginx: { sudo nginx -t; } && { sudo systemctl restart nginx; sudo systemctl restart php7.3-fpm; }
 
     <<-COMMENT
