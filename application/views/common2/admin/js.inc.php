@@ -1,6 +1,6 @@
     <!-- jQuery -->
     <!--script src="<?=HTTP_PLUGIN;?>jquery-1.12.4.min.js"></script-->
-    <script src="<?=HTTP_ROOT;?>assets/adminlte/plugins/jquery/jquery.min.js"></script-->
+    <script src="<?=PATH_ASSETS; ?>/plugins/jquery/jquery.min.js"></script-->
     <!-- Bootstrap Core JavaScript -->
     <script src="<?=HTTP_PLUGIN;?>bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
@@ -14,7 +14,6 @@
     <script type="text/javascript" src="<?=HTTP_PLUGIN;?>fancybox/jquery.fancybox.js?v=2.1.5"></script>
     <link rel="stylesheet" type="text/css" href="<?=HTTP_PLUGIN;?>fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
     <script type="text/javascript">
-debugger;
         var _json = { _ALERT : {} };
         <?php if (isset($_JSON)): ?>
             _json = <?=json_encode($_JSON);?>;

@@ -29,6 +29,7 @@ $httpRoot .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_N
 $httpRoot = rtrim($httpRoot, '/'); /** */
 $config['base_url'] = $httpRoot;
 
+define('PATH_ASSETS', $config['base_url'] . '/assets/');
 
 /*
 |--------------------------------------------------------------------------

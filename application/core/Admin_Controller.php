@@ -102,7 +102,7 @@ class AdminController extends MI_Controller
             'name' => $this->security->get_csrf_token_name(),
             'hash' => $this->security->get_csrf_hash()
         );
-debugBreak();
+
         $data['_JSON']['_ALERT'] = $data['_ALERT'];
         $data = array_merge($this->data, $data);
 

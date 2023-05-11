@@ -4,7 +4,6 @@
     <link href="<?=HTTP_PLUGIN;?>animate/animate.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="<?=HTTP_PLUGIN;?>bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?=HTTP_ROOT;?>assets/adminlte/css/alt/adminlte.components.css" rel="stylesheet">
 
     <!-- Bootstrap DateTime and Date Picker CSS -->
     <link href="<?=HTTP_PLUGIN;?>datepicker/css/jquery-ui.css" rel="stylesheet">
