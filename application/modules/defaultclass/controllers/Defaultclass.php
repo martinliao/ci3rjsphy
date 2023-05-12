@@ -136,7 +136,7 @@ class Defaultclass extends AdminController
                     $this->setAlert(2, '預設值編輯成功');
                 }
                 //redirect(base_url("planning/createclass/?{$_SERVER['QUERY_STRING']}"));
-                redirect(base_url("Defaultclass"));
+                redirect(base_url("defaultclass"));
             }
         }
 
@@ -148,8 +148,8 @@ class Defaultclass extends AdminController
             $this->data['form']['beaurau_id'] = $post['beaurau_id'];
         }
 
-        //$this->data['link_save2'] = base_url("Defaultclass/edit/{$id}/?{$_SERVER['QUERY_STRING']}");
-        $this->data['link_save2'] = base_url("Defaultclass");
+        //$this->data['link_save2'] = base_url("defaultclass/edit/{$id}/?{$_SERVER['QUERY_STRING']}");
+        $this->data['link_save2'] = base_url("defaultclass");
 
         $this->data['link_cancel'] = base_url("planning/createclass/?{$_SERVER['QUERY_STRING']}");
         $this->data['link_get_ecpa_name'] = base_url("planning/createclass/getEcpaClassName");
