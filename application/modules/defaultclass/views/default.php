@@ -26,9 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
         changAct();
     });
 
-    jQuery("#is_mixed").change(function() {
-        changAct();
-    });
+    //jQuery("#is_mixed").change(function() {
+    //    changAct();
+    //});
 
     jQuery("#is_assess").change(function() {
         if(1==jQuery(this).val()) {
