@@ -1,5 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
+/* load the MX_Router class */
+require APPPATH . "third_party/MX/Controller.php";
+
 /**
  * CodeIgniter-HMVC
  *
@@ -16,8 +19,7 @@
 
 class MI_Controller extends MX_Controller
 {
-    //
-    public $CI;
+    //public $CI;
 
     /**
      * An array of variables to be passed through to the
@@ -38,7 +40,7 @@ class MI_Controller extends MX_Controller
      *
      * @method __construct
      */
-    public function __construct()
+    function __construct()
     {
         // To inherit directly the attributes of the parent class.
         parent::__construct();
@@ -46,7 +48,7 @@ class MI_Controller extends MX_Controller
 
         // This function returns the main CodeIgniter object.
         // Normally, to call any of the available CodeIgniter object or pre defined library classes then you need to declare.
-        $CI =& get_instance();
+        //$CI =& get_instance();
 
         // Load global css here.
 

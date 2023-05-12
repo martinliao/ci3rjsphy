@@ -127,7 +127,7 @@
     <div class="form-group col-xs-6"><!-- mark 2021-06-04 加入unlock條件-->
         <label class="control-label">開課起日</label>
         <div class="input-group" id="start_date1">
-            <input type="text" class="form-control <?=form_error('start_date1')?'has-error':'';?> datepicker" id="set_start_date1" name="start_date1" value="<?=set_value('start_date1', !empty($form['start_date1'])?date('Y-m-d',strtotime($form['start_date1'])):''); ?>" <?=($unlock_start_date1=='true')?'':'disabled'?> />
+            <input type="text" class="form-control <?=form_error('start_date1')?'has-error':'';?> datepicker" id="set_start_date1" name="start_date1" value="<?=set_value('start_date1', !empty($form['start_date1'])?date('Y-m-d',strtotime($form['start_date1'])):''); ?>" />
             <span class="input-group-addon" style="cursor: pointer;"><i class="fa fa-calendar"></i></span>
         </div>
     </div>
@@ -135,7 +135,7 @@
     <div class="form-group col-xs-6"><!-- mark 2021-06-04 加入unlock條件-->
         <label class="control-label">開課迄日</label>
         <div class="input-group" id="end_date1">
-            <input type="text" class="form-control <?=form_error('end_date1')?'has-error':'';?> datepicker" id="set_end_date1" name="end_date1" value="<?=set_value('end_date1', !empty($form['end_date1'])?date('Y-m-d',strtotime($form['end_date1'])):''); ?>" <?=($unlock_end_day1=='true')?'':'disabled'?> />
+            <input type="text" class="form-control <?=form_error('end_date1')?'has-error':'';?> datepicker" id="set_end_date1" name="end_date1" value="<?=set_value('end_date1', !empty($form['end_date1'])?date('Y-m-d',strtotime($form['end_date1'])):''); ?>" />
             <span class="input-group-addon" style="cursor: pointer;" ><i class="fa fa-calendar"></i></span>
         </div>
     </div>
@@ -159,7 +159,7 @@
     <div class="form-group col-xs-6">
         <label class="control-label">季別</label>
         <?php
-            echo form_dropdown('reason', $choices['reason'], set_value('reason', $form['reason']), "class='form-control' disabled");
+            echo form_dropdown('reason', $choices['reason'], set_value('reason', $form['reason']), "class='form-control'");
         ?>
         <?=form_error('reason'); ?>
     </div>
@@ -297,7 +297,7 @@
     </div>
     <div class="form-group col-xs-6">
         <label class="control-label">課程內容(舊資料)(僅供參考)</label>
-        <textarea class="form-control" id="content" name="content" maxlength='400' cols='100' rows='4' disabled><?=set_value('content', $form['content']); ?></textarea>
+        <textarea class="form-control" id="content" name="content" maxlength='400' cols='100' rows='4' ><?=set_value('content', $form['content']); ?></textarea>
         <?=form_error('content'); ?>
     </div>
 
@@ -371,7 +371,7 @@
     </div>
 
     <div class="tab-pane col-xs-12" id="online_course" style="display: none">
-        <input type="hidden" name="hidStr" id="hidStr" value="" disabled />
+        <input type="hidden" name="hidStr" id="hidStr" value="" />
         <label class="control-label">線上課程</label>
         <table class="table table-hover" style="margin-bottom: 10px;">
             <thead>

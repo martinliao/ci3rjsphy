@@ -88,7 +88,7 @@ class Defaultclass extends AdminController
         $this->data['choices']['open_retirement'] = array('Y' => '是', 'N' => '否');
 
         if ($post = $this->input->post()) {
-debugBreak();
+//debugBreak();
             $segmemo = $this->input->post('segmemo');
             $course_name = $this->input->post('course_name');
             $material = $this->input->post('material');
@@ -115,7 +115,6 @@ debugBreak();
             if (isset($post['elrid']) && !empty($post['elrid'])) {
                 $elrid = $post['elrid'];
             }
-            $this->setAlert(2, '預設值編輯...');
             if ($this->_isVerify('edit', $this->data['user_bureau'], $fmap_check) == TRUE) {
                 unset($post['room_name']);
                 unset($post['segmemo']);
@@ -131,36 +130,13 @@ debugBreak();
 
                 //$rs = $this->createclass_model->updateRequire($id, $post);
                 $tmp = json_encode($post);
+//debugBreak();
                 $rs = $this->defaultclass_model->setDefault($tmp);
                 if ($rs) {
-                    if (!empty($segmemo)) {
-                        $segmemo_info['year'] = $post['year'];
-                        $segmemo_info['class_no'] = $post['class_no'];
-                        $segmemo_info['segmemo'] = $segmemo;
-
-                        $check_segmemo = $this->createclass_model->getSegmemo($segmemo_info['year'], $segmemo_info['class_no']);
-
-                        if (!empty($check_segmemo)) {
-                            $this->createclass_model->updateSegmemo($segmemo_info);
-                        } else {
-                            $this->createclass_model->insertSegmemo($segmemo_info);
-                        }
-                    }
-
-                    //if(isset($online_course_name) && !empty($online_course_name)){ //2021-06-09 取消3B.edit *考核班期*影響*混成班級*的設定
-                    $this->createclass_model->insertRequireOnline($post['year'], $post['class_no'], $post['term'], $post['is_assess'], $post['is_mixed'], $online_course_name, $hours, $elrid);
-                    //}
-
-                    if (!empty($course_name) && !empty($material)) {
-                        $this->createclass_model->deleteCourse($post['year'], $post['class_no'], $post['term']);
-                        for ($i = 0; $i < count($course_name); $i++) {
-                            $this->createclass_model->insertCourse($post['year'], $post['class_no'], $post['term'], $course_name[$i], $material[$i]);
-                        }
-                    }
-//debugBreak();
                     $this->setAlert(2, '預設值編輯成功');
                 }
-                redirect(base_url("planning/createclass/?{$_SERVER['QUERY_STRING']}"));
+                //redirect(base_url("planning/createclass/?{$_SERVER['QUERY_STRING']}"));
+                redirect(base_url("Defaultclass"));
             }
         }
 
@@ -197,17 +173,9 @@ debugBreak();
 
     private function _isVerify($action = 'add', $user_bureau, $fmap_check)
     {
-        //$config = $this->createclass_model->getVerifyConfig();
-        if ($user_bureau != '379680000A') {
-            $config['type']['rules'] = '';
-            $config['class_name']['rules'] = '';
-            $config['ht_class_type']['rules'] = '';
-            $config['is_assess']['rules'] = '';
-            $config['open_retirement']['rules'] = '';
-        }
+        $config = $this->defaultclass_model->getVerifyConfig();
         $this->form_validation->set_rules($config);
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
-
         return ($this->form_validation->run() == FALSE) ? FALSE : TRUE;
     }
 

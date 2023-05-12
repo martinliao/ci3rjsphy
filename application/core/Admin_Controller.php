@@ -14,8 +14,6 @@
 
 class AdminController extends MI_Controller
 {
-    public $CI;
-
     /**
      * An array of variables to be passed through to the view, layout, ....
      */
@@ -44,14 +42,10 @@ class AdminController extends MI_Controller
         // CI profiler
         $this->output->enable_profiler(false);
 
-        // This function returns the main CodeIgniter object.
-        // Normally, to call any of the available CodeIgniter object or pre defined library classes then you need to declare.
-        //$CI =& get_instance();
-
         $this->load->library('smarty_acl');
         $this->load->helper('url');
         $this->load->helper('form');
-        $this->load->library('form_validation');
+        //$this->load->library('form_validation');
 
         $this->load->model(array(
             'system/setting_model',

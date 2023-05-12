@@ -23,7 +23,7 @@ class Defaultclass_model extends MY_Model
 
     public function setDefault($value)
     {
-        $this->db->replace($this->table, array('name' => $this->default_field, 'value' => $value));
+        return $this->db->replace($this->table, array('name' => $this->default_field, 'value' => $value));
     }
 
     public function getFormDefault($info = array())
@@ -125,21 +125,6 @@ class Defaultclass_model extends MY_Model
     public function getVerifyConfig()
     {
         $config = array(
-            'type' => array(
-                'field' => 'type',
-                'label' => '系列別代碼',
-                'rules' => 'trim|required',
-            ),
-            'ecpa_class_id' => array(
-                'field' => 'ecpa_class_id',
-                'label' => '終身學習類別代碼',
-                'rules' => 'trim|required',
-            ),
-            'class_name' => array(
-                'field' => 'class_name',
-                'label' => '班期名稱',
-                'rules' => 'trim|required',
-            ),
             'ht_class_type' => array(
                 'field' => 'ht_class_type',
                 'label' => '鐘點費類別',
@@ -150,11 +135,6 @@ class Defaultclass_model extends MY_Model
                 'label' => '本期人數',
                 'rules' => 'trim|required',
             ),
-            // 'range_week' => array(
-            //     'field' => 'range_week',
-            //     'label' => '訓練期程(週)',
-            //     'rules' => 'trim|required',
-            // ),
             'range' => array(
                 'field' => 'range',
                 'label' => '訓練期程(小時)',
@@ -163,11 +143,6 @@ class Defaultclass_model extends MY_Model
             'weights' => array(
                 'field' => 'weights',
                 'label' => '權重',
-                'rules' => 'trim|required',
-            ),
-            'req_beaurau' => array(
-                'field' => 'req_beaurau',
-                'label' => '承辦單位代碼 ',
                 'rules' => 'trim|required',
             ),
             'is_assess' => array(
@@ -196,7 +171,6 @@ class Defaultclass_model extends MY_Model
                 'rules' => 'required',
             ),
         );
-
         return $config;
     }
 

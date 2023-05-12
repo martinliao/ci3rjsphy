@@ -14,7 +14,10 @@ class Createclass extends MY_Controller
         $this->load->model('data/second_category_model');
         $this->load->model('planning/setclass_model');
         $this->load->model('planning/booking_place_model'); //mark 2021-06-03 更新沒有選擇教室的課程
-        
+        // 2023A, 預設值
+debugBreak();
+        $this->load->model('defaultclass/defaultclass_model');
+
         if (!isset($this->data['filter']['page'])) {
             $this->data['filter']['page'] = '1';
         }
@@ -162,6 +165,7 @@ class Createclass extends MY_Controller
 
         $get = $this->input->get();
         if(isset($get['year']) && !empty($get['year']) && isset($get['id']) && !empty($get['id'])){
+            //$this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($get['id']));
             $this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($get['id']));
             $this->data['form']['year'] = $get['year'];
             $this->data['form']['room_code'] = '';
