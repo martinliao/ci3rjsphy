@@ -14,8 +14,6 @@ class Createclass extends MY_Controller
         $this->load->model('data/second_category_model');
         $this->load->model('planning/setclass_model');
         $this->load->model('planning/booking_place_model'); //mark 2021-06-03 更新沒有選擇教室的課程
-        // 2023A, 預設值
-debugBreak();
         $this->load->model('defaultclass/defaultclass_model');
 
         if (!isset($this->data['filter']['page'])) {
@@ -166,7 +164,8 @@ debugBreak();
         $get = $this->input->get();
         if(isset($get['year']) && !empty($get['year']) && isset($get['id']) && !empty($get['id'])){
             //$this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($get['id']));
-            $this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($get['id']));
+            $default_values = (array)$this->defaultclass_model->getDefault();
+            $this->data['form'] = $default_values;
             $this->data['form']['year'] = $get['year'];
             $this->data['form']['room_code'] = '';
             if(isset($this->data['form']['dev_type']) && !empty($this->data['form']['dev_type'])){
@@ -190,7 +189,9 @@ debugBreak();
             $this->data['transfer'] = true;
             $this->data['link_cancel'] = base_url("planning/createclass/");
         } else {
-            $this->data['form'] = $this->createclass_model->getFormDefault();
+            //$this->data['form'] = $this->createclass_model->getFormDefault();
+            $default_values = (array)$this->defaultclass_model->getDefault();
+            $this->data['form'] = $default_values;
 
             //if(preg_match("/^211.79.136.20[2,3,4,5,6]$/", $_SERVER["REMOTE_ADDR"]) || preg_match("/^163.29.35.[0-9]*[0-9]*[0-9]*$/", $_SERVER["REMOTE_ADDR"])) {
                 if($this->data['is_edat']){
@@ -390,7 +391,10 @@ debugBreak();
             }
         //}
 
-        $this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
+        //$this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
+        $createValues = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
+        $defaultValues = (array)$this->defaultclass_model->getDefault();
+        $this->data['form'] = array_merge($createValues, $defaultValues);
         $this->data['form']['segmemo'] = $this->createclass_model->getSegmemo($this->data['form']['year'],$this->data['form']['class_no']);
 
         if(isset($this->data['form']['dev_type']) && !empty($this->data['form']['dev_type'])){
@@ -566,7 +570,9 @@ debugBreak();
     }
 
     public function printApplication($id=null){
-        $this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
+        //$this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
+        $default_values = (array)$this->defaultclass_model->getDefault();
+        $this->data['form'] = $default_values;
         $this->data['form']['segmemo'] = $this->createclass_model->getSegmemo($this->data['form']['year'],$this->data['form']['class_no']);
 
         if(isset($this->data['form']['dev_type']) && !empty($this->data['form']['dev_type'])){
