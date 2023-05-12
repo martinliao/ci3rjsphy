@@ -57,8 +57,17 @@
         <?=form_error('no_persons'); ?>
     </div>
 
-    <input id="min_no_persons" name="min_no_persons" type="hidden" value="<?=set_value('min_no_persons', $form['min_no_persons']); ?>">
-    <input id="max_no_persons" name="max_no_persons" type="hidden" value="<?=set_value('max_no_persons', $form['max_no_persons']); ?>">    
+    <div class="form-group col-xs-6 <?=form_error('min_no_persons')?'has-error':'';?>">
+        <label class="control-label">人數下限</label>
+        <input class="form-control" id="min_no_persons" name="min_no_persons" placeholder="" value="<?=set_value('min_no_persons', $form['min_no_persons']); ?>">
+        <?=form_error('min_no_persons'); ?>
+    </div>
+
+    <div class="form-group col-xs-6 <?=form_error('max_no_persons')?'has-error':'';?>">
+        <label class="control-label">人數上限</label>
+        <input class="form-control" id="max_no_persons" name="max_no_persons" placeholder="" value="<?=set_value('max_no_persons', $form['max_no_persons']); ?>">
+        <?=form_error('max_no_persons'); ?>
+    </div>
 
     <div class="form-group col-xs-6">
         <label class="control-label">班期屬性</label>
@@ -92,7 +101,11 @@
         <?=form_error('class_cate2'); ?>
     </div>
 
-    <input id="range_week" name="range_week" type="hidden" value="<?=set_value('range_week', $form['range_week']); ?>">
+    <div class="form-group col-xs-6 <?=form_error('range_week')?'has-error':'';?>">
+        <label class="control-label">訓練期程(週)</label>
+        <input class="form-control" id="range_week" name="range_week" placeholder="" value="<?=set_value('range_week', $form['range_week']); ?>">
+        <?=form_error('range_week'); ?>
+    </div>
 
     <div class="form-group col-xs-6 required <?=form_error('range')?'has-error':'';?>">
         <label class="control-label">訓練期程(小時)</label>
@@ -443,7 +456,6 @@
         </div>
         <?=form_error('env_class'); ?>
     </div>
-
 
     <div class="form-group col-xs-6 required">
         <label class="control-label">政策行銷班期</label>

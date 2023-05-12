@@ -31,8 +31,7 @@ class Defaultclass extends AdminController
         $default_values  = (array)$this->defaultclass_model->getDefault();
         //$default_values  = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
         $this->data['form'] = $default_values;
-
-        $this->data['form']['segmemo'] = $this->createclass_model->getSegmemo($this->data['form']['year'], $this->data['form']['class_no']);
+        //$this->data['form']['segmemo'] = $this->createclass_model->getSegmemo($this->data['form']['year'], $this->data['form']['class_no']);
 
         if (isset($this->data['form']['dev_type']) && !empty($this->data['form']['dev_type'])) {
             $this->data['form']['dev_type_name'] = $this->createclass_model->getDevTypeName($this->data['form']['dev_type']);
@@ -88,7 +87,6 @@ class Defaultclass extends AdminController
         $this->data['choices']['open_retirement'] = array('Y' => '是', 'N' => '否');
 
         if ($post = $this->input->post()) {
-//debugBreak();
             $segmemo = $this->input->post('segmemo');
             $course_name = $this->input->post('course_name');
             $material = $this->input->post('material');
@@ -117,20 +115,18 @@ class Defaultclass extends AdminController
             }
             if ($this->_isVerify('edit', $this->data['user_bureau'], $fmap_check) == TRUE) {
                 unset($post['room_name']);
-                unset($post['segmemo']);
                 unset($post['course_name']);
                 unset($post['material']);
                 unset($post['dev_type_name']);
                 unset($post['req_beaurau_name']);
                 unset($post['ecpa_class_name']);
                 unset($post['fmap']);
-                unset($post['online_course_name']);
+                //unset($post['online_course_name']);
                 unset($post['hours']);
                 unset($post['elrid']);
 
                 //$rs = $this->createclass_model->updateRequire($id, $post);
                 $tmp = json_encode($post);
-//debugBreak();
                 $rs = $this->defaultclass_model->setDefault($tmp);
                 if ($rs) {
                     $this->setAlert(2, '預設值編輯成功');

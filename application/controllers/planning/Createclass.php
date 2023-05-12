@@ -395,7 +395,9 @@ class Createclass extends MY_Controller
         $createValues = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
         $defaultValues = (array)$this->defaultclass_model->getDefault();
         $this->data['form'] = array_merge($createValues, $defaultValues);
-        $this->data['form']['segmemo'] = $this->createclass_model->getSegmemo($this->data['form']['year'],$this->data['form']['class_no']);
+        //$this->data['form']['segmemo'] = $this->createclass_model->getSegmemo($this->data['form']['year'],$this->data['form']['class_no']);
+        $segmemoCreate = $this->createclass_model->getSegmemo($this->data['form']['year'],$this->data['form']['class_no']);
+        $this->data['form']['segmemo'] = !empty($segmemoCreate) ? $segmemoCreate : $defaultValues['segmemo'];
 
         if(isset($this->data['form']['dev_type']) && !empty($this->data['form']['dev_type'])){
             $this->data['form']['dev_type_name'] = $this->createclass_model->getDevTypeName($this->data['form']['dev_type']);
@@ -565,7 +567,6 @@ class Createclass extends MY_Controller
         if($this->data['user_bureau'] != '379680000A'){
             $this->data['link_printApplication'] = base_url("planning/createclass/printApplication/{$id}");
         }
-
         $this->layout->view('planning/createclass/edit', $this->data);
     }
 
