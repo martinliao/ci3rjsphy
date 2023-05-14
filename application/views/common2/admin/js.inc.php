@@ -1,6 +1,6 @@
     <!-- jQuery -->
     <!--script src="<?=HTTP_PLUGIN;?>jquery-1.12.4.min.js"></script-->
-    <script src="<?=PATH_ASSETS; ?>/plugins/jquery/jquery.min.js"></script-->
+    <script src="<?=PATH_ASSETS; ?>/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="<?=HTTP_PLUGIN;?>bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
