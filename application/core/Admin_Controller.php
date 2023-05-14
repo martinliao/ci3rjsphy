@@ -76,6 +76,12 @@ class AdminController extends MI_Controller
         // 目前位置
         $this->setMenu($user, $_session['member_userid']);
         $this->setMenuLocation();
+
+        // 年度查詢
+        $current_year = date('Y') - 1909;
+        for($i=$current_year;$i>=90;$i--){
+             $this->data['choices']['query_year'][$i] = $i;
+        }
     }
 
     /**
@@ -224,4 +230,72 @@ class AdminController extends MI_Controller
         );
         $this->session->set_flashdata('_ALERT', $data);
     }
+
+    public function getSeriesCategory(){
+        $data = array();
+        $this->db->select('item_id,name');
+        $this->db->from('series_category');
+        $query = $this->db->get();
+        $bureau = $query->result_array();
+
+        foreach ($bureau as $key) {
+            $data[$key['item_id']] = $key['name'];
+        }
+
+        return $data;
+    }
+
+    public function getQueryString($merge_params=array(), $skip_params=array())
+    {
+        $filter = $this->data['filter'];
+        $filter = array_merge($filter, $merge_params);
+
+        foreach ($skip_params as $param) {
+            if (isset($filter[$param])) {
+                unset($filter[$param]);
+            }
+        }
+
+        return http_build_query($filter);
+    }
+
+	/**
+	 * Load css styles.
+	 *
+	 * @access protected
+	 * @param  array $css
+	 */
+	protected function load_css(array $css)
+	{
+		// If globals exist - combine the globals with local
+		if ($og_css = $this->load->get_var('site_css')) {
+			// merge
+			$css = array_merge($og_css, $css);
+			// get rid of duplicates
+			$css = array_unique($css);
+		}
+
+		$this->load->vars('site_css', $css);
+	}
+
+    /**
+	 * Load javascript files.
+	 *
+	 * @access protected
+	 * @param  array $js
+	 */
+	protected function load_js(array $js)
+	{
+		// If globals exist - combine the globals with local
+		if ($og_js = $this->load->get_var('site_js')) {
+			// merge
+			$js = array_merge($og_js, $js);
+			// get rid of duplicates
+			$js = array_unique($js);
+		}
+
+		$this->load->vars('site_js', $js);
+	}
+
+
 }

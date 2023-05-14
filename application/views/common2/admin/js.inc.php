@@ -12,8 +12,17 @@
     <script type="text/javascript" src="<?=HTTP_PLUGIN;?>jquery.mousewheel-3.0.6.pack.js"></script>
     <!-- Add fancyBox main JS and CSS files -->
     <script type="text/javascript" src="<?=HTTP_PLUGIN;?>fancybox/jquery.fancybox.js?v=2.1.5"></script>
-    <link rel="stylesheet" type="text/css" href="<?=HTTP_PLUGIN;?>fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+    <? if (!empty($site_js)) : ?>
+		<? foreach ($site_js as $js) : ?>
+		    <script type="text/javascript" src="<?=base_url() . $js;?>"></script>
+		<? endforeach; ?>
+	<? endif; ?>
+
     <script type="text/javascript">
+        // http://stackoverflow.com/questions/2420970/how-can-i-get-selector-from-jquery-object/15623322#15623322
+        !function(e,t){var n=function(e){var n=[];for(;e&&e.tagName!==t;e=e.parentNode){if(e.className){var r=e.className.split(" ");for(var i in r){if(r.hasOwnProperty(i)&&r[i]){n.unshift(r[i]);n.unshift(".")}}}if(e.id&&!/\s/.test(e.id)){n.unshift(e.id);n.unshift("#")}n.unshift(e.tagName);n.unshift(" > ")}return n.slice(1).join("")};e.fn.getSelector=function(t){if(true===t){return n(this[0])}else{return e.map(this,function(e){return n(e)})}}}(window.jQuery)
+
         var _json = { _ALERT : {} };
         <?php if (isset($_JSON)): ?>
             _json = <?=json_encode($_JSON);?>;
