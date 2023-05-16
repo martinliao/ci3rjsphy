@@ -717,7 +717,7 @@ class Createclass_model extends MY_Model
         $this->db->delete('require_online');
 
         //if($is_assess == '1' && $is_mixed == '1'){ //2021-06-09 取消3B.edit *考核班期*影響*混成班級*的設定
-        if(count($online_course_name) > 0)
+        if(count($online_course_name) > 0) {
             for($i=0;$i<count($online_course_name);$i++){
                 $this->db->set('year',$year);
                 $this->db->set('class_no',$class_no);
