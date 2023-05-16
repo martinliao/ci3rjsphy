@@ -395,6 +395,7 @@ class Createclass extends MY_Controller
         $createValues = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
         $defaultValues = (array)$this->defaultclass_model->getDefault();
         $this->data['form'] = array_merge($createValues, $defaultValues);
+
         //$this->data['form']['segmemo'] = $this->createclass_model->getSegmemo($this->data['form']['year'],$this->data['form']['class_no']);
         $segmemoCreate = $this->createclass_model->getSegmemo($this->data['form']['year'],$this->data['form']['class_no']);
         $this->data['form']['segmemo'] = !empty($segmemoCreate) ? $segmemoCreate : $defaultValues['segmemo'];
@@ -468,6 +469,7 @@ class Createclass extends MY_Controller
                 }
             }
 
+            $online_course_name = array();
             if(isset($post['online_course_name']) && !empty($post['online_course_name'])){
                 $online_course_name = $post['online_course_name'];
             }
