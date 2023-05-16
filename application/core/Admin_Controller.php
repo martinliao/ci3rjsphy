@@ -307,7 +307,7 @@ class AdminController extends MI_Controller
     function get_head_code()
 	{
         // From Moolde: outputrequirementslib.php
-		$this->load->helper('common');
+		$this->load->helper('moodlelib'); // common
 		$this->load->helper('weblib_29');
 		//$this->load->library('js_writer');
 		$tmp = $this->init_requirements_data();
