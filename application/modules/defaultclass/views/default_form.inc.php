@@ -138,22 +138,6 @@
         </div>
     </div>
 
-    <div class="form-group col-xs-6"><!-- mark 2021-06-04 加入unlock條件-->
-        <label class="control-label">開課起日</label>
-        <div class="input-group" id="start_date1">
-            <input type="text" class="form-control <?=form_error('start_date1')?'has-error':'';?> datepicker" id="set_start_date1" name="start_date1" value="<?=set_value('start_date1', !empty($form['start_date1'])?date('Y-m-d',strtotime($form['start_date1'])):''); ?>" />
-            <span class="input-group-addon" style="cursor: pointer;"><i class="fa fa-calendar"></i></span>
-        </div>
-    </div>
-
-    <div class="form-group col-xs-6"><!-- mark 2021-06-04 加入unlock條件-->
-        <label class="control-label">開課迄日</label>
-        <div class="input-group" id="end_date1">
-            <input type="text" class="form-control <?=form_error('end_date1')?'has-error':'';?> datepicker" id="set_end_date1" name="end_date1" value="<?=set_value('end_date1', !empty($form['end_date1'])?date('Y-m-d',strtotime($form['end_date1'])):''); ?>" />
-            <span class="input-group-addon" style="cursor: pointer;" ><i class="fa fa-calendar"></i></span>
-        </div>
-    </div>
-
     <div class="form-group col-xs-6">
         <label class="control-label">選員方式</label>
         <?php
@@ -382,39 +366,6 @@
             echo form_dropdown('is_mixed', $choices['is_mixed'], set_value('is_mixed', $form['is_mixed']), 'class="form-control" id="is_mixed"');
         ?>
         <?=form_error('is_mixed'); ?>
-    </div>
-
-    <div class="tab-pane col-xs-12" id="online_course" style="display: none">
-        <input type="hidden" name="hidStr" id="hidStr" value="" />
-        <label class="control-label">線上課程</label>
-        <table class="table table-hover" style="margin-bottom: 10px;">
-            <thead>
-                <tr>
-                    <th width="85%">課程</th>
-                    <th width="10%">時數</th>
-                    <th width="5%"></th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php 
-                if(isset($form['online_course']) && !empty($form['online_course'])){
-                    for ($i=0;$i<count($form['online_course']);$i++) { 
-                        $rows = $i+1;
-                        echo '<tr>';
-                        echo '<td><input class="form-control" type="text" name="online_course_name[]" id="online_course_name[]" value="'.$form['online_course'][$i]['class_name'].'"></td>';
-                        echo '<td><input class="form-control" type="text" name="hours[]" id="hours[]" value="'.$form['online_course'][$i]['hours'].'"><input type="hidden" value="'.$form['online_course'][$i]['elearn_id'].'" name="elrid[]" id="elrid[]"></td>';
-                        echo '<td align="right"><button type="button" class="btn btn-danger btn-sm" id="remove_'.$rows.'" onclick="removeItem(this, '.$rows.')">刪除</button></td>';
-                        echo '</tr>';
-                    }
-                }
-            ?>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="7" align="right"><button type="button" class="btn btn-success btn-sm" onclick="openCourSeltor()">新增</button></td>
-                </tr>
-            </tfoot>
-        </table>
     </div>
 
     <div class="form-group col-xs-6">
