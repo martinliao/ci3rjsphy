@@ -29,6 +29,8 @@ class AdminController extends MI_Controller
 
     protected $user;
 
+    protected $amdjscode = array('');
+
     /**
      * [__construct description]
      *
@@ -45,6 +47,7 @@ class AdminController extends MI_Controller
         $this->load->library('smarty_acl');
         $this->load->helper('url');
         $this->load->helper('form');
+        $this->load->helper('weblib_29');
         //$this->load->library('form_validation');
 
         $this->load->model(array(
@@ -123,6 +126,7 @@ class AdminController extends MI_Controller
         $this->load->view("{$_theme}/index", $data); // navbar, sidebar, view
 
         $data['js'] = $this->load->view("{$_theme}/js.inc.php", $data, TRUE);
+        $data['standard_footer_html'] = $this->get_amd_footercode();
         $this->load->view("{$_theme}/footer.inc.php", $data); // footer, js
     }
 
@@ -296,6 +300,35 @@ class AdminController extends MI_Controller
 
 		$this->load->vars('site_js', $js);
 	}
+
+
+    /**
+     * Returns js code to load amd module loader, then insert inline script tags
+     * that contain require() calls using RequireJS.
+     * @return string
+     */
+    protected function get_amd_footercode() {
+        $output = '';
+        //$jsloader = site_url('Javascript/');
+        $jsloader = site_url('/');
+        $requirejsloader= site_url('getamd/');
+        $requirejsconfig = file_get_contents(APPPATH.'lib/requirejs/moodle-config.js');
+
+        $requirejsconfig = str_replace('[BASEURL]', $requirejsloader, $requirejsconfig);
+        $requirejsconfig = str_replace('[JSURL]', $jsloader, $requirejsconfig);
+        $requirejsconfig = str_replace('[JSEXT]', '.js', $requirejsconfig);
+        // 加了 3.9.12 的版本
+        $requirejsconfig = str_replace('[JSMIN]', '', $requirejsconfig);
+
+        $output .= html_writer::script($requirejsconfig);
+        $output .= html_writer::script('', base_url('lib/requirejs/require.js'));  // Ignore js_fix_url()
+
+        // First include must be to a module with no dependencies, this prevents multiple requests.
+        $prefix = "require(['core/first'], function() {\n";
+        $suffix = "\n});";
+        $output .= html_writer::script($prefix . implode(";\n", $this->amdjscode) . $suffix);
+        return $output;
+    }
 
 
 }

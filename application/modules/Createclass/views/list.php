@@ -131,7 +131,9 @@
                                                 <i class="fa fa-eye fa-lg"></i>
                                             </a>
                                         <?php } ?>
+                                        <button type="button" class="btn btn-outline btn-success btn-xs btn-toggle" id="tambah0" title='Booking'><i class="fa fa-eye fa-lg"></i></button>
                                         <?php if (isset($row['link_edit'])) { ?>
+                                            <!--button type="button" class="btn btn-success btn-sm" id="tambah0"><i class="fa fa-eye fa-lg"></i></button-->
                                             <a type="button" class="btn btn-outline btn-warning btn-xs btn-toggle" href="<?= $row['link_edit']; ?>">
                                                 <i class="fa fa-pencil fa-lg"></i>
                                             </a>
@@ -163,6 +165,7 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
+<?php include('core/modal.inc.php');?>
 <!--script src="<?= HTTP_PLUGIN; ?>jquery.highlight-3.js"></script-->
 <script>
     function sendFun() {

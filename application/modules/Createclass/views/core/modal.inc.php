@@ -5,14 +5,14 @@
         outline: none;
     }
     .modal-dialog80 {
-        width: 80% !important;
+        width: 70% !important;
     }
     .pointer {
         cursor: pointer;
     }
 </style>
 <!-- modal -->
-<div class="modal fade" id="bookroom" tabindex="-1" role="dialog" aria-labelledby="myBookRoomLabel" aria-hidden="true">
+<div class="modal fade" id="booking_room" tabindex="-1" role="dialog" aria-labelledby="myBookRoomLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog80 modal-xl">
         <div class="modal-content">
             <div class="modal-header">

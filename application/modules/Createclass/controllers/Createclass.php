@@ -155,13 +155,7 @@ class Createclass extends AdminController
         $this->data['page_name'] = 'add';
         $this->data['user_bureau'] = $this->flags->user['bureau_id'];
 
-        //if(preg_match("/^211.79.136.20[2,3,4,5,6]$/", $_SERVER["REMOTE_ADDR"]) || preg_match("/^163.29.35.[0-9]*[0-9]*[0-9]*$/", $_SERVER["REMOTE_ADDR"])) {
-            if(in_array(14,$this->flags->user['group_id'])){
-                $this->data['is_edat'] = true;
-            } else {
-                $this->data['is_edat'] = false;
-            }
-        //}
+        $this->data['is_edat'] = false;
 
         $get = $this->input->get();
         if(isset($get['year']) && !empty($get['year']) && isset($get['id']) && !empty($get['id'])){
@@ -566,15 +560,15 @@ class Createclass extends AdminController
         }
         //$this->layout->view('planning/createclass/edit', $this->data);
 
-        $this->load_css(array(
-            'assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
-            'assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'
-		));
+        //$this->load_css(array(
+        //    'assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
+        //    'assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'
+		//));
         $this->load_js(array(
             'assets/plugins/datatables/jquery.dataTables.min.js',
             'assets/plugins/datatables-responsive/js/dataTables.responsive.min.js',
             'assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js',
-            'assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'
+            //'assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'
         ));
         $this->render_page('edit', $this->data);
     }

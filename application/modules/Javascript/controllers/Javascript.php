@@ -17,6 +17,7 @@ class Javascript extends JavascriptController
 		#$this->load->helper('configonlylib');
 		#$this->load->helper('jslib');
 		#$this->load->library(['core/minify']);
+debugBreak();
 	}
 
 
@@ -79,34 +80,5 @@ class Javascript extends JavascriptController
 			$content .= file_get_contents($jsfile)."\n";
 		}
 		js_send_uncached($content, $etag);
-		//$this->load->view('/general/index', $data);
-	}
-
-
-	/**
-	 *
-	 * Example of using another layout and view template for your view if needed
-	 *
-	 * @access public
-	 * @return void
-	 *
-	*/
-	public function highlight(){
-		$this->set_page_title('Example of another page');
-		$this->set_meta_description('Example of another page Meta Description.');
-
-		// Set another layout
-		$this->layout = 'highlight';
-
-		// Do something here...
-		// $foo = 'bar';
-
-		// Assign your data to an array
-		$data = array(
-			//'baz' => $foo
-		);
-
-		// Load another view and pass the data
-		$this->load->view('/example/index', $data);
 	}
 }

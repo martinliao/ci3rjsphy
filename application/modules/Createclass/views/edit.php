@@ -4,7 +4,10 @@
 			<div class="panel-heading">
 				<?=$_LOCATION['function']['name'] ;?>
 				<!-- test button -->
-				<button type="button" class="btn btn-success btn-sm" id="tambah"><i class="fas fa-plus"></i> Test 預約教室</button>
+				<button type="button" class="btn btn-success btn-sm" id="tambah" data-seq_no=<?= $form['seq_no']?> >
+					<i class="fas fa-plus"></i>
+					Test預約教室鈕
+				</button>
 			</div>
 			<div class="panel-body">
 				<?php include('form.inc.php');?>
@@ -32,10 +35,15 @@
 		return formObj;
 	}
     document.addEventListener("DOMContentLoaded", () => {
-		const form = $('.modal-body').html();
-		$('#tambah').click(function() {
-			$("#bookroom").modal("show");
-			$('#show_data').load('<?= site_url('Room') ?>');
-        });
+		//const form = $('.modal-body').html();
+		/*$('#tambah').click(function() {
+			var seqNo = $(this).data('seq_no');
+			$("#booking_room").modal("show");
+			$('#show_data').load('<?= site_url('Room/add') ?>/' + seqNo);
+        });/** */
+		require(['mod_Createclass/init'], function(init) {
+			debugger;
+			init.init();
+		});
 	});
 </script>

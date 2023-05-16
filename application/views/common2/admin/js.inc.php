@@ -1,12 +1,16 @@
+
     <!-- jQuery -->
     <!--script src="<?=HTTP_PLUGIN;?>jquery-1.12.4.min.js"></script-->
-    <script src="<?=PATH_ASSETS; ?>/plugins/jquery/jquery.min.js"></script>
+    <script src="<?=PATH_ASSETS; ?>plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="<?=HTTP_PLUGIN;?>bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--script src="<?=HTTP_PLUGIN;?>bootstrap/dist/js/bootstrap.min.js"></script-->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
     <!-- Metis Menu Plugin JavaScript -->
     <script src="<?=HTTP_PLUGIN;?>metisMenu/dist/metisMenu.min.js"></script>
     <!-- Noty jquery notification plugin -->
-    <script src="<?=HTTP_PLUGIN;?>select2/select2.full.js"></script>
+    <!--script src="<?=HTTP_PLUGIN;?>select2/select2.full.js"></script-->
     <script src="<?=HTTP_PLUGIN;?>noty/packaged/jquery.noty.packaged.min.js"></script>
     <!-- Add mousewheel plugin (this is optional) -->
     <script type="text/javascript" src="<?=HTTP_PLUGIN;?>jquery.mousewheel-3.0.6.pack.js"></script>

@@ -5,7 +5,8 @@
         border-top: 1px solid #e5e5e5;
     }
 </style>
-<form id="query_room_form" role=form data-toggle="validator">
+<!-- edit form -->
+<form id="query_bookingroom" role=form data-toggle="validator">
     <input type="hidden" name="<?= $csrf['name']; ?>" value="<?= $csrf['hash']; ?>" />
     <input type="hidden" id="seq_no" name="seq_no" value="<?= set_value('seq_no', $form['seq_no']); ?>">
     <div class="row">
@@ -33,27 +34,28 @@
         </div>
         <div class="form-group col-xs-6 required <?= form_error('no_persons') ? 'has-error' : ''; ?>">
             <label class="control-label">本期人數</label>
-            <input class="form-control" id="no_persons" name="no_persons" placeholder="" value="<?= set_value('no_persons', $form['no_persons']); ?>" required>
+            <input class="form-control" id="no_persons" name="no_persons" readonly placeholder="" value="<?= set_value('no_persons', $form['no_persons']); ?>" required>
             <?= form_error('no_persons'); ?>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-xs-6 required <?= form_error('range') ? 'has-error' : ''; ?>">
             <label class="control-label">訓練期程(小時)</label>
-            <input class="form-control" id="range" name="range" placeholder="" value="<?= set_value('range', $form['range']); ?>" required>
+            <input class="form-control" id="range" name="range" readonly placeholder="" value="<?= set_value('range', $form['range']); ?>" required>
             <?= form_error('range'); ?>
         </div>
-        <div class="form-group form-check col-xs-6 required ">
-            <label class="control-label">教室類別</label>
-            <div class="form-check">
-                <div class="checkbox-inline">
-                    <input class="form-check-input" type="checkbox" name="room_type" id="Check1" value="A" <?= set_checkbox('class_room_type_A', 'A', $filter['class_room_type_B'] == 'B'); ?>>
-                    <label class="form-check-label" for="Check1">一般教室</label>
-                </div>
-                <div class="checkbox-inline">
-                    <input class="form-check-input" type="checkbox" name="room_type" id="Check2" value="B" <?= set_checkbox('class_room_type_B', 'B', $filter['class_room_type_B'] == 'B'); ?>>
-                    <label class="form-check-label" for="Check2">電腦教室</label>
-                </div>
+        <div class="form-group col-xs-3">
+            <label class="control-label">開課起日</label>
+            <div class="input-group" id="start_date">
+                <input type="text" class="form-control <?=form_error('start_date')?'has-error':'';?> datepicker" id="set_start_date" name="start_date" value="<?=set_value('start_date', !empty($form['start_date'])?date('Y-m-d',strtotime($form['start_date'])):''); ?>" <?=($unlock_start_date=='true')?'':'disabled'?> />
+                <span class="input-group-addon" style="cursor: pointer;" ><i class="fa fa-calendar"></i></span>
+            </div>
+        </div>
+        <div class="form-group col-xs-3">
+            <label class="control-label">開課迄日</label>
+            <div class="input-group" id="end_date">
+                <input type="text" class="form-control <?=form_error('end_date')?'has-error':'';?> datepicker" id="set_end_date" name="end_date" value="<?=set_value('end_date', !empty($form['end_date'])?date('Y-m-d',strtotime($form['end_date'])):''); ?>" <?=($unlock_end_day1=='true')?'':'disabled'?> />
+                <span class="input-group-addon" style="cursor: pointer;" ><i class="fa fa-calendar"></i></span>
             </div>
         </div>
     </div>
@@ -62,15 +64,15 @@
             <button type="submit" class="btn btn-success" id="btn">開始預約教室</button>
     </div>
     <div class="card-body pad table-responsive">
-        <table class="table table-bordered table-sm" id="roomData" width="100%">
+        <table class="table table-bordered table-sm" id="booking_table" width="100%">
             <thead>
                 <tr>
-                    <th width=3%></th>
-                    <th width=5%>期別</th>
+                    <th></th>
+                    <th>期別</th>
                     <th></th>
                     <th>開課起日</th>
                     <th>開課迄日</th>
-                    <th width=30%>教室名稱</th>
+                    <th>教室名稱</th>
                     <th>預約時段</th>
                     <th>功能</th>
                 </tr>
@@ -81,3 +83,8 @@
     </div>
     </div>
 </form>
+<script type="text/javascript">
+    //document.addEventListener("DOMContentLoaded", () => {
+        getBookingLists(<?= set_value('seq_no', $form['seq_no']); ?>);
+    //});
+</script>
