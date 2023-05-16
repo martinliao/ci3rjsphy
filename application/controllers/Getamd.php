@@ -11,7 +11,7 @@
  * @since      Version 0.0.1
  */
 
-class getamd extends JavascriptController
+class Getamd extends JavascriptController
 {
 
     /**
