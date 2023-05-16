@@ -394,7 +394,7 @@ class Createclass extends MY_Controller
         //$this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
         $createValues = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
         $defaultValues = (array)$this->defaultclass_model->getDefault();
-        $this->data['form'] = array_merge($createValues, $defaultValues);
+        $this->data['form'] = array_merge($defaultValues, $createValues);
 
         //$this->data['form']['segmemo'] = $this->createclass_model->getSegmemo($this->data['form']['year'],$this->data['form']['class_no']);
         $segmemoCreate = $this->createclass_model->getSegmemo($this->data['form']['year'],$this->data['form']['class_no']);
@@ -460,7 +460,7 @@ class Createclass extends MY_Controller
 
             $fmap_check = false;
             if($post['fmap'] == 'Y'){
-                for($i=1;$i<=8;$i++){
+                for($i=1;$i<=11;$i++){
                     $key = 'map'.$i;
                     if(isset($post[$key]) && $post[$key] > 0){
                         $fmap_check = true;
