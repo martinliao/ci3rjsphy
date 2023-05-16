@@ -7,6 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="<?php echo base_url(); ?>/favicon.ico">
 	<?= $css ?>
+	<!-- standard_head_html -->
+	<?= $standard_head_html ?>
+	<!-- /standard_head_html -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

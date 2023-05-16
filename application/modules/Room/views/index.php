@@ -85,6 +85,10 @@
 </form>
 <script type="text/javascript">
     //document.addEventListener("DOMContentLoaded", () => {
-        getBookingLists(<?= set_value('seq_no', $form['seq_no']); ?>);
+    //    getBookingLists(<?= set_value('seq_no', $form['seq_no']); ?>);
     //});
+    require(['jquery',"core/log","mod_Room/js",'mod_bootstrapbase/bootstrap'], function($,log,room) { 
+        room.getBookingLists(<?= set_value('seq_no', $form['seq_no']); ?>);
+        //room.init();
+    });
 </script>

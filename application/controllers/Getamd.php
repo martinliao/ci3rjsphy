@@ -24,7 +24,6 @@ class Getamd extends JavascriptController
         global $CFG;
         define('MOODLE_INTERNAL', true);
         define('CACHE_DISABLE_ALL ', true);
-debugBreak();
         //$CFG->yui2version = '2.9.0';
         //$CFG->yui3version = '3.17.2';
         $CFG->dirroot = rtrim(APPPATH, '/'); // for Moodle
@@ -43,7 +42,6 @@ debugBreak();
     }
 
     public function index($jsname = null) {
-debugBreak();
         return $this->get('-1', 'core', 'first');
     }
 
@@ -51,8 +49,12 @@ debugBreak();
         return $this->get('-1', 'core', 'first');
     }
 
+    public function mod($path, $scriptfile)
+    {
+        return $this->get('-1', $path, $scriptfile);
+    }
 
-    public function get($id = null, $path, $scriptfile)
+    public function get($id=-1, $path, $scriptfile)
     {
         global $CFG;
         /*$slashargument = min_get_slash_argument();
@@ -61,6 +63,7 @@ debugBreak();
             die('Invalid request');
         }/** */
         $uri = current_url(true);
+//debugBreak();
         $slashargument= $id.'/'.$path.'/'.$scriptfile;
         $slashargument = ltrim($slashargument, '/');
         if (substr_count($slashargument, '/') < 1) {

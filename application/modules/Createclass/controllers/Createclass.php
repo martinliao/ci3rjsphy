@@ -564,12 +564,12 @@ class Createclass extends AdminController
         //    'assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
         //    'assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'
 		//));
-        $this->load_js(array(
-            'assets/plugins/datatables/jquery.dataTables.min.js',
-            'assets/plugins/datatables-responsive/js/dataTables.responsive.min.js',
-            'assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js',
-            //'assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'
-        ));
+        //$this->load_js(array(
+        //    //'assets/plugins/datatables/jquery.dataTables.min.js',
+        //    //'assets/plugins/datatables-responsive/js/dataTables.responsive.min.js',
+        //    //'assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js',
+        //    //'assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'
+        //));
         $this->render_page('edit', $this->data);
     }
 

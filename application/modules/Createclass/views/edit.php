@@ -41,9 +41,16 @@
 			$("#booking_room").modal("show");
 			$('#show_data').load('<?= site_url('Room/add') ?>/' + seqNo);
         });/** */
-		require(['mod_Createclass/init'], function(init) {
-			debugger;
-			init.init();
+		//require(["core/log"], function(amd) { amd.setConfig({"level":"trace"}); });
+		/*require(['core/first'], function() {
+			require(['mod_bootstrapbase/bootstrap', 'core/log'], function(bootstrap, log) {
+				log.debug('Bootstrap initialised');
+			});
+		});/** */
+		//require(['jquery',"core/log"], function($,amd) { amd.setConfig({"level":"trace"}); });
+		require(['jquery',"core/log","mod_Createclass/init",'mod_bootstrapbase/bootstrap'], function($,amd,init) { 
+			amd.setConfig({"level":"trace"}); 
+			//init.init();
 		});
 	});
 </script>

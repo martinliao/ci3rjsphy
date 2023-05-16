@@ -17,7 +17,7 @@ class Javascript extends JavascriptController
 		#$this->load->helper('configonlylib');
 		#$this->load->helper('jslib');
 		#$this->load->library(['core/minify']);
-debugBreak();
+		//$uri = current_url(true);
 	}
 
 
@@ -29,7 +29,17 @@ debugBreak();
 	 */
 	public function index()
 	{		
-		$this->load->view('/general/index', $data);
+		$this->load->view('/general/index', $this->data);
+	}
+
+	public function lib($path, $scriptfile)
+	{
+		return $this->get(-1, 'lib/'.$path, $scriptfile);
+	}
+
+	public function jquery($path, $scriptfile)
+	{
+		return $this->get(-1, 'lib/jquery/'.$path, $scriptfile);
 	}
 
 	public function get($id = null, $path, $scriptfile) {
@@ -62,7 +72,7 @@ debugBreak();
 				// does not exist
 				continue;
 			}
-			if (substr($jsfile, -3) !== '.js') {
+			if ((substr($jsfile, -3) !== '.js') && (substr($jsfile, -4) != '.css')) {
 				// hackers - not a JS file
 				continue;
 			}

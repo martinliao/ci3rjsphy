@@ -31,6 +31,8 @@ class AdminController extends MI_Controller
 
     protected $amdjscode = array('');
 
+    protected $M_cfg;
+
     /**
      * [__construct description]
      *
@@ -110,7 +112,8 @@ class AdminController extends MI_Controller
         $data = array_merge($this->data, $data);
 
         $_css = $this->load->view("{$_theme}/css.inc.php", $data, TRUE);
-        $this->load->view("{$_theme}/header.inc.php", array('css' => $_css));
+        $_standard_head_html = $this->get_head_code();
+        $this->load->view("{$_theme}/header.inc.php", array('css' => $_css, 'standard_head_html' => $_standard_head_html));
         
         $data['navbar'] = $this->load->view("{$_theme}/navbar.inc.php", $data, TRUE);
         $data['sidebar'] = $this->load->view("{$_theme}/sidebar.inc.php", $data, TRUE);
@@ -301,6 +304,26 @@ class AdminController extends MI_Controller
 		$this->load->vars('site_js', $js);
 	}
 
+    function get_head_code()
+	{
+        // From Moolde: outputrequirementslib.php
+		$this->load->helper('common');
+		$this->load->helper('weblib_29');
+		//$this->load->library('js_writer');
+		$tmp = $this->init_requirements_data();
+		$output = '';
+		// Set up the M namespace.
+        $js = "var M = {}; M.yui = {};\n";
+		$js .= "M.pageloadstarttime = new Date();\n";
+		$js .= Js_writer::set_variable('M.cfg', $this->M_cfg, false);
+		//$js .= $this->YUI_config->get_config_functions();
+        //$js .= js_writer::set_variable('YUI_config', $this->YUI_config, false) . "\n";
+        //$js .= "M.yui.loader = {modules: {}};\n"; // Backwards compatibility only, not used any more.
+        //$js = $this->YUI_config->update_header_js($js);
+		$output .= html_writer::script($js);
+        return $output;
+    }
+
 
     /**
      * Returns js code to load amd module loader, then insert inline script tags
@@ -309,14 +332,13 @@ class AdminController extends MI_Controller
      */
     protected function get_amd_footercode() {
         $output = '';
-        //$jsloader = site_url('Javascript/');
-        $jsloader = site_url('/');
-        $requirejsloader= site_url('getamd/');
+        $jsloader = site_url('Javascript/');
+        $requirejsloader= site_url('Getamd/');
         $requirejsconfig = file_get_contents(APPPATH.'lib/requirejs/moodle-config.js');
 
         $requirejsconfig = str_replace('[BASEURL]', $requirejsloader, $requirejsconfig);
         $requirejsconfig = str_replace('[JSURL]', $jsloader, $requirejsconfig);
-        $requirejsconfig = str_replace('[JSEXT]', '.js', $requirejsconfig);
+        $requirejsconfig = str_replace('[JSEXT]', '', $requirejsconfig);
         // 加了 3.9.12 的版本
         $requirejsconfig = str_replace('[JSMIN]', '', $requirejsconfig);
 
@@ -330,5 +352,55 @@ class AdminController extends MI_Controller
         return $output;
     }
 
+    protected function sesskey() {
+        //Get session name
+        //$session_name = $admin ? $this->session_names['admin'] : $this->session_names['user'];
+        $session_name = $this->session_names['admin'];
+        $session = $this->session->userdata($session_name);
+//debugBreak();
+        //Check session exists
+		if (empty($session['sesskey'])) {
+			// note: do not use $USER because it may not be initialised yet
+			if (!isset($session)) {
+				return FALSE;
+			}
+			$session['sesskey'] = random_string(10);
+		}
+        return $session['sesskey'];
+    }
+
+    function get_config_for_javascript() {
+        global $CFG;
+
+        if (empty($this->M_cfg)) {
+            // JavaScript should always work with $CFG->httpswwwroot rather than $CFG->wwwroot.
+            // Otherwise, in some situations, users will get warnings about insecure content
+            // on secure pages from their web browser.
+
+            $this->M_cfg = array(
+                'wwwroot'             => base_url(), // Yes, really. See above.
+                'sesskey'             => $this->sesskey(),
+                'themerev'            => -1,
+                'slasharguments'      => (int)(!empty($CFG->slasharguments)),
+                'theme'               => 'default',
+                'jsrev'               => '-1', //$this->get_jsrev(),
+                'admin'               => 'admin',
+                'csrfname'            => $this->security->get_csrf_token_name(),
+                'csrfhash'            => $this->security->get_csrf_hash()
+            );
+            //if ($CFG->debugdeveloper) {
+            if (ENVIRONMENT !== 'production') {
+                $this->M_cfg['developerdebug'] = true;
+            }
+        }
+        return $this->M_cfg;
+    }
+
+    function init_requirements_data() {
+        // Init the js config.
+        $this->get_config_for_javascript();
+        // ToDo: core-block
+        //$this->yui_module('moodle-core-blocks', 'M.core_blocks.init_dragdrop', [], null, true);
+    }
 
 }

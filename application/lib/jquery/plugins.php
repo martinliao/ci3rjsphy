@@ -39,4 +39,6 @@ $plugins = array(
     'jquery'  => array('files' => array('jquery-3.5.1.min.js')),
     'ui'      => array('files' => array('ui-1.12.1/jquery-ui.min.js')),
     'ui-css'  => array('files' => array('ui-1.12.1/theme/smoothness/jquery-ui.min.css')),
+    'datatable'      => array('files' => array('datatables/jquery.dataTables.min.js')),
+    'datatable-css'  => array('files' => array('datatables/jquery.dataTables.min.css')),
 );

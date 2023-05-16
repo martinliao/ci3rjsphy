@@ -17,6 +17,14 @@ class Room extends AdminController
 		
 		$this->choices['time_list'] = $this->reservation_time_model->getChoices();
 		$this->load->model('room_model', 'model');
+
+		if (empty($this->data['filter']['start_date'])) {
+            $this->data['filter']['start_date'] = date('Y-m-d', time() - (86400 * 7));
+        }
+
+        if (empty($this->data['filter']['end_date'])) {
+            $this->data['filter']['end_date'] = date('Y-m-d', time() );
+        }
 	}
 
 	public function add($seqNo=null)
@@ -24,7 +32,8 @@ class Room extends AdminController
 		$id= $seqNo; //27973;
 		$data = [
 			'title' => 'Booking Room',
-		    'form' => $this->booking_place_model->getFormDefault()
+			'form' => $this->booking_place_model->getFormDefault(),
+			'filter' => $this->data['filter']
 		];
 		$old_data = null;
 		$bookRecords = [];
@@ -58,10 +67,11 @@ class Room extends AdminController
 			'hash' => $this->security->get_csrf_hash()
 		);
 		//$this->load->view('core/modals', $data);
-		$this->load->view('core/js', $data);
+		//$this->load->view('core/js', $data);
 		$this->load->view('core/modal2', $data);
 		$this->load->view('index', $data);
-		$this->load->view('core/js2', $data);
+		//$this->load->view('core/js2', $data);
+		//$this->load->view('core/init', $data);
 	}
 
 	function getLists($id=NULL)
@@ -116,6 +126,10 @@ class Room extends AdminController
 			"data" => $data,
 		);
 		echo json_encode($output);
+	}
+
+	function getAvailable() {
+
 	}
 
 }

@@ -1,30 +1,47 @@
-define(function() {
-debugger;
+define(['jquery',"core/log",'mod_Room/js2', 'mod_bootstrapbase/bootstrap','datatables'], function($, log, js2) {
+var Example = {
     //document.addEventListener("DOMContentLoaded", () => {
+    init: function() {
+        self= this;
         $("#query_bookingroom").submit(function(e) {
             e.preventDefault();
             console.log('submit!!');
             var seqNo = $(this).find('input[name="seq_no"]').val();
-            getBookingLists(seqNo);
+            self.getBookingLists(seqNo);
             return false;
         });
-    //});
 
-    function getBookingLists(seqNo) {
+        //const form = $('.modal-body').html();
+        $('#booking_table').on('click', '.edit', function() {
+            //initDaterange0();
+            //initDaterange1('<?=$form['start_date']?>', '<?=$form['end_date']?>');
+            catId = $(this).data('cat_id');
+            seqNo = $(this).data('seq_no');
+            //var tmp = $("#querybooking").modal("show");
+            var tmp = $("#available_room").modal("show");
+            //console.log(tmp);
+            //$('#show_data').load('<?= site_url('Room') ?>');
+            debugger;
+            js2.init();
+        });
+    },
+
+    getBookingLists: function(seqNo) {
         //console.log('getLists');
         //console.log('seqNo: ' + seqNo);
-        var csrfObj = {
-            "<?= $csrf['name']; ?>": "<?= $csrf['hash']; ?>"
-        };
+        var csrfObj = { };
+        //"<?= $csrf['name']; ?>": "<?= $csrf['hash']; ?>"
+        csrfObj[M.cfg.csrfname] = M.cfg.csrfhash;
         //var tmp = $('#booking_table');
         if (!$.fn.DataTable.isDataTable('#booking_table')) {
+            self = this;
             $('#booking_table').DataTable({
                 "processing": true,
                 "serverSide": true,
                 "order": [],
                 "ajax": {
                     "data": csrfObj,
-                    "url": "<?php echo site_url('Room/getLists'); ?>"+"/"+seqNo,
+                    "url": M.cfg.wwwroot + 'Room/getLists' + '/' + seqNo,
                     "type": "POST"
                 },
                 "columnDefs": [{
@@ -35,18 +52,21 @@ debugger;
                 'info': false,
                 'paging': false,
                 'searching': false,
+                "drawCallback": function( settings ) {
+                    self.init();
+                }
             });
             $('#booking_table').DataTable().columns([2]).visible(false);
         } else {
             $('#booking_table').DataTable().ajax.reload();
         }
-    }
+    },
 
-    function cb(start, end) {
+    cb: function (start, end) {
         $('input[name="daterange"] span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    }
+    },
 
-    function initDaterange() {
+    initDaterange: function () {
         var start = moment().subtract(29, 'days');
         var end = moment();
 
@@ -64,10 +84,10 @@ debugger;
         }, cb);
 
         cb(start, end);
-    }
+    },
 
     // 最簡單的 + 最常用功能
-    function initDaterange1(start, end) {
+    initDaterange1: function (start, end) {
         $('input[name="daterange"]').daterangepicker({
             timePicker: false,
             locale: {
@@ -83,10 +103,10 @@ debugger;
                 '下個月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
             }
         });
-    }
+    },
 
     // 最簡單的
-    function initDaterange0() {
+    initDaterange0: function () {
         $('input[name="daterange"]').daterangepicker({
             timePicker: false,
             locale: {
@@ -94,17 +114,7 @@ debugger;
             }
         });
     }
+}
 
-    //const form = $('.modal-body').html();
-    $('#booking_table').on('click', '.edit', function() {
-//debugger;
-        initDaterange0();
-        //initDaterange1('<?=$form['start_date']?>', '<?=$form['end_date']?>');
-        catId = $(this).data('cat_id');
-        seqNo = $(this).data('seq_no');
-        //var tmp = $("#querybooking").modal("show");
-        var tmp = $("#available_room").modal("show");
-        //console.log(tmp);
-        //$('#show_data').load('<?= site_url('Room') ?>');
-    });
+    return Example;
 });

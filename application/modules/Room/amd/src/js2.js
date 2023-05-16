@@ -1,6 +1,8 @@
-define(function() {
-debugger;
-    document.addEventListener("DOMContentLoaded", () => {
+define(['jquery',"core/log"], function($,log) {
+
+var Example = {
+    init: function () {
+        self= this;
         $("input[name='room_type']").change(function() {
             $.each($("input[name='room_type']"), function() {
                 this.setCustomValidity('');
@@ -10,9 +12,7 @@ debugger;
                 $("input[name='room_type']")[0].setCustomValidity('請至少選擇1種.');
             }
         });
-debugger;
         $("#query_available").submit(function(e) {
-debugger;
             e.preventDefault();
             console.log('submit!!');
             var checked = $("input[name='room_type']:checked").length;
@@ -23,21 +23,24 @@ debugger;
             }
             var seqNo = $(this).find('input[name="seq_no"]').val();
             // room_type=01&room=&start_date=2023-05-08&end_date=2023-05-15
-            getRoomSchedule('01', '2023-05-08', '2023-05-15');
+            self.getRoomSchedule('01', '2023-05-08', '2023-05-15');
             return false;
         });
-    });
+    },
 
-    function getRoomSchedule(roomType, startDate, endDate) {
-        //console.log('getLists');
-        //console.log('seqNo: ' + seqNo);
+    getRoomSchedule: function (roomType, startDate, endDate) {
+        console.log('getRoomSchedule');
+        console.log('startDate: ' + startDate);
+        console.log('endDate: ' + endDate);
+        self= this;
         // planning/classroom?sort=&room_type=01&room=&start_date=2023-05-08&end_date=2023-05-15
         var dataObj = {
-            "<?= $csrf['name']; ?>" : "<?= $csrf['hash']; ?>",
+            //"<?= $csrf['name']; ?>" : "<?= $csrf['hash']; ?>",
             'room_type' : roomType,
             'start_date' : startDate,
             'end_date' : endDate
         };
+        dataObj[M.cfg.csrfname] = M.cfg.csrfhash;
         if (!$.fn.DataTable.isDataTable('#available_table')) {
             $('#available_table').DataTable({
                 "processing": true,
@@ -45,7 +48,7 @@ debugger;
                 "order": [],
                 "ajax": {
                     "data": dataObj,
-                    "url": "<?php echo site_url('Room/getAvailable'); ?>",
+                    "url": M.cfg.wwwroot + 'Room/getAvailable' + '?room_type=01&start_date=2023-05-08&end_date=2023-05-15',
                     "type": "POST"
                 },
                 "columnDefs": [{
@@ -56,10 +59,16 @@ debugger;
                 'info': false,
                 'paging': false,
                 'searching': false,
+                "drawCallback": function( settings ) {
+                    self.init();
+                }
             });
             $('#available_table').DataTable().columns([2]).visible(false);
         } else {
             $('#available_table').DataTable().ajax.reload();
         }
     }
+}
+
+    return Example;
 });
