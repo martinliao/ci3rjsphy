@@ -321,7 +321,7 @@ class AdminController extends MI_Controller
         $requirejsconfig = str_replace('[JSMIN]', '', $requirejsconfig);
 
         $output .= html_writer::script($requirejsconfig);
-        $output .= html_writer::script('', base_url('lib/requirejs/require.js'));  // Ignore js_fix_url()
+        $output .= html_writer::script('', base_url('assets/libs/requirejs/require.js'));  // Ignore js_fix_url()
 
         // First include must be to a module with no dependencies, this prevents multiple requests.
         $prefix = "require(['core/first'], function() {\n";

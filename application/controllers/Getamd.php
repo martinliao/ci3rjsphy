@@ -43,6 +43,7 @@ debugBreak();
     }
 
     public function index($jsname = null) {
+debugBreak();
         return $this->get('-1', 'core', 'first');
     }
 
