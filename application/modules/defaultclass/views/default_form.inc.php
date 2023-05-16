@@ -119,25 +119,6 @@
         <input class="form-control" id="weights" name="weights" placeholder="" value="<?=set_value('weights', ($form['weights']>0)?$form['weights']:'1'); ?>">
         <?=form_error('weights'); ?>
     </div>
-
-    <div class="form-group col-xs-6">
-        <label class="control-label">同班不同期可重複受訓否</label>
-        <div>
-            <div class="radio-inline">
-                <label>
-                    <input id="isappsameclass" type="radio" value="1" style="zoom:1.5;" name="isappsameclass" <?=$form['isappsameclass']=='1'?'checked':''?> >
-                    <span>YES</span>
-                </label>
-            </div>
-            <div class="radio-inline">
-                <label>
-                    <input id="isappsameclass" type="radio" value="2" style="zoom:1.5;" name="isappsameclass" <?=(empty($form['isappsameclass']) || $form['isappsameclass']=='2')?'checked':''?>>
-                    <span>NO</span>
-                </label>
-            </div>
-        </div>
-    </div>
-
     <div class="form-group col-xs-6">
         <label class="control-label">選員方式</label>
         <?php
@@ -163,6 +144,24 @@
     </div>
 
     <div class="form-group col-xs-6">
+        <label class="control-label">同班不同期可重複受訓否</label>
+        <div>
+            <div class="radio-inline">
+                <label>
+                    <input id="isappsameclass" type="radio" value="1" style="zoom:1.5;" name="isappsameclass" <?=$form['isappsameclass']=='1'?'checked':''?> >
+                    <span>YES</span>
+                </label>
+            </div>
+            <div class="radio-inline">
+                <label>
+                    <input id="isappsameclass" type="radio" value="2" style="zoom:1.5;" name="isappsameclass" <?=(empty($form['isappsameclass']) || $form['isappsameclass']=='2')?'checked':''?>>
+                    <span>NO</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-xs-6">
         <label class="control-label">參訓限制條件權限下放</label>
         <div>
             <div class="radio-inline">
@@ -185,6 +184,12 @@
         <label class="control-label">辦班時段<font style="color: red">(最多200個中文字)</font></label>
         <textarea class="form-control" id="segmemo" name="segmemo" maxlength='200' cols='100' rows='2'><?=set_value('segmemo', $form['segmemo']); ?></textarea>
         <?=form_error('segmemo'); ?>
+    </div>
+
+    <div class="form-group col-xs-6">
+        <label class="control-label">課程內容(舊資料)(僅供參考)</label>
+        <textarea class="form-control" id="content" name="content" maxlength='400' cols='100' rows='4' ><?=set_value('content', $form['content']); ?></textarea>
+        <?=form_error('content'); ?>
     </div>
 
     <div class="form-group col-xs-6">
@@ -293,11 +298,6 @@
             </div>
         </div>
     </div>
-    <div class="form-group col-xs-6">
-        <label class="control-label">課程內容(舊資料)(僅供參考)</label>
-        <textarea class="form-control" id="content" name="content" maxlength='400' cols='100' rows='4' ><?=set_value('content', $form['content']); ?></textarea>
-        <?=form_error('content'); ?>
-    </div>
 
     <div class="form-group col-xs-6 required <?=form_error('is_assess')?'has-error':'';?>">
         <label class="control-label">考核班期</label>
@@ -405,9 +405,6 @@
             </div>
         </div>
         <?=form_error('fmap'); ?>
-    </div>
-
-    <div class="form-group col-xs-6">
     </div>
 
     <div class="form-group col-xs-6 required <?=form_error('env_class')?'has-error':'';?>">
