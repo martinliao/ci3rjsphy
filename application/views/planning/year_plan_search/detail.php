@@ -31,7 +31,7 @@
                                 <th class="text-center">預定開班時間</th>
                                 <th class="text-center">環教班期</th>
                                 <th class="text-center">政策行銷班期</th>
-                                <th class="text-center">府級策略地圖</th>
+                                <th class="text-center">重大政策</th>
                                 <th class="text-center">開放退休人員選課</th>
                                 <th class="text-center">無須支應講座鐘點費</th>
                                 <th class="text-center">上課地點非公訓處</th>
@@ -98,6 +98,15 @@
                                             if($row['map8'] == '1') {
 	                                            $map_list = 'H精實良善治理 ';
                                             }
+                                            if($row['map9'] == '1'){
+                                                $map_list[] = "樂活宜居(45項)";
+                                            }
+                                            if($row['map10'] == '1'){
+                                                $map_list[] = "友善共融(31項)";
+                                            }
+                                            if($row['map11'] == '1'){
+                                                $map_list[] = "創新活力(37項)";
+                                            }
                                         echo $map_list;
                                     ?>
                                 </td> 
@@ -162,7 +171,7 @@
                                 <th class="text-center">教室</th>
                                 <th class="text-center">環教班期</th>
                                 <th class="text-center">政策行銷班期</th>
-                                <th class="text-center">府級策略地圖</th>
+                                <th class="text-center">重大政策</th>
                                 <th class="text-center">開放退休人員選課</th>
                                 <th class="text-center">無須支應講座鐘點費</th>
                                 <th class="text-center">上課地點非公訓處</th>
@@ -220,6 +229,15 @@
                                             }
                                             if($row['map8'] == '1') {
 	                                            $map_list = 'H精實良善治理 ';
+                                            }
+                                            if($row['map9'] == '1'){
+                                                $map_list[] = "樂活宜居(45項)";
+                                            }
+                                            if($row['map10'] == '1'){
+                                                $map_list[] = "友善共融(31項)";
+                                            }
+                                            if($row['map11'] == '1'){
+                                                $map_list[] = "創新活力(37項)";
                                             }
                                         echo $map_list;
                                     ?>

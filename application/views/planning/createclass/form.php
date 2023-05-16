@@ -1,7 +1,8 @@
 <?php
     $user_bureau_status = $user_bureau!='379680000A'?'disabled':'';
 
-    if(!empty($form['map1']) || !empty($form['map2']) || !empty($form['map3']) || !empty($form['map4']) || !empty($form['map5']) || !empty($form['map6']) || !empty($form['map7']) || !empty($form['map8'])){
+    if(!empty($form['map1']) || !empty($form['map2']) || !empty($form['map3']) || !empty($form['map4']) || !empty($form['map5']) || !empty($form['map6']) || !empty($form['map7']) || !empty($form['map8'])
+    || !empty($form['map9']) || !empty($form['map10']) || !empty($form['map11'])){
         $fmap = 'Y';
     } else {
         $fmap = 'N';
@@ -728,8 +729,8 @@
                 </label>
             </div>
         </div>
-        <!--div>
-            <div class="checkbox-inline" style="margin-left: 0px">
+        <div>
+            <!--div class="checkbox-inline" style="margin-left: 0px">
                 <label>
                     <input id="map1" type="checkbox" value="1" name="map1" style="zoom:1.5;" onclick="chooseOne(this);" <?=$form['map1']=='1'?'checked':''?>>
                     <span>A營造永續環境</span>
@@ -776,8 +777,26 @@
                     <input id="map8" type="checkbox" value="1" name="map8" style="zoom:1.5;" onclick="chooseOne(this);" <?=$form['map8']=='1'?'checked':''?>>
                     <span>H精實良善治理</span>
                 </label>
+            </div-->
+            <div class="checkbox-inline" style="margin-left: 0px">
+                <label>
+                    <input id="map9" type="checkbox" value="1" name="map9" style="zoom:1.5;" onclick="chooseOne(this);" <?=$form['map9']=='1'?'checked':''?>>
+                    <span>樂活宜居(45項)</span>
+                </label>
             </div>
-        </div-->
+            <div class="checkbox-inline" style="margin-left: 0px">
+                <label>
+                    <input id="map10" type="checkbox" value="1" name="map10" style="zoom:1.5;" onclick="chooseOne(this);" <?=$form['map10']=='1'?'checked':''?>>
+                    <span>友善共融(31項)</span>
+                </label>
+            </div>
+            <div class="checkbox-inline" style="margin-left: 0px">
+                <label>
+                    <input id="map11" type="checkbox" value="1" name="map11" style="zoom:1.5;" onclick="chooseOne(this);" <?=$form['map11']=='1'?'checked':''?>>
+                    <span>創新活力(37項)</span>
+                </label>
+            </div>
+        </div>
         <?=form_error('fmap'); ?>
     </div>
 
@@ -953,6 +972,12 @@ function fmap_off(){
     jQuery("#map7").prop( "disabled", true);
     jQuery("#map8").prop( "checked", false);
     jQuery("#map8").prop( "disabled", true);
+    jQuery("#map9").prop( "checked", false);
+    jQuery("#map9").prop( "disabled", true);
+    jQuery("#map10").prop( "checked", false);
+    jQuery("#map10").prop( "disabled", true);
+    jQuery("#map11").prop( "checked", false);
+    jQuery("#map11").prop( "disabled", true);
 }
 
 function fmap_on(){
@@ -964,6 +989,9 @@ function fmap_on(){
     jQuery("#map6").prop( "disabled", false);
     jQuery("#map7").prop( "disabled", false);
     jQuery("#map8").prop( "disabled", false);
+    jQuery("#map9").prop( "disabled", false);
+    jQuery("#map10").prop( "disabled", false);
+    jQuery("#map11").prop( "disabled", false);
 }
 
 <?php if($page_name == 'edit') { ?>

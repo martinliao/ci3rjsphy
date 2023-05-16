@@ -708,7 +708,7 @@ class Createclass extends MY_Controller
             echo mb_convert_encoding("考核方式-其他,","BIG5","UTF-8");
             echo mb_convert_encoding("混成班期,","BIG5","UTF-8");
             echo mb_convert_encoding("對象,","BIG5","UTF-8");
-            echo mb_convert_encoding("府級策略地圖,","BIG5","UTF-8");
+            echo mb_convert_encoding("重大政策,","BIG5","UTF-8");
             echo mb_convert_encoding("環境教育班期,","BIG5","UTF-8");
             echo mb_convert_encoding("政策行銷班期,","BIG5","UTF-8");
             echo mb_convert_encoding("開放退休人員選課,","BIG5","UTF-8");
@@ -848,6 +848,12 @@ class Createclass extends MY_Controller
                     echo mb_convert_encoding('G精進健康安全',"BIG5","UTF-8") . ",";
                 } else if($data[$i]['map8'] == '1'){
                     echo mb_convert_encoding('H精實良善治理',"BIG5","UTF-8") . ",";
+                } else if($data[$i]['map9'] == '1'){
+                    echo mb_convert_encoding('樂活宜居(45項)',"BIG5","UTF-8") . ",";
+                } else if($data[$i]['map10'] == '1'){
+                    echo mb_convert_encoding('友善共融(31項)',"BIG5","UTF-8") . ",";
+                } else if($data[$i]['map11'] == '1'){
+                    echo mb_convert_encoding('創新活力(37項)',"BIG5","UTF-8") . ",";
                 } else {
                     echo mb_convert_encoding('否',"BIG5","UTF-8") . ",";
                 }

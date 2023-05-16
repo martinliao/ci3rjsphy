@@ -221,7 +221,7 @@ class Year_plan_search extends MY_Controller
             echo iconv("UTF-8", "BIG5", "教室,");
             echo iconv("UTF-8", "BIG5", "環教班期,");
             echo iconv("UTF-8", "BIG5", "政策行銷班期,");
-            echo iconv("UTF-8", "BIG5", "府級策略地圖策略主題,");
+            echo iconv("UTF-8", "BIG5", "重大政策,");
             echo iconv("UTF-8", "BIG5", "開放退休人員選課,");
             echo iconv("UTF-8", "BIG5", "上課地點非公訓處,");
             echo iconv("UTF-8", "BIG5", "無須支應講座鐘點費,");
@@ -267,28 +267,37 @@ class Year_plan_search extends MY_Controller
 
                 $map_list='';
                 if($info[$i]['map1'] == '1'){
-                      $map_list = 'A營造永續環境 ';
-                  } 
-                  if($info[$i]['map2'] == '1'){
-                      $map_list = 'B健全都市發展 ';
-                  }
-                  if($info[$i]['map3'] == '1') {
-                      $map_list = 'C發展多元文化 ';
-                  }
-                  if($info[$i]['map4'] == '1') {
-                      $map_list = 'D優化產業勞動 ';
-                  }
-                  if($info[$i]['map5'] == '1') {
-                      $map_list = 'E強化社會支持 ';
-                  }
-                  if($info[$i]['map6'] == '1') {
-                      $map_list = 'F打造優質教育 ';
-                  }
-                  if($info[$i]['map7'] == '1') {
-                      $map_list = 'G精進健康安全 ';
-                  }
-                  if($info[$i]['map8'] == '1') {
-                      $map_list = 'H精實良善治理 ';
+                    $map_list = 'A營造永續環境 ';
+                } 
+                if($info[$i]['map2'] == '1'){
+                    $map_list = 'B健全都市發展 ';
+                }
+                if($info[$i]['map3'] == '1') {
+                    $map_list = 'C發展多元文化 ';
+                }
+                if($info[$i]['map4'] == '1') {
+                    $map_list = 'D優化產業勞動 ';
+                }
+                if($info[$i]['map5'] == '1') {
+                    $map_list = 'E強化社會支持 ';
+                }
+                if($info[$i]['map6'] == '1') {
+                    $map_list = 'F打造優質教育 ';
+                }
+                if($info[$i]['map7'] == '1') {
+                    $map_list = 'G精進健康安全 ';
+                }
+                if($info[$i]['map8'] == '1') {
+                    $map_list = 'H精實良善治理 ';
+                }
+                if($info[$i]['map9'] == '1') {
+                    $map_list = '樂活宜居(45項) ';
+                }
+                if($info[$i]['map10'] == '1') {
+                    $map_list = '友善共融(31項) ';
+                }
+                if($info[$i]['map11'] == '1') {
+                    $map_list = '創新活力(37項) ';
                 }
                 echo "\"".iconv("UTF-8", "BIG5",$map_list."\",");
 
@@ -353,7 +362,7 @@ class Year_plan_search extends MY_Controller
             echo iconv("UTF-8", "BIG5", "預定開班時間,");
             echo iconv("UTF-8", "BIG5", "環教班期,");
             echo iconv("UTF-8", "BIG5", "政策行銷班期,");
-            echo iconv("UTF-8", "BIG5", "府級策略地圖策略主題,");
+            echo iconv("UTF-8", "BIG5", "重大政策,");
             echo iconv("UTF-8", "BIG5", "開放退休人員選課,");
 
             echo iconv("UTF-8", "BIG5", "無須支應講座鐘點費,");

@@ -41,7 +41,7 @@ $now = date('YmdHi');
 			<td   class='tdc1'  width="100" align="center" height="50"><font face="標楷體" size = "4">優&nbsp;先&nbsp;順&nbsp;序</font></td>
 			<td   class='tdc1'  width="570" align="center" height="50"><font face="標楷體" size = "4">班&nbsp;期&nbsp;名&nbsp;稱</font></td>
 			<td   class='tdc1' width="80" align="center" height="50"><font face="標楷體" size = "4">期&nbsp;數</font></td>
-			<td  class='tdc1' width="250" align="center" height="50"><font face="標楷體" size = "4">府級策略地圖<br>策略主題</font></td>
+			<td  class='tdc1' width="250" align="center" height="50"><font face="標楷體" size = "4">重大政策</font></td>
 		</tr>
 		<?php
         for($i=0;$i<count($info);$i++){
@@ -71,7 +71,17 @@ $now = date('YmdHi');
         	if($info[$i]['map8']) {
         		$str .= "H實現良善治理<br>";
         	}
-          
+			if($info[$i]['map9']) {
+        		$str .= "樂活宜居(45項)<br>";
+        	}
+			if($info[$i]['map10']) {
+        		$str .= "友善共融(31項)<br>";
+        	}
+			if($info[$i]['map11']) {
+        		$str .= "創新活力(37項)<br>";
+        	}
+
+			
           echo "<tr>";
           echo '<td class="tdc1" align="center" height="50"><font face="標楷體" size = "4">'.$info[$i]['sort'].'</font></td>';
           echo '<td class="tdc1" align="center" height="50"><font face="標楷體" size = "4">'.$info[$i]['class_name'].'</font></td>';

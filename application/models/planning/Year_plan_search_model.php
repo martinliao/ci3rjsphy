@@ -45,7 +45,7 @@ class Year_plan_search_model extends MY_Model
         
         $params = array(
             'select' => 'require.seq_no, require.year,require.respondant,require.env_class,require.policy_class,require.map1,require.map2,require.map3,require.map4,require.no_persons,require.contactor,count(require.term) as term,
-                         require.map5,require.map6,require.map7,require.map8,require.special_status,require.range,require.special_status_other,require.contactor,require.class_name,require.class_status,BS_user.name as BS_name,
+                         require.map5,require.map6,require.map7,require.map8,require.map9,require.map10,require.map11,require.special_status,require.range,require.special_status_other,require.contactor,require.class_name,require.class_status,BS_user.name as BS_name,
                          require.class_no,require.class_name,require.worker,require.start_date1,require.end_date1,require.class_status,require.weights,require.room_code,require.open_retirement,require.range,require.range_real,require.range_internet,bt.base_term as base_term,
                          series_category.name as series_name,sc.name as second_name,bureau.name as bureau_name,bureau.name as dev_type_name,not_hourfee,not_location',
             'order_by' => 'sc.name,require.class_no,require.term',

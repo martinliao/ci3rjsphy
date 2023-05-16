@@ -212,7 +212,9 @@ class Practice_order_table extends MY_Controller
             $data['info'][0]['map6']=null;
             $data['info'][0]['map7']=null;
             $data['info'][0]['map8']=null;
-
+            $data['info'][0]['map9']=null;
+            $data['info'][0]['map10']=null;
+            $data['info'][0]['map11']=null;
         }
         $this->load->view('planning/practice_order_table/export',$data);
     }

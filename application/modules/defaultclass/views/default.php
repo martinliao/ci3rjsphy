@@ -93,6 +93,12 @@ function fmap_off(){
     jQuery("#map7").prop( "disabled", true);
     jQuery("#map8").prop( "checked", false);
     jQuery("#map8").prop( "disabled", true);
+    jQuery("#map9").prop( "checked", false);
+    jQuery("#map9").prop( "disabled", true);
+    jQuery("#map10").prop( "checked", false);
+    jQuery("#map10").prop( "disabled", true);
+    jQuery("#map11").prop( "checked", false);
+    jQuery("#map11").prop( "disabled", true);
 }
 
 function fmap_on(){
@@ -104,6 +110,9 @@ function fmap_on(){
     jQuery("#map6").prop( "disabled", false);
     jQuery("#map7").prop( "disabled", false);
     jQuery("#map8").prop( "disabled", false);
+    jQuery("#map9").prop( "disabled", false);
+    jQuery("#map10").prop( "disabled", false);
+    jQuery("#map11").prop( "disabled", false);
 }
 
 <?php if($page_name == 'edit') { ?>

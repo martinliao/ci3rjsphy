@@ -327,7 +327,7 @@
 		?>
 
 		<tr>
-			<td class='tdr' rowspan="2"><font face="標楷體" size="2">府級策略地圖<br>策略主題班期</font></td>
+			<td class='tdr' rowspan="2"><font face="標楷體" size="2">重大政策</font></td>
 			<td class='tdl' colspan = '6'>
 			<?php
 				$mapStr = array();
@@ -354,6 +354,15 @@
 				}
 				if($form['map8'] == '1'){
 					$mapStr[] = "H精實良善治理";
+				}
+				if($form['map9'] == '1'){
+					$mapStr[] = "樂活宜居(45項)";
+				}
+				if($form['map10'] == '1'){
+					$mapStr[] = "友善共融(31項)";
+				}
+				if($form['map11'] == '1'){
+					$mapStr[] = "創新活力(37項)";
 				}
 				$mapStr = implode('、', $mapStr);
 			?>

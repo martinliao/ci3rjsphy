@@ -27,6 +27,7 @@ class Practice_order_table_model extends MY_Model
         
         $params = array(
             'select' => 'require.seq_no, require.year,require.respondant,require.term,require.no_persons,require.range_real,require.range_internet,require.map1,require.map2,require.map3,require.map4,require.map5,require.map6,require.map7,require.map8,
+                         require.map9,require.map10,require.map11,
                          require.range,require.contactor,require.content,require.tel,require.reason,require.is_assess,require.is_mixed,require.sort,
                          require.class_no,require.class_name,require.worker,require.start_date1,require.end_date1,require.class_status,require.weights,require.room_code,
                          series_category.name as series_name,bureau.name as bureau_name,BS_user.name as bs_name,second_category.name as second_name,count(1) as total_terms',
@@ -128,12 +129,9 @@ class Practice_order_table_model extends MY_Model
         $condition=[$query1[0]['bureau_id'],$query2[0]['bureau_id']];
 
 
-        $this->db->select('a.seq_no,a.year,a.class_no,a.class_name,count(*) as total_term,b.description as type_name,a.sort,b1.name as bureau_name,a.term,a.map1,a.map2,a.map3,a.map4,a.map5,a.map6,a.map7,a.map8');
+        $this->db->select('a.seq_no,a.year,a.class_no,a.class_name,count(*) as total_term,b.description as type_name,a.sort,b1.name as bureau_name,a.term,a.map1,a.map2,a.map3,a.map4,a.map5,a.map6,a.map7,a.map8,a.map9,a.map10,a.map11');
         $this->db->join('view_code_table as b','a.type=b.item_id and b.type_id="23"','left')
                  ->join('bureau as b1','a.dev_type = b1.bureau_id');
-
-        
-       
         
         if(isset($data['year'])){
             $this->db->where('a.year',$data['year']);

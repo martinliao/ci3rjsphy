@@ -1,5 +1,6 @@
 <?php
-    if(!empty($form['map1']) || !empty($form['map2']) || !empty($form['map3']) || !empty($form['map4']) || !empty($form['map5']) || !empty($form['map6']) || !empty($form['map7']) || !empty($form['map8'])){
+    if(!empty($form['map1']) || !empty($form['map2']) || !empty($form['map3']) || !empty($form['map4']) || !empty($form['map5']) || !empty($form['map6']) || !empty($form['map7']) || !empty($form['map8'])
+    || !empty($form['map9']) || !empty($form['map10']) || !empty($form['map11'])){
         $fmap = 'Y';
     } else {
         $fmap = 'N';
@@ -429,6 +430,26 @@
                 <label>
                     <input type="radio" value="N" name="fmap" style="zoom:1.5;" onclick="fmap_off();" <?=($fmap=='N')?'checked':''?>>
                     <span>否</span>
+                </label>
+            </div>
+        </div>
+        <div>
+            <div class="checkbox-inline" style="margin-left: 0px">
+                <label>
+                    <input id="map9" type="checkbox" value="1" name="map9" style="zoom:1.5;" onclick="chooseOne(this);" <?=$form['map9']=='1'?'checked':''?>>
+                    <span>樂活宜居(45項)</span>
+                </label>
+            </div>
+            <div class="checkbox-inline" style="margin-left: 0px">
+                <label>
+                    <input id="map10" type="checkbox" value="1" name="map10" style="zoom:1.5;" onclick="chooseOne(this);" <?=$form['map10']=='1'?'checked':''?>>
+                    <span>友善共融(31項)</span>
+                </label>
+            </div>
+            <div class="checkbox-inline" style="margin-left: 0px">
+                <label>
+                    <input id="map11" type="checkbox" value="1" name="map11" style="zoom:1.5;" onclick="chooseOne(this);" <?=$form['map11']=='1'?'checked':''?>>
+                    <span>創新活力(37項)</span>
                 </label>
             </div>
         </div>

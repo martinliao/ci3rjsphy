@@ -20,7 +20,7 @@ class MI_Form_validation extends CI_Form_validation
         $this->set_message('valid_date', '%s 日期格式错误');
         $this->set_message('valid_datetime', '%s 日期时间格式错误');
         $this->set_message('valid_gather_zero', '%s 請設定是否為考核班期');
-        $this->set_message('valid_famp', '府級策略地圖最少設定一個');
+        $this->set_message('valid_famp', '重大政策最少設定一個');
         $this->set_message('validate_bank', '帳號請填入數字，不可有[-]等其他字元');
         $this->set_message('validate_zipcode', '郵遞區碼請輸入3、5或6碼');
         //$this->set_message('valid_exist','此場地代碼已經被刪除');

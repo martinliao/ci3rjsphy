@@ -96,6 +96,9 @@ class Createclass_model extends MY_Model
                         'map6' => '',
                         'map7' => '',
                         'map8' => '',
+                        'map9' => '',
+                        'map10' => '',
+                        'map11' => '',
                         'env_class' => '',
                         'policy_class' => '',
                         'open_retirement' => '',
@@ -245,6 +248,9 @@ class Createclass_model extends MY_Model
         $this->db->set('map6',0);
         $this->db->set('map7',0);
         $this->db->set('map8',0);
+        $this->db->set('map9',0);
+        $this->db->set('map10',0);
+        $this->db->set('map11',0);
 
         //2021-06-25 修正特殊情況無法取消勾選問題
         $this->db->set('not_hourfee',null);
