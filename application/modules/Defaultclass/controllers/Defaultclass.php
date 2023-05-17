@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+/**
+ * 表單預設值
+ */
 class Defaultclass extends AdminController
 {
     public function __construct()
@@ -9,7 +12,7 @@ class Defaultclass extends AdminController
         $this->load->model('planning/createclass_model');
         $this->load->model('data/second_category_model');
         $this->load->model('planning/setclass_model');
-        $this->load->model('planning/booking_place_model'); //mark 2021-06-03 更新沒有選擇教室的課程
+        $this->load->model('planning/booking_place_model');
 
         $this->load->model('defaultclass_model');
     }
@@ -19,11 +22,7 @@ class Defaultclass extends AdminController
         $this->data['page_name'] = 'edit';
         $this->data['user_bureau'] = $this->flags->user['bureau_id'];
 
-        // $id = 27937
         //$default_values  = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
-        //var_dump(json_encode($default_valus));
-        //var_dump($default_values['ht_class_type']);
-
         // Save to DB
         //$tmp = json_encode($default_values);
         //$this->defaultclass_model->setDefault($tmp);
