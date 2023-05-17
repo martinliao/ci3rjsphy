@@ -573,9 +573,7 @@ class Createclass extends MY_Controller
     }
 
     public function printApplication($id=null){
-        //$this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
-        $default_values = (array)$this->defaultclass_model->getDefault();
-        $this->data['form'] = $default_values;
+        $this->data['form'] = $this->createclass_model->getFormDefault($this->createclass_model->get($id));
         $this->data['form']['segmemo'] = $this->createclass_model->getSegmemo($this->data['form']['year'],$this->data['form']['class_no']);
 
         if(isset($this->data['form']['dev_type']) && !empty($this->data['form']['dev_type'])){
