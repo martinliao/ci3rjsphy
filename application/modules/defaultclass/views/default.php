@@ -385,10 +385,10 @@ function explodeStr() {
 
 function checkSave(){
     if(document.getElementById('is_mixed').value == '1'){
-        if($('#online_course table tbody tr').size() == 0){
+        /*if($('#online_course table tbody tr').size() == 0){
             alert('線上課程至少1門');
             return false;
-        }
+        }*/
     }
 
     var obj = document.getElementById('data-form');

@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * 表單預設值
  */
-class Defaultclass extends AdminController
+class Defaultclass extends MY_Controller //AdminController
 {
     public function __construct()
     {
@@ -75,7 +75,7 @@ class Defaultclass extends AdminController
         $this->data['choices']['class_cate2'] = $this->createclass_model->getStudyWayThree();
         $this->data['choices']['isappsameclass'] = array('1' => 'YES', '2' => 'NO');
         $this->data['choices']['app_type'] = $this->createclass_model->getElectionWay();
-        $this->data['choices']['class_status'] = array('1' => '草案', '2' => '確定計畫', '3' => '新增計畫');
+        $this->data['choices']['class_status'] = array('0' => '', '1' => '草案', '2' => '確定計畫', '3' => '新增計畫');
         $this->data['choices']['reason'] = array('' => '自動偵測', '1' => '1', '2' => '2', '3' => '3', '4' => '4');
         $this->data['choices']['is_start'] = array('Y' => 'YES', 'N' => 'NO');
         $this->data['choices']['is_assess'] = array('1' => '是', '0' => '否');
@@ -163,7 +163,8 @@ class Defaultclass extends AdminController
         //$this->layout->setLayout('adminlte/main');
         //$this->layout->setLayout('common2/main');
         //$this->layout->view('edit', $this->data);
-        $this->render_page('default', $this->data);
+        //$this->render_page('default', $this->data);
+        $this->layout->view('defaultclass/default', $this->data);
     }
 
     private function _isVerify($action = 'add', $user_bureau, $fmap_check)

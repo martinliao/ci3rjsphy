@@ -130,16 +130,6 @@ class Defaultclass_model extends MY_Model
                 'label' => '鐘點費類別',
                 'rules' => 'trim|required',
             ),
-            'no_persons' => array(
-                'field' => 'no_persons',
-                'label' => '本期人數',
-                'rules' => 'trim|required',
-            ),
-            'range' => array(
-                'field' => 'range',
-                'label' => '訓練期程(小時)',
-                'rules' => 'trim|required',
-            ),
             'weights' => array(
                 'field' => 'weights',
                 'label' => '權重',
