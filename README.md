@@ -80,3 +80,21 @@ $("#myModal").on("show", function () {
 ```
 
 https://stackoverflow.com/questions/9538868/prevent-body-from-scrolling-when-a-modal-is-opened
+
+
+### Scroll bar only for modal-body
+
+How to put scroll bar only for modal-body?
+
+````
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 80vh;
+    overflow-y: auto;
+}
+```
+
+ref: https://stackoverflow.com/questions/25874001/how-to-put-scroll-bar-only-for-modal-body
