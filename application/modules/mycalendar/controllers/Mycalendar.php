@@ -9,7 +9,7 @@ class Mycalendar extends MY_Controller
             'name' => $this->security->get_csrf_token_name(),
             'hash' => $this->security->get_csrf_hash()
         );
-        $this->layout->setLayout('common_cal/layout_main');
+        $this->layout->setLayout('common_calendar/layout_main');
         $this->layout->view('calendar', $data);
     }
 }
