@@ -5,6 +5,7 @@ $route['default_controller'] = 'dcsdindex';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['Getamd/(:any)'] = "Getamd/css/$1";
 $route['Getamd/(:any)/(:any)'] = "Getamd/mod/$1/$2";
 $route['Getamd/(:any)/(:any)/(:any)'] = "Getamd/get/$1/$2/$3";
 $route['Javascript/lib/(:any)/(:any)'] = "Javascript/lib/$1/$2";

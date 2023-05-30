@@ -52,15 +52,15 @@ class MI_Controller extends MX_Controller
 
         // Load global css here.
 
-		$this->load_css(array(
+		/*$this->load_css(array(
 			'css/normalize.css',
 			'css/global.css'
-		));
+		));*/
 
 		// Load global js here.
-		$this->load_js(array(
+		/*$this->load_js(array(
 			'js/libs/modernizr.js'
-		));
+		));/** */
 
         // Copyright year calculation for the footer
         $begin = 2019;

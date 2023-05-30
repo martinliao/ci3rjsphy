@@ -28,7 +28,7 @@ class Getamd extends JavascriptController
         //$CFG->yui3version = '3.17.2';
         $CFG->dirroot = rtrim(APPPATH, '/'); // for Moodle
         $CFG->libdir = FCPATH . '/lib';
-        $CFG->cachedir = APPPATH . 'cache'; 
+        $CFG->cachedir = APPPATH . 'cache';
         // To inherit directly the attributes of the parent class.
         parent::__construct();
         $this->load->helper('configonlylib');
@@ -36,16 +36,25 @@ class Getamd extends JavascriptController
         $this->load->library(['core/minify']);
         //$path = $this->CI->config->item('cache_path');
         $path = '';
-        $CFG->localcachedir = ($path === '') ? APPPATH.'cache' : $path;
+        $CFG->localcachedir = ($path === '') ? APPPATH . 'cache' : $path;
         $CFG->directorypermissions = 02777;
         $CFG->filepermissions      = ($CFG->directorypermissions & 0666);
     }
 
-    public function index($jsname = null) {
+    // public function __get($method)
+    // {
+    //     debugBreak();
+    //     global $CFG;
+    //     $_get = $this->input->get();
+    // }
+
+    public function index($jsname = null)
+    {
         return $this->get('-1', 'core', 'first');
     }
 
-    public function core($jsname = null) {
+    public function core($jsname = null)
+    {
         return $this->get('-1', 'core', 'first');
     }
 
@@ -54,7 +63,12 @@ class Getamd extends JavascriptController
         return $this->get('-1', $path, $scriptfile);
     }
 
-    public function get($id=-1, $path, $scriptfile)
+    // public function css($path, $scriptfile)
+    // {
+    //     return $this->get('-1', $path, $scriptfile);
+    // }
+
+    public function get($id = -1, $path, $scriptfile)
     {
         global $CFG;
         /*$slashargument = min_get_slash_argument();
@@ -63,8 +77,8 @@ class Getamd extends JavascriptController
             die('Invalid request');
         }/** */
         $uri = current_url(true);
-//debugBreak();
-        $slashargument= $id.'/'.$path.'/'.$scriptfile;
+        //debugBreak();
+        $slashargument = $id . '/' . $path . '/' . $scriptfile;
         $slashargument = ltrim($slashargument, '/');
         if (substr_count($slashargument, '/') < 1) {
             header('HTTP/1.0 404 not found');
@@ -100,7 +114,7 @@ class Getamd extends JavascriptController
         // Use the caching only for meaningful revision numbers which prevents future cache poisoning.
         if ($rev > 0 and $rev < (time() + 60 * 60)) {
             $candidate = $CFG->localcachedir . '/requirejs/' . $etag;
-//debugBreak();
+            //debugBreak();
             if (file_exists($candidate)) {
                 if (!empty($_SERVER['HTTP_IF_NONE_MATCH']) || !empty($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
                     // We do not actually need to verify the etag value because our files
@@ -218,7 +232,7 @@ class Getamd extends JavascriptController
 
     function combo_params()
     {
-debugBreak();
+        //debugBreak();
         if (isset($_SERVER['QUERY_STRING']) and strpos($_SERVER['QUERY_STRING'], 'file=/') === 0) {
             // url rewriting
             $slashargument = substr($_SERVER['QUERY_STRING'], 6);

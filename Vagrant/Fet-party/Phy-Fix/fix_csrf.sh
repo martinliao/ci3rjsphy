@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sed -i "s/\(.*config\['csrf_protection'\][ ]\).*/\1= FALSE;/g" $DOCROOT/application/config/config.php
+#sed -i "s/\(.*config\['csrf_protection'\][ ]\).*/\1= FALSE;/g" $DOCROOT/application/config/config.php
 
 ## Fix Welcome.php, 略過 ReCaptcha 的檢查.
 <<comment

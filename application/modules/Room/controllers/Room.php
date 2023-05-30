@@ -14,122 +14,138 @@ class Room extends AdminController
 		$this->load->model('planning/booking_place_model');
 		$this->load->model('planning/createclass_model');
 		$this->load->model('data/reservation_time_model');
-		
+
 		$this->choices['time_list'] = $this->reservation_time_model->getChoices();
 		$this->load->model('room_model', 'model');
 
 		if (empty($this->data['filter']['start_date'])) {
-            $this->data['filter']['start_date'] = date('Y-m-d', time() - (86400 * 7));
-        }
-
-        if (empty($this->data['filter']['end_date'])) {
-            $this->data['filter']['end_date'] = date('Y-m-d', time() );
-        }
-	}
-
-	public function add($seqNo=null)
-	{
-		$id= $seqNo; //27973;
-		$data = [
-			'title' => 'Booking Room',
-			'form' => $this->booking_place_model->getFormDefault(),
-			'filter' => $this->data['filter']
-		];
-		$old_data = null;
-		$bookRecords = [];
-		if(!empty($id)){
-            $conditions = array(
-                'seq_no' => $id,
-            );
-            $old_data = $this->createclass_model->get($conditions); // select * from require where seq_no = $id
-            $data['form'] = array(
-                'year' => $old_data['year'],
-                'class_no' => $old_data['class_no'],
-                'term' => $old_data['term'],
-                'class_name' => $old_data['class_name'],
-                'start_date' => $old_data['start_date1'],
-                'end_date' => $old_data['end_date1'],
-                'seq_no' => $old_data['seq_no'],
-				'range' => $old_data['range'],
-				'no_persons' => $old_data['no_persons']
-            );
-            //$bookRecords = $this->booking_place_model->getBooking($id);
-        } else {
-			$data['form']['no_persons'] = 0; // 本期人數
-			$data['form']['range'] = 0; // 訓練期程(小時)
+			$this->data['filter']['start_date'] = date('Y-m-d', time() - (86400 * 7));
 		}
-		//$data['booking'] = $bookRecords;
-		$data['choices'] = $this->choices;
-		
-		$this->load->view('_layout/general/head', $data);
-		$data['csrf'] = array(
-			'name' => $this->security->get_csrf_token_name(),
-			'hash' => $this->security->get_csrf_hash()
-		);
-		//$this->load->view('core/modals', $data);
-		//$this->load->view('core/js', $data);
-		$this->load->view('core/modal2', $data);
-		$this->load->view('index', $data);
-		//$this->load->view('core/js2', $data);
-		//$this->load->view('core/init', $data);
+
+		if (empty($this->data['filter']['end_date'])) {
+			$this->data['filter']['end_date'] = date('Y-m-d', time());
+		}
 	}
 
-	function getLists($id=NULL)
+	function getAvailableRoom()
 	{
-		$data = array();
-		$this->data['form'] = $this->booking_place_model->getFormDefault();
-		$old_data = null;
-		$bookRecords = [];
-		if(!empty($id)){
-            $conditions = array(
-                'seq_no' => $id,
-            );
-            $old_data = $this->createclass_model->get($conditions);
-            $this->data['form'] = array(
-                'year' => $old_data['year'],
-                'class_no' => $old_data['class_no'],
-                'term' => $old_data['term'],
-                'class_name' => $old_data['class_name'],
-                'start_date' => $old_data['start_date1'],
-                'end_date' => $old_data['end_date1'],
-                'seq_no' => $old_data['seq_no'],
-            );
-            $bookRecords = $this->booking_place_model->getBooking($id);
-        }
-		//$this->data['booking'] = $data = $this->booking_place_model->getBooking($id);
+		$_post = $this->input->post();
+		$startDate = $_post['start_date'];
+		$endDate = $_post['end_date'];
+		$conditions = array(
+			"room_time" => addslashes($_post['room_time']),
+			"room_type" => addslashes($_post['room_type']),
+			"start_date" => addslashes($_post['start_date']),
+			"end_date" => addslashes($_post['end_date']),
+		);
+		// 取得起迄日
+		$begin = new DateTime($startDate);
+		$end = new DateTime($endDate);
+		$end = $end->modify('+1 day');
+		$interval = DateInterval::createFromDateString('1 day');
+		$period = new DatePeriod($begin, $interval, $end);
+
+		$availableRecords= $this->booking_place_model->getPlace($conditions);
 		$i = 0;
-		if (sizeof($bookRecords) > 0) {
-			$i = $_POST['start'];
-			foreach ($bookRecords as $rec) {
+		$data = array();
+		$dateRange = 10;
+		if (sizeof($availableRecords) > 0) {
+			foreach ($availableRecords as $rec) {
 				$d = (object)$rec;
 				$i++;
-				$btn_edit = '<button type="button" class="btn btn-warning btn-xs edit" data-cat_id="' . $d->cat_id .'" data-class_no="' . $d->class_no . '" data-seq_no="' . $d->seq_no . '"><i class="fas fa-fw fa-pen"></i> 修改</button>';
-				$btn_hapus = '<button type="button" class="btn btn-danger btn-xs hapus"  data-cat_id="' . $d->cat_id . '"> 刪除</button>';
-				
-				$_period = $this->choices['time_list'][$d->booking_period];
-				$roomType = $this->choices['room_type'][$d->cat_id];
-
-				$data[] = array($i, $d->cat_id, $d->seq_no, $d->start_date, $d->end_date, $d->room_name, $_period, $btn_edit . ' ' . $btn_hapus);
-				//$data[] = array($i, $d->start_date, $d->end_date, $d->room_name, $btn_edit . ' ' . $btn_hapus);
+				$_dataTag = $this->getDataTag([
+					'data-room_id' => $d->room_id,
+					'data-room_sname' => $d->room_sname,
+					'data-room_cap' => $d->room_cap
+				]);
+				$btn_book = '<button type="button" class="btn btn-warning btn-xs edit" ' .  $_dataTag . '><i class="fas fa-fw fa-pen"></i> 訂!!</button>';
+				//$data[] = array($i, $d->room_id, $d->room_name, $d->room_sname, $d->room_cap, $btn_book);
+				$_dateChecks = [];
+				foreach ($period as $dt) {
+					$_date = $dt->format("Y-m-d");
+					$_dateChecks[] = "<label><input type='checkbox' data-room_id='{$d->room_id}' data-bookingdate='{$_date}'></label>";
+				}
+				$data[] = array_merge(array($i, $d->room_id, $d->room_sname, $d->room_cap), $_dateChecks, array($btn_book));
 			}
 		}
-		/*$i++;
-		$btn_add = '<button type="button" class="btn btn-warning btn-xs edit" data-role="' . $d->name . '" data-id_role="' . $d->id . '"><i class="fas fa-fw fa-pen"></i> 預約</button>';
-		$data[] = array($i++, '2', $old_data['seq_no'], $old_data['start_date1'], $old_data['end_date1'], '', '', $btn_add);
-		$data[] = array($i++, '3', $old_data['seq_no'], $old_data['start_date1'], $old_data['end_date1'], '', '', $btn_add);
-		$data[] = array($i++, '4', $old_data['seq_no'], $old_data['start_date1'], $old_data['end_date1'], '', '', $btn_add);/** */
-
 		$output = array(
-			//"draw" => $_POST['draw'],
-			//"recordsTotal" => $this->model->countAll(),
-			//"recordsFiltered" => $this->model->countFiltered($_POST),
 			"data" => $data,
 		);
 		echo json_encode($output);
 	}
 
-	function getAvailable() {
+	/**
+	 * 訂教室
+	 * checked: true is booking; false is remove booking.
+	 * Parameter: bookingdate, seq_no, room_id, room_time
+	 * Return: json
+	 */
+	public function bookingRoom()
+	{
+		$result = null;
+		$success = true;
+		$message = '';
+		$_post = $this->input->post();
+		$doBooking = $_post['checked'];
+		//$startDate = $_post['start_date'];
+		//$endDate = $_post['end_date'];
+		$startDate = $endDate = $_post['bookingdate'];
+		$_seqNo = $_post['seq_no'];
+		// 因為是checkbox, 所以不會有這個情況.
+		// if(strtotime($startDate)>strtotime($endDate)){
+		// 	echo json_encode(array('success' => false, 'message' => '起日不能大於迄日')); exit;
+		// }
+		$conditions = array(
+			'room_id' => $_post['room_id'],
+			'booking_period' => $_post['root_time'],
+			'booking_date >=' => $startDate,
+			'booking_date <=' => $endDate,
+		);
+		$used_room = $this->booking_place_model->get($conditions);
+		//room_useu也檢查
+		if($used_room){
+			echo json_encode(array('success' => false, 'message' => '該時段中已有使用,請重新選取')); exit;
+		}
+		$_class = $this->createclass_model->get(array('seq_no' => $_seqNo));
+		if($_class){
+			$_days = ((strtotime($startDate)-strtotime($endDate)) / 86400) + 1;
+			$_limit_days = ceil((intval($_class['range'])/6))+1;
+			//if(!in_array('9', $this->flags->user['group_id']) && $_days > $_limit_days){
+			if($_days > $_limit_days){
+				echo json_encode(array('success' => false, 'message' => '超過可預約天數<br/>可預約教室天數＝研習時數÷6(無條件進位)＋1天')); exit;
+			}
+			$field = array();
+			$field['cre_date'] = date('Y-m-d H:i:s');
+			$field['cre_user'] = 'jack'; //$this->flags->user['id'];
+			$field['upd_date'] = date('Y-m-d H:i:s');
+			$field['upd_user'] = 'jack'; //$this->flags->user['id'];
+			$field['year'] = $_class['year'];
+			$field['class_no'] = $_class['class_no'];
+			$field['term'] = $_class['term'];
+			$field['booking_period'] = $_post['room_time'];
+			$field['cat_id'] = '01'; //$_post['room_type']; 
+			$field['room_id'] = $_post['room_id'];
+			$field['seq_no'] = $_seqNo;
+			$booking_date = date("Y-m-d", strtotime( "+0 day", strtotime($startDate)));
+			$field['booking_date'] = $booking_date;
+			$tmp = $this->booking_place_model->_insert($field);
+			$message = "{$tmp}";
 
+			/* // 更新 createclass_model
+			$date_interval = $this->booking_place_model->get_date_interval($_seqNo);
+			if($date_interval){
+				$update_data['start_date1'] = $date_interval['start_date'];
+				$update_data['end_date1'] = $date_interval['end_date'];
+			}else{
+				$update_data['start_date1'] = $startDate;
+				$update_data['end_date1'] = $endDate;
+			}
+			$update_data['room_code'] = $field['room_id'];
+			$update_data['room_remark'] = 'Change by ajax.';
+			$update_data['reason'] = ceil(date('n', strtotime($startDate))/3);
+			$this->createclass_model->update($_seqNo, $update_data);/** */
+		}
+		echo json_encode(array('success' => $success, 'message' => $message));
 	}
 
 }

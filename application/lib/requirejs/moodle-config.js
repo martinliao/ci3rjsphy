@@ -1,3 +1,4 @@
+var cdnBase = 'https://cdn.datatables.net';
 var require = {
     baseUrl : '[BASEURL]',
     // We only support AMD modules with an explicit define() statement.
@@ -6,12 +7,19 @@ var require = {
     waitSeconds : 0,
 
     paths: {
-        jquery: '[JSURL]lib/jquery/jquery-3.5.1[JSMIN][JSEXT]',
+        jquery: '[JSURL]lib/jquery/jquery-3.6.0[JSMIN][JSEXT]',
         jqueryui: '[JSURL]lib/jquery/ui-1.12.1/jquery-ui[JSMIN][JSEXT]',
-        datatables: '[JSURL]lib/jquery/datatables/jquery.dataTables[JSMIN][JSEXT]',
+
+        'datatables.net': cdnBase + '/1.13.4/js/jquery.dataTables.min',
+        bootstrapdataTablescss: '[JSURL]lib/DataTables/dataTables.bootstrap',
+        jquerydataTables: '[JSURL]lib/DataTables/jquery.dataTables[JSMIN][JSEXT]',
+        datatables: '[JSURL]lib/DataTables/dataTables.bootstrap[JSMIN][JSEXT]',
+
         moment: '[JSURL]lib/moment/moment[JSMIN][JSEXT]',
         daterangepicker: '[JSURL]lib/jquery/daterangepicker/daterangepicker[JSMIN][JSEXT]',
         'daterangepicker-css': '[JSURL]lib/jquery/daterangepicker/daterangepicker',
+        fullcalendar: '[JSURL]lib/jquery/fullcalendar/fullcalendar[JSMIN][JSEXT]',
+        fullcalendarcss: '[JSURL]lib/jquery/fullcalendar/fullcalendar',
         jqueryprivate: '[JSURL]lib/requirejs/jquery-private[JSEXT]'
     },
 
@@ -32,6 +40,11 @@ var require = {
       jqueryprivate: { jquery: 'jquery' }
     },
     shim: {
+        'jquerydataTables': {deps: ['jquery']},
+        'datatables' : {deps: ['jquery', 'jquerydataTables', 'css!bootstrapdataTablescss' ]},
         'daterangepicker' : {deps: ['jquery', 'css!daterangepicker-css']},
+        'fullcalendar' : {
+            deps: ['jquery', 'jqueryui'] //, 'css!fullcalendarcss'
+        }
     }
 };

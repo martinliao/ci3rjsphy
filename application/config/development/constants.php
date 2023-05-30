@@ -12,9 +12,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | 
 | 但是為了相容性, 所以目前還是保留, Updated, Apr2023, martin.
 */ 
-$scheme = $_SERVER['REQUEST_SCHEME'] . '://';
-$dirx= explode("/", $_SERVER['PHP_SELF']);
-$httpRoot= $scheme . $_SERVER['HTTP_HOST'] . '/' . $dirx[1] . '/';
+$httpRoot  = "http://".$_SERVER['HTTP_HOST'];
+$httpRoot .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+$httpRoot = $httpRoot;
 
 defined('HTTP_ROOT')           OR define('HTTP_ROOT', $httpRoot);
 defined('HTTP_STATIC')         OR define('HTTP_STATIC', HTTP_ROOT . 'static/');

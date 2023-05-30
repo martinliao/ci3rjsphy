@@ -19,7 +19,7 @@ class AdminController extends MI_Controller
      */
     protected $data = array();
 
-    protected $theme = 'common2/admin'; //'reactadmin/admin'; // 'common2/admin2';
+    protected $theme = 'common3/admin'; // 'common2/admin' , 'reactadmin/admin' , 'common2/admin2';
 
     protected $role_id;
 
@@ -81,6 +81,8 @@ class AdminController extends MI_Controller
         // 目前位置
         $this->setMenu($user, $_session['member_userid']);
         $this->setMenuLocation();
+
+        $this->getFilter();
 
         // 年度查詢
         $current_year = date('Y') - 1909;
@@ -402,5 +404,39 @@ class AdminController extends MI_Controller
         // ToDo: core-block
         //$this->yui_module('moodle-core-blocks', 'M.core_blocks.init_dragdrop', [], null, true);
     }
+
+    function getFilter() {
+        $this->data['filter'] = array(
+            // 'q' => '',
+            // 'page' => 1,
+            // 'sort' => NULL,
+        );
+        if ($this->input->get()) {
+            $this->data['filter'] = $this->input->get();
+            foreach($this->data['filter'] as $filter_key => $filter_row){
+                if (is_array($filter_row)){
+                    foreach($this->data['filter'][$filter_key] as $filter_array_key => $filter_array_row){
+                        $this->data['filter'][$filter_key][$filter_array_key] = htmlentities($this->security->xss_clean($filter_array_row));
+                    }
+                }else{
+                    $this->data['filter'][$filter_key] = htmlentities($this->security->xss_clean($filter_row));
+                }
+            }
+        }
+    }
+
+    function getDataTag($array) {
+		return str_replace("=", '="', http_build_query($array, null, '" ', PHP_QUERY_RFC3986)).'"';
+		/*$btn_book = <<<EOL
+			<button type="button" class="btn btn-warning btn-xs edit"
+				data-room_id="' . $d->room_id . '"
+				data-room_sname="' . $d->room_sname . '"
+				data-room_cap="' . $d->room_cap . '"
+			>
+				<i class="fas fa-fw fa-pen"></i> 訂!!
+			</button>
+EOL;/** */
+	}
+
 
 }

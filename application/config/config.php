@@ -329,7 +329,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/userguide3/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'b{{h#/Ib;pd<%+H0?ujvv9KLRc0LR-o8ot"K*so.J&}4\qCQ+Ij81ih\d48fx5_';
 
 /*
 |--------------------------------------------------------------------------
@@ -394,6 +394,13 @@ $config['sess_save_path'] = sys_get_temp_dir();
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
+// CI 3.1.13
+$config['sess_expire_on_close'] = TRUE;
+$config['sess_encrypt_cookie']  = TRUE;
+#$config['sess_use_database']    = TRUE;
+#$config['sess_table_name']      = 'user_sessions';
+$config['sess_match_ip']        = TRUE;
+$config['sess_match_useragent'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -415,7 +422,7 @@ $config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= FALSE;
+$config['cookie_httponly'] 	= TRUE;
 $config['cookie_samesite'] 	= 'Lax';
 
 /*
