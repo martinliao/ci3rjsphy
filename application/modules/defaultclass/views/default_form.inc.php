@@ -75,6 +75,24 @@ if (
         </div>
     </div>
 
+    <div class="form-group col-xs-6 required <?=form_error('no_persons')?'has-error':'';?>">
+        <label class="control-label">本期人數</label>
+        <input class="form-control" id="no_persons" name="no_persons" placeholder="" value="<?=set_value('no_persons', $form['no_persons']); ?>">
+        <?=form_error('no_persons'); ?>
+    </div>
+
+    <div class="form-group col-xs-6 <?=form_error('min_no_persons')?'has-error':'';?>">
+        <label class="control-label">人數下限</label>
+        <input class="form-control" id="min_no_persons" name="min_no_persons" placeholder="" value="<?=set_value('min_no_persons', $form['min_no_persons']); ?>">
+        <?=form_error('min_no_persons'); ?>
+    </div>
+
+    <div class="form-group col-xs-6 <?=form_error('max_no_persons')?'has-error':'';?>">
+        <label class="control-label">人數上限</label>
+        <input class="form-control" id="max_no_persons" name="max_no_persons" placeholder="" value="<?=set_value('max_no_persons', $form['max_no_persons']); ?>">
+        <?=form_error('max_no_persons'); ?>
+    </div>
+
     <div class="form-group col-xs-5">
         <label class="control-label">班期屬性</label>
         <?php
