@@ -4,7 +4,7 @@
 			<div class="panel-heading">
 				<?=$_LOCATION['function']['name'] ;?>
 				<!-- test button -->
-				<button type="button" class="btn btn-success btn-sm" id="tambah" data-seq_no=<?= $form['seq_no']?> >
+				<button type="button" class="btn btn-success btn-sm" id="tambah0" data-seq_no=<?= $form['seq_no']?> >
 					預約教室Test鈕
 				</button>
 			</div>

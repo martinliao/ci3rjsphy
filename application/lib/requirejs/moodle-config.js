@@ -8,7 +8,8 @@ var require = {
 
     paths: {
         jquery: '[JSURL]lib/jquery/jquery-3.6.0[JSMIN][JSEXT]',
-        jqueryui: '[JSURL]lib/jquery/ui-1.12.1/jquery-ui[JSMIN][JSEXT]',
+        jqueryui: '[JSURL]lib/jquery/ui-1.13.2/jquery-ui[JSMIN][JSEXT]',
+        jqueryuicss: '[JSURL]lib/jquery/ui-1.13.2/jquery-ui',
 
         'datatables.net': cdnBase + '/1.13.4/js/jquery.dataTables.min',
         bootstrapdataTablescss: '[JSURL]lib/DataTables/dataTables.bootstrap',
@@ -40,6 +41,7 @@ var require = {
       jqueryprivate: { jquery: 'jquery' }
     },
     shim: {
+        jqueryui: { deps: ['jquery', 'css!jqueryuicss']},
         'jquerydataTables': {deps: ['jquery']},
         'datatables' : {deps: ['jquery', 'jquerydataTables', 'css!bootstrapdataTablescss' ]},
         'daterangepicker' : {deps: ['jquery', 'css!daterangepicker-css']},

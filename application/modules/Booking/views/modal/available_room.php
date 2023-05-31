@@ -9,7 +9,7 @@
         overflow-y: auto;
     }
 
-    /*.modal-dialog {
+    .modal-dialog {
         overflow-y: initial !important
     }
 
@@ -36,12 +36,13 @@
                     <input type="hidden" id="seq_no" name="seq_no" value="<?= set_value('seq_no', $form['seq_no']); ?>">
                     <div class="col-xs-12">
                         <div class="form-group">
-                            <label class="control-label">使用日期</label>
-                            <div class="input-daterange input-group" style="width: 320px;">
-                                <input type="text" class="form-control datepicker input-sm" id="test1" name="start_date" value="<?= $filter['start_date']; ?>" />
-                                <span class="input-group-addon" style="cursor: pointer;" id="test2"><i class="fa fa-calendar"></i></span>
-                                <input type="text" class="form-control datepicker input-sm" id="datepicker1" name="end_date" value="<?= $filter['end_date']; ?>" />
-                                <span class="input-group-addon" style="cursor: pointer;" id="datepicker2"><i class="fa fa-calendar"></i></span>
+                            <label class="control-label">預約使用日期</label>
+                            <div class="input-daterange input-group" style="width: 300px;">
+                                <input type="text" class="form-control datepicker" id="query_start_date" name="start_date" value="<?= $filter['start_date']; ?>" />
+                                <span class="input-group-addon" style="cursor: pointer;" id="query_small_cal1"><i class="fa fa-calendar"></i></span>
+                                <!-- <span class="input-group-addon">to</span> -->
+                                <input type="text" class="form-control datepicker" id="query_end_date" name="end_date" value="<?= $filter['end_date']; ?>" />
+                                <span class="input-group-addon" style="cursor: pointer;" id="query_small_cal2"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -88,7 +89,19 @@
 </div>
 <script type="text/javascript">
     require(['jquery', "core/log", "mod_Booking/js2", 'mod_bootstrapbase/bootstrap'], function($, log, booking2) {
-        //log.debug('available_room.php loading...');
         booking2.init();
+        // $(document).ready(function() {
+        //     $("#start_date").datepicker();
+        //     $('#small_cal1').click(function() {
+        //         $("#start_date").focus();
+        //     });
+        // });
+
+        // $(document).ready(function() {
+        //     $("#end_date").datepicker();
+        //     $('#small_cal2').click(function() {
+        //         $("#end_date").focus();
+        //     });
+        // });
     });
 </script>

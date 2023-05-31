@@ -28,6 +28,7 @@ class Booking extends AdminController
 			$this->data['filter']['end_date'] = date('Y-m-d', time());
 		}
 		//$this->userBureau = $this->flags->user['bureau_id'];
+		// ToDo: Fix user bureau.
 		$this->userBureau = '379680000A';
 	}
 
@@ -40,7 +41,7 @@ class Booking extends AdminController
 		);
 		$data['current_seq_no'] = $seqNo;
 		$data['all_class'] = $this->_getAllClassArray($seqNo);
-		$this->load->view('index', $data);
+		$this->load->view('session', $data);
 	}
 
 	public function session($seqNo = null)
@@ -69,23 +70,26 @@ class Booking extends AdminController
 				'range' => $old_data['range'],
 				'no_persons' => $old_data['no_persons']
 			);
-			$data['filter']['start_date'] = $old_data['start_date1'];
-			$data['filter']['end_date'] = $old_data['end_date1'];
+			//$data['filter']['start_date'] = $old_data['start_date1'];
+			//$data['filter']['end_date'] = $old_data['end_date1'];
 		} else {
 			$data['form']['no_persons'] = 0; // 本期人數
 			$data['form']['range'] = 0; // 訓練期程(小時)
 		}
 		$data['choices'] = $this->choices;
 
+		$data['seq_no'] = $seqNo;
 		$data['csrf'] = array(
 			'name' => $this->security->get_csrf_token_name(),
 			'hash' => $this->security->get_csrf_hash()
 		);
 		$this->load->view('modal/_session_detail', $data);  // 主畫面: query_bookingroom
-		// $this->load_js(array(
-		// 	'https://cdn.datatables.net/select/1.6.2/js/dataTables.select.min.js'
-		// ));
 		$data['filter']['class_room_type_A'] = 'A';
+		// Date
+		$filterDate1 = new DateTime($old_data['start_date1']);
+		$data['filter']['start_date'] = $filterDate1->format('Y-m-d');
+		$filterDate2 = new DateTime($old_data['end_date']);
+		$data['filter']['end_date'] = $filterDate2->format('Y-m-d');
 		$this->load->view('modal/available_room', $data);
 	}
 

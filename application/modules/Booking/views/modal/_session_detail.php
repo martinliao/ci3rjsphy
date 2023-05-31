@@ -74,10 +74,9 @@
         </div>
 
         <div class="modal-command">
-            <button type="button" class="btn btn-secondary"></button>
-            <button type="submit" class="btn btn-success" id="btn">預約教室重新查詢</button>
+            <!-- <button type="button" class="btn btn-secondary"></button> -->
+            <button type="button" class="btn btn-success" id="new_booking">預約教室</button>
         </div>
     </form>
-    <!-- /.mail-box-messages -->
 </div>
 <!-- /.box-body -->

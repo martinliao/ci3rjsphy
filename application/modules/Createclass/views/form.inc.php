@@ -339,6 +339,7 @@
     <div class="form-group col-xs-6 <?=form_error('room_name')?'has-error':'';?>">
         <label class="control-label">預約教室<font style="color:red">(選非公訓處上課者，處外場地須自行洽外機關預約)</font></label>
         <?php if($page_name == 'edit'){ ?>
+        <input type="button" class="btn btn-xs btn-primary" id="tambah" data-seq_no=<?= $form['seq_no']?> value="新預約">
         <input type="button" class="btn btn-xs btn-primary" onclick="bookingFun(<?=$form['seq_no']?>)" value="預約">
         <input type="button" class="btn btn-xs btn-primary" onclick="updateBookingFun(<?=$form['seq_no']?>)" value="更新">
         <?php } ?>

@@ -1,47 +1,55 @@
-define([
-	"jquery",
-	"core/log",
-	"mod_Booking/js2",
-	"mod_bootstrapbase/bootstrap",
-	"css!datatables",
-	"datatables",
-], function ($, log, booking2) {
+define(["jquery", "core/log", "mod_Booking/js2", "mod_bootstrapbase/bootstrap", "jqueryui", "css!datatables", "datatables"], function ($, log, booking2) {
 	var Example = {
 		//document.addEventListener("DOMContentLoaded", () => {
 		init: function () {
 			that = this;
-			//log.debug($('mod_booking/init'));
-			/*$("#query_bookingroom").submit(function (e) {
-				e.preventDefault();
-				//console.log('submit!!');
-				that.getBookingLists();
-				return false;
-			});/** */
-
+			log.debug('mod_Booking, init');
 			//const form = $('.modal-body').html();
-			/*$("#available_room").on('shown.bs.modal', function (e) {
-            	log.debug('available_room is shown.');
-            	//booking2.init();
-        	});/** */
-
 			var _seqNo = null;
 			$("#all_class li").each(function () {
-				$(this)
-					.find("a")
-					.on("click", function (a, b, c) {
+				$(this).find("a").on("click", function (a, b, c) {
 						_seqNo = $(this).data("seq_no"); // $.trim($(this).text());
 						//log.debug('li click: ' +  _seqNo);
 						$("#query_bookingroom input[id=seq_no]").val(_seqNo);
-						//that.getBookingLists();
+						log.debug('loading... Booking/query/' + _seqNo);
 						$("#show_booking_data").load(M.cfg.wwwroot + "Booking/query/" + _seqNo, function (a,b,c) {
-							log.debug('start... load Booking/session/27976 ');
+							log.debug('loading... Booking/session/' + _seqNo);
 							$("#session_detail").load(M.cfg.wwwroot + "Booking/session/" + _seqNo, function(a,b,c){
-								log.debug('after session loaded, call booking.getBookingLists');
+								log.debug('session_detail loaded');
 								that.getBookingLists();
+								that.sessionReady();
 							});
 						});
 					});
 			});
+		},
+		sessionReady: function () {
+			$("#new_booking").on("click", function () {
+                $("#available_room").modal("show");
+
+                $("#available_room").on('shown.bs.modal', function (e) {
+                    log.debug('available_room is shown.');
+// //debugger;
+// 					$("#query_start_date").datepicker({
+// 						showMonthAfterYear: true,
+// 						changeMonth: true,
+// 						changeYear: true,
+// 						yearRange: "-100:+0"
+// 					});
+// 					$('#query_small_cal1').click(function() {
+// 						$("#query_start_date").focus();
+// 					});
+// 					$("#query_end_date").datepicker({
+// 						showMonthAfterYear: true,
+// 						changeMonth: true,
+// 						changeYear: true,
+// 						yearRange: "-100:+0"
+// 					});
+// 					$('#query_small_cal2').click(function() {
+// 						$("#query_end_date").focus();
+// 					});
+                });
+            });
 		},
 
 		getBookingLists: function () {
@@ -104,9 +112,10 @@ define([
 								data: dataObj,
 								dataType: 'json',
 								success: function (response) {
-									//if (response.success == true) {
+									//if (response.success == true) { // ToDo: The response is status(NOT sucess).
 									if (response.status == true) {
 										toastr['success']('seq_no: ' + seqNo + ', Room: '+ roomId, ' date: '+ startDate + '~' + endDate);
+										$("#booking_table").DataTable().ajax.reload();
 									} else {
 										toastr['error'](response.message);
 									}
