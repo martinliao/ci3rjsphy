@@ -24,7 +24,7 @@
     <div class="modal-dialog modal-dialog90 ">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><?= $form['class_name'] ?> 第<?= $form['term']; ?>期 人數:<?= $form['no_persons'] ?> , 訓練期程<?= $form['range'] ?>小時 預約教室</h4>
+                <h4 class="modal-title"><?= $form['class_name'] ?> 第<?= $form['term']; ?>期 人數:<?= $form['no_persons'] ?> , 訓練期程<?= $form['range'] ?>小時 預約教室 - 可選的教室選擇</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" tabindex="-1">
                     <span aria-hidden="true">&times;</span>
                 </button>
